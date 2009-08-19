@@ -1,0 +1,14 @@
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+[user]
+	name = NAGAYA Shinichiro
+	email = clairvy@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+
+# github config in /etc/gitconfig
