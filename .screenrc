@@ -1,0 +1,7 @@
+# -*- coding: utf-8-unix; -*-
+
+source $HOME/.screenrc-gen
+
+screen -t BS 0
+screen -t mb 1
+screen -t mb 2

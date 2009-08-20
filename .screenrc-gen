@@ -1,0 +1,48 @@
+# -*- coding: utf-8-unix; -*-
+defscrollback 8192
+startup_message off
+autodetach on
+#defencoding eucJP
+defencoding utf8
+escape ^z^z
+hardcopydir $HOME/tmp
+## http://frexx.de/xterm-256-notes/
+# erase background with current bg color
+defbce "on"
+# do not use 'screen-bce'
+term xterm-256color
+#term xterm
+#hardstatus alwayslastline "%w | %h"
+hardstatus alwayslastline "[%02c] %-w%n %{r dc}%t%{-}%+w"
+# コピーモードで Emacs のような移動を可能にする
+markkeys $=^e:^u=^b:^d=^v=^f
+
+
+# スクリーン毎の log を取る
+logfile ”$HOME/log/screen-%Y%m%d-%n.log”
+#log on
+deflog on
+
+bind w windowlist -b
+bind r eval 'echo "Resize window"' 'command -c resize'
+bind -c resize ^]  command
+bind -c resize j eval 'resize +1' 'command -c resize'
+bind -c resize k eval 'resize -1' 'command -c resize'
+bind x command -c REGION
+bind -c REGION 2 split
+bind -c REGION 1 only
+bind -c REGION 0 remove
+bind -c REGION o focus
+
+# 現在位置から行末までコピーする
+# URL のコピペに使えます(C-a C-k)
+bind  eval "copy" "stuff ' $ '"
+
+# Emacs の yank っぽいペースト法(C-z C-y)
+bind  paste .
+# クラス“launcher”として定義されたキーバインドへ移行する
+bind  eval "echo 'Launcher-mode:  [ t: top ] [ w: w3m -B]'" "command -c launcher"
+# クラス“launcher”に属するキーバインドを設定
+bind -c launcher t screen top
+bind -c launcher w screen w3m -B
+bind -c launcher ^z command
