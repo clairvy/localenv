@@ -12,3 +12,5 @@
 	interactive = auto
 
 # github config in /etc/gitconfig
+[push]
+	default = tracking
