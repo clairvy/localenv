@@ -1,0 +1,158 @@
+# -*- mode: rd; coding: utf-8-unix; -*-
+
+2009/07/02 by s-nag
+
+= Ubuntu でWAF を動かす
+
+- Catalyst
+- MySQL
+- Apache
+- mod_perl
+
+= 前準備
+== perldoc
+  $ sudo aptitude install perldoc
+
+== CPAN::Mini
+  $ minicpan -r http://ftp.jaist.ac.jp/ -l ~/minicpan
+  $ cpanp
+  CPAN Terminal> s mirrors
+  Readonly list of mirrors (in order of preference):
+  
+          [1] ftp://ftp.cpan.org/pub/CPAN
+          [2] http://www.cpan.org
+          [3] ftp://ftp.nl.uu.net/pub/CPAN
+          [4] ftp://cpan.valueclick.com/pub/CPAN
+          [5] ftp://ftp.funet.fi/pub/languages/perl/CPAN
+  
+  CPAN Terminal> s reconfigure
+  7> Select mirrors
+  n
+  2> Custom
+  file:///home/nagaya/minicpan
+  http://ftp.jaist.ac.jp
+  http://ftp.nara.wide.ad.jp
+  http://ftp.riken.jp
+  http://ftp.yz.yamagata-u.ac.jp
+  ^D
+  1> Mirror
+  9> Save & exit
+  CPAN Terminal> s mirrors
+  
+  Readonly list of mirrors (in order of preference):
+  
+          [1] file:///home/nagaya/minicpan
+          [2] http://ftp.jaist.ac.jp/pub/CPAN
+          [3] http://ftp.nara.wide.ad.jp/pub/CPAN
+          [4] http://ftp.riken.jp/lang/CPAN
+          [5] http://ftp.yz.yamagata-u.ac.jp/pub/lang/cpan
+  CPAN Terminal> q
+
+== local::lib  
+  $ cpanp
+  CPAN Terminal> i local::lib
+  yes
+  CPAN Terminal> quit
+  $ perl -Mlocal::lib
+  Attempting to create directory /home/nagaya/perl5
+  Attempting to create file /home/nagaya/perl5/.modulebuildrc
+  export MODULEBUILDRC="/home/nagaya/perl5/.modulebuildrc"
+  export PERL_MM_OPT="INSTALL_BASE=/home/nagaya/perl5"
+  export PERL5LIB="/home/nagaya/perl5/lib/perl5:/home/nagaya/perl5/lib/perl5/i486-linux-gnu-thread-multi"
+  export PATH="/home/nagaya/perl5/bin:$PATH"
+  $ vi ~/.zshrc
+  # for local::lib
+  local_lib_path="/home/nagaya/perl5"
+  export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
+  export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
+  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/i486-linux-gnu-thread-multi"
+  export PATH="${local_lib_path}/bin:$PATH"
+
+= Catalyst
+現代のPerl WAF 標準っぽいもの。
+最新版は、5.80007
+
+- http://www.catalystframework.org/
+
+== Catalyst
+  $ cpanp 's conf prereqs 1; s save'       
+  $ cpanp i Catalyst
+  $ cpanp i ExtUtils::Install --skiptest
+  $ cpanp i Catalyst::Devel
+  $ cpanp i Catalyst::View::TT
+  $ cpanp i Catalyst::Helper::Model::DBIC::Schema
+  $ cpanp i DBIx::Class::Schema::Loader
+  $ cpanp i Catalyst::Plugin::Authentication
+  $ cpanp i Catalyst::Authentication::Store::DBIx::Class
+  $ cpanp i Catalyst::Engine::Apache
+#  $ cpanp i Catalyst::Plugin::Session::Store::FastMmap
+  $ cpanp i Catalyst::Plugin::Session::Store::File
+  $ cpanp i Catalyst::Plugin::Session::State::Cookie
+  $ cpanp i Catalyst::Controller::HTML::FormFu
+  $ cpanp i HTML::FormFu::Model::DBIC
+  $ cpanp i Catalyst::Plugin::Unicode
+  $ cpanp i DBIx::Class::ForceUTF8
+  $ cpanp i DateTime::Format::MySQL
+  $ cpanp i Catalyst::Model::MultiAdapter
+  $ cpanp i Catalyst::Plugin::StackTrace
+  $ cpanp i Test::WWW::Mechanize::Catalyst
+
+Resource と FormFu がマッチしない
+#  $ cpanp i Catalyst::Controller::Resources
+#  $ cpanp i Module::Build --force # 何故か、/usr/share/perl/5.10 に直接入ったぞ
+#  $ cpanp i CPANPLUS::Dist::Build # Module::Build に依存？
+#  $ cpanp i Catalyst::Request::REST::ForBrowsers
+
+
+Imager がsegv したのでとりあえず使わない
+#  $ cpanp u HTML::FormFu::Imager
+#  $ cpanp u Imager # libgif-dev が必要
+
+for sv
+  $ cpanp i Class::Accessor::Fast
+
+本来は，Catalyst::Model::DBIC::Schema をインストールすべきだったかもしれない
+
+ExtUtils::Install は、local::lib 環境だとmake test を失敗させる。
+参考: http://rt.cpan.org/Public/Bug/Display.html?id=47462
+よって、--skiptest
+
+以下でExtUtils::Install が動くことは確認した。
+  $ PERL_MM_OPT='' make test
+
+Catalyst::Engine::Apache は、mod_perl 用
+
+C::P::S::Store::FastMmap は、thread 環境で動作しない
+
+== MySQL
+  $ sudo aptitude install mysql-server
+  root
+  $ mysql -u root -p
+  mysql> show databases;
+  mysql> use mysql;
+  mysql> show tables;
+  mysql> \q
+  $ perl -MData::Dumper -mDBI -we 'my $dbh = DBI->connect("dbi:mysql:database=mysql", "root", "root");print Data::Dumper->Dump([$dbh->selectall_arrayref("select * from user")])'
+
+MySQL server をインストールするときに、
+mysql-client, libdbd-mysql-perl, libdbi-perl なども入るらしい。
+
+== mod_perl
+
+  $ sudo aptitude install libapache2-mod-perl2
+  $ sudo searvice apache2 reload
+  $ cat /etc/apache2/site-available/default
+  (前略)
+  # for Catalyst with mod_perl
+  
+      PerlOptions +Parent
+      PerlSwitches -I/home/nagaya/s/lang/perl/MyApp/lib -I/home/nagaya/perl5/lib/perl5 -I/home/nagaya/perl5/lib/perl5/i486-linux-gnu-thread-multi
+      PerlLoadModule MyApp
+      Alias /tr/ /home/nagaya/s/lang/perl/MyApp/
+      <Location /tr/>
+          SetHandler perl-script
+          PerlResponseHandler MyApp
+      </Location>
+  (後略)
+
+全体は、VirtualHost 内にあるので、PerlOptions +Parent が必要らしい

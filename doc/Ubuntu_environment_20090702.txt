@@ -1,0 +1,122 @@
+# -*- mode: rd; coding: utf-8-unix; -*-
+
+2009/07/02
+
+= 基本情報
+hostname: nagaya-desktop
+OS:       Ubuntu 9.04(jaunty)
+メモリ:   244.9MB
+CPU:      Intel(R) Pentium(R) 4 CPU 1.70GHz
+Disk:     54.3GB
+
+= システム→設定→サウンド
+- サウンド→警告音と効果音を鳴らす のチェックを外す
+
+= システム→設定→キーボード
+- レイアウト→レイアウトのオプション
+-- Ctrl キーの位置→Swap Ctrl and CapsLock
+
+= システム→システム管理→ログイン画面
+- アクセシビリティ→効果音→ログオン画面を表示したとき のチェックを外す
+
+= システム→システム管理→言語サポート
+- なんとなく流れに沿ってやる
+
+= システム→システム管理→アップデートマネージャー
+- なんとなく流れに沿ってやる
+
+= キィ設定
+  $ xmodmap -pke
+  $ vi ~/.Xmodmap
+  keycode 49 = Escape NoSymbol Escape NoSymbol Escape
+  $ xmodmap ~/.Xmodmap
+
+xev マンドでkeycode は調べられる．窓使いっぽい
+
+= apt でインストールしたソフト
+  $ sudo aptitude install emacs-snapshot
+  $ sudo aptitude install scim-skk
+  $ sudo aptitude install elscreen
+  $ sudo aptitude install zsh
+  $ chsh
+  /bin/zsh
+  $ sudo aptitude install lv
+  $ sudo aptitude install git-core
+  $ sudo aptitude install subversion
+  $ sudo aptitude install ruby-elisp
+  $ sudo aptitude install rdtool
+  $ sudo aptitude install rdtool-elisp
+  $ sudo aptitude install libcpan-mini-perl
+  $ minicpan -r http://ftp.cpan.jp/ -l ~/minicpan
+  $ sudo aptitude install postfix
+  $ sudo aptitude install sun-java5-jre
+  $ sudo aptitude install yaskkserv
+  $ sudo aptitude install vim-perl
+  $ sudo aptitude install yaml-mode
+  $ sudo aptitude install js2-mode
+  $ sudo aptitude install mysql-server-5.1
+  $ sudo aptitude install libdevel-nytprof-perl
+
+#  $ sudo aptitude install libimager-perl
+#  $ sudo aptitude install giflib-dbg
+#  $ sudo aptitude install libjpeg-dev
+#  $ sudo aptitude install libpng-dev
+#  $ sudo aptitude install libttf-dev
+#  $ sudo aptitude install libfreetype6-dev
+#  $ sudo aptitude install libtiff-dev
+
+screen, screen-profiles はインストール済みだった
+CPAN::Mini は、CPAN をキャッシュする
+
+jude 用にjre をインストールした。
+
+Devel::NYTProf は、local::lib に入れたくなかったので、
+aptitude でインストール
+
+== 他
+
+  ddskk
+  $ cd .emacs.d
+  $ tar zxf ~/arc/ddskk-20090714.tar.gz
+  $ ln -s ddskk-20090714 ddskk
+  $ cd ddskk
+  $ make
+  $ cp skk-setup.el.in skk-setup.el
+  $ cat <<EOL >> ~/.emacs
+  
+  ;; for skk
+  (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
+                        load-path))
+  (require 'skk-setup)
+  EOL
+  $ sudo aptitude install yaskkserv
+
+== 試しにインストールしてみた
+  $ sudo aptitude install gnome-do
+
+= Twitter
+
+= Firefox のadd-on
+- ツリー型タブ
+- Multirow Bookmarks Toolbar
+- FireGestures
+- Greasemonkey
+-- AutoPagerize
+- Add Bookmark Here 2
+- Firebug
+- Web Developer
+- Tab Mix Plus
+-- イベント→タブを開く→以下を新しいタブに読み込む→[ブックマーク、ブックマークグループ、検索バー]
+-- イベント→タブを閉じる→最後のタブを閉じたとき、ウィンドウ自体は閉じない
+
+about:config
+browser.search.openintab => true
+
+= OpenOffice.org Calc
+- ツール→オートコレクト→オプション→全てのチェックを外す
+
+= 参考
+全般
+- http://smdn.invisiblefulmoon.net/linux/ubuntu/initialconfig_jaunty/
+キーボード
+- http://blog.goo.ne.jp/noriyo77/e/ab33fc1c6d522a6d3be200deff6189dd

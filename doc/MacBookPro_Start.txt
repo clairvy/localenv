@@ -1,0 +1,66 @@
+# -*- mode: rd; coding: utf-8-unix; -*-
+
+= MacBookPro を入手して最初ら辺にやること
+
+再インストールとかamachang の見てやった。
+
+インストールしたソフトウェア
+- Xcode (CD 入れて、インストールするだけ)
+
+インストールしたports
+  $ sudo port install zsh
+  $ sudo port uninstall zsh
+  $ sudo port install zsh-devel
+  $ port search zsh
+  $ sudo port install lv
+  $ sudo port install gmake
+  $ sudo port install wget
+  $ sudo port install sqlite3
+  $ sudo port install w3m
+  $ sudo port install svn
+  $ sudo port install screen
+  $ sudo port install git-core
+
+# がーん。-devel なのね。
+# screen は，macports 版じゃないとnil server とかで怒られる．
+# と思ったらどっちでも怒られた。
+
+タッチパッドの設定を最初に変えないと死ねる。
+
+  $ sudo vi /etc/shells
+  $ chsh -s /opt/local/bin/zsh
+
+ターミナル→環境設定→テキストのアンチエイリアス処理を有効にした
+システムの環境設定→キーボードとマウス→修飾キー→Caps Lock をControl に変更
+
+aircrack - packet からWEP キーを割り出すソフト
+  $ cd arc
+  $ wget http://download.aircrack-ng.org/aircrack-ng-1.0-rc3.tar.gz
+  $ cd work
+  $ tar -zxvf ~/arc/aircrack-ng-1.0-rc3.tar.gz
+  $ cd aircrack-ng-1.0-rc3
+  $ make
+  $ sudo make install
+
+Kismac - wifi のパケットをキャプチャするソフト
+  $ svn co http://svn.kismac-ng.org/kmng/trunk kismac
+  $ cd kismac/release/
+  $ make
+
+ふーむ．うまいことやらないとIV が足りなくて駄目だな．
+もっと長い時間キャプチャする必要がある．
+
+プリンタ
+システムの環境設定→プリンタとファックス
+
+Ctrl-Space
+システムの環境設定→キーボードとマウス→Spotlight 検索フィールドを表示のチェックを外す
+
+ウィンドウの切り替え
+システムの環境設定→キーボードとマウス→選択アプリケーションの別ウィンドウを操作対象にする→Cmd+`
+
+X11
+/usr/X11/bin/xhost +192.168.0.221 とかすると，X11 が起動する．
+環境設定→セキュリティ→ネットワーククライアントからの接続を許可にチェック
+
+= Perl

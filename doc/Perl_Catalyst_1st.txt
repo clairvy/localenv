@@ -1,0 +1,31 @@
+# -*- mode: rd; coding: utf-8-unix; -*-
+
+Catalyst 5.80007 あたりの1st ステップガイドになるようなもの。
+
+= 最初に
+
+  $ perldoc Catalyst
+
+== 試してみる
+
+  $ catalyst.pl MyApp
+  $ cd MyApp
+  $ script/myapp_create.pl controller Library::Login
+  $ script/myapp_server.pl
+  $ script/myapp_create.pl view TT TT
+  $ script/myapp_create.pl model MyModel DBIC::Schema MySchema create=static 'dbi:SQLite:/tmp/myapp.db'
+  $ script/myapp_create.pl model MyModel DBIC::Schema MySchema create=static "dbi:mysql:myapp:localhost" root root
+
+mysql との接続方法
+
+== server
+
+  $ script/myapp_server.pl
+
+メソッドの順は，
+- <NS>::begin
+- <NS parent>::auto
+- <NS>::auto
+- <NS>::<method>
+- <NS>::end
+の順に呼ばれる．

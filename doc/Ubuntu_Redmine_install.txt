@@ -1,0 +1,76 @@
+# -*- mode: rd; coding: utf-8-unix; -*-
+
+= Redmine のインストール
+
+== Ruby
+  $ sudo aptitude install ruby
+  $ sudo aptitude install ruby-dev
+
+== SQLite3
+  $ sudo aptitude install sqlite3
+  $ sudo aptitude install libsqlite3-dev
+
+== RubyGems
+  $ sudo aptitude install rubygems
+
+== Ruby on Rails
+  $ sudo gem install -v=2.1.2 rails
+
+== sqlite3-ruby
+  $ sudo gem install sqlite3-ruby
+
+== Rake
+  $ sudo gem install rake
+
+== redmine
+  $ cd s/app
+  $ svn checkout http://redmine.rubyforge.org/svn/branches/0.8-stable redmine
+  $ cd redmines
+  $ vi config/database.yml
+  $ cat config/database.yml
+  production:
+    adapter: sqlite3
+    dbfile: db/redmine.db
+    timeout: 5000
+  $ /var/lib/gems/1.8/bin/rake db:migrate RAILS_ENV=production
+  $ script/server -e production
+
+ここまでで、localhost:3000 admin:admin にてログインできるようになる。
+
+= Apache/Passenger(mod_rails for Apache) の利用
+
+== GNU C++ compiler
+  $ sudo aptitude install build-essential
+
+== Apache
+  $ sudo aptitude install apache2
+  $ sudo aptitude install apache2-dev
+  $ sudo a2enmod rewrite
+
+mod_rewrite の有効化がわからんかった
+
+== passenger
+  $ sudo gem install passenger
+  $ sudo /var/lib/gems/1.8/bin/passenger-install-apache2-module
+
+  ---
+   LoadModule passenger_module /var/lib/gems/1.8/gems/passenger-2.2.4/ext/apache2/mod_passenger.so
+   PassengerRoot /var/lib/gems/1.8/gems/passenger-2.2.4
+   PassengerRuby /usr/bin/ruby1.8
+  ---
+   <VirtualHost *:80>
+      ServerName www.yourhost.com
+      DocumentRoot /somewhere/public    # <-- be sure to point to 'public'!
+   </VirtualHost>
+  ---
+  $ sudoedit /etc/apache2/passenger.load
+  $ cat /etc/apache2/passenger.load
+  LoadModule passenger_module /var/lib/gems/1.8/gems/passenger-2.2.4/ext/apache2/mod_passenger.so
+  $ sudoedit /etc/apache2/passenger.conf
+  $ cat /etc/apache2/passenger.conf
+  <IfModule mod_passenger.c>
+      PassengerRoot /var/lib/gems/1.8/gems/passenger-2.2.4
+      PassengerRuby /usr/bin/ruby1.8
+  </IfModule>
+  $ sudo a2enmod passenger
+  $ sudo service apache2 restart
