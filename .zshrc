@@ -103,7 +103,7 @@ local prompt_color='%{[32m%}'
 local clear_color='%{[0m%}'
 local rprompt_color='%{[33m%}' # yellow [0m
 local prompt_char='$'
-if [[ "x$USER" == "xs-nag" || "x$USER" == "xnagaya" ]]; then
+if [[ "x$USER" == "xs-nag" || "x$USER" == "xnagaya" || "x$USER" == "xs_nag" ]]; then
   prompt_color='%{[32m%}'      # green [0m
 elif [[ "x$USER" == "xroot" ]]; then
   prompt_color='%{[37m%}'      # white [0m
@@ -124,6 +124,8 @@ export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/i486-li
 export PATH="${local_lib_path}/bin:$PATH"
 
 export PATH="${PATH}:$HOME/local/bin"
+# for Mac ports
+export PATH="${PATH}:/opt/local/bin"
 
 # alias
 alias mv='nocorrect mv -i'
@@ -134,7 +136,11 @@ alias mgdir='nocorrect mkdir -m 775'
 alias rm='rm -i'
 alias history='builtin history -Di'
 alias his='history | tail'
-alias ls='command ls -AF --color=auto --show-control-chars'
+if [[ `uname -s` == "Darwin" ]]; then
+  alias ls='command ls -AFG'
+else
+  alias ls='command ls -AF --color=auto --show-control-chars'
+fi
 alias ln='ln -n'
 alias x=exit
 alias first_release="perl -mModule::CoreList -le 'print Module::CoreList->first_release(@ARGV)'"
