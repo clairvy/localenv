@@ -1,5 +1,12 @@
 # -*- mode: rd; coding: utf-8-unix; -*-
 
+= 基本
+
+shift = ↑
+Control = ^
+alt(option) = 下がり
+command = 記号(アップルキー)
+
 = MacBookPro を入手して最初ら辺にやること
 
 再インストールとかamachang の見てやった。
@@ -59,8 +66,33 @@ Ctrl-Space
 ウィンドウの切り替え
 システムの環境設定→キーボードとマウス→選択アプリケーションの別ウィンドウを操作対象にする→Cmd+`
 
+Spaces
+システム環境設定→ExposeとSpaces→Spaces→Spacesを有効にする
+
 X11
 /usr/X11/bin/xhost +192.168.0.221 とかすると，X11 が起動する．
 環境設定→セキュリティ→ネットワーククライアントからの接続を許可にチェック
 
+= Growl
+- Growl
+- GrowlSafari
+- GrowlTunes
+
 = Perl
+
+= Safari
+http://d.hatena.ne.jp/aduka/20090211/1234312204
+
+- SIMBL (/Library/Application Support/SIMBL/Plugins 配下にインストール)
+  - SafariTabConfig
+#  - SafariTabMemento
+  - GraseKit
+    - AutoPagerize
+- Glims for Safari
+- GrowlSafari
+
+http://d.hatena.ne.jp/tanemori/20081029/SafariPlugins
+
+= Firefox
+
+= Opera
