@@ -43,6 +43,19 @@ Index: app/helpers/application_helper.rb
  
      # different methods for formatting wiki links
      case options[:wiki_links]
+Index: app/views/repositories/revision.rhtml
+===================================================================
+--- app/views/repositories/revision.rhtml	(リビジョン 2798)
++++ app/views/repositories/revision.rhtml	(作業コピー)
+@@ -24,7 +24,7 @@
+ <p><% if @changeset.scmid %>ID: <%= @changeset.scmid %><br /><% end %>
+ <span class="author"><%= authoring(@changeset.committed_on, @changeset.author) %></span></p>
+ 
+-<%= textilizable @changeset.comments %>
++<p><%= textilizable @changeset.comments, {:lite_mode => true} %></p>
+ 
+ <% if @changeset.issues.any? %>
+ <h3><%= l(:label_related_issues) %></h3>
 Index: lib/redmine/wiki_formatting.rb
 ===================================================================
 --- lib/redmine/wiki_formatting.rb	(リビジョン 2798)
