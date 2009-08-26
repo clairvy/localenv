@@ -1,0 +1,94 @@
+Index: test/unit/helpers/application_helper_test.rb
+===================================================================
+--- test/unit/helpers/application_helper_test.rb	(リビジョン 2798)
++++ test/unit/helpers/application_helper_test.rb	(作業コピー)
+@@ -452,4 +452,23 @@
+     Setting.gravatar_enabled = '0'
+     assert_nil avatar(User.find_by_mail('jsmith@somenet.foo'))
+   end
++
++  def test_not_formatted
++    to_test = {
++      'foo bar' => 'foo bar',
++      '[abc]def' => '', # link anchor
++    }
++    to_test.each { |text, result| assert_equal result == "" ? "" : "<p>#{result}</p>", textilizable(text) }
++  end
++
++  def test_textilizable_with_options
++    to_test = {
++      'foo bar' => 'foo bar',
++      '[abc]def' => '[abc]def',
++    }
++    options = {
++        :lite_mode => true,
++    }
++    to_test.each { |text, result| assert_equal result, textilizable(text, options) }
++  end
+ end
+Index: app/helpers/application_helper.rb
+===================================================================
+--- app/helpers/application_helper.rb	(リビジョン 2798)
++++ app/helpers/application_helper.rb	(作業コピー)
+@@ -304,7 +304,11 @@
+       end
+     end
+ 
+-    text = Redmine::WikiFormatting.to_html(Setting.text_formatting, text) { |macro, args| exec_macro(macro, obj, args) }
++    if options[:lite_mode]
++      text = Redmine::WikiFormatting.to_html(Setting.text_formatting, text, [:lite_mode]) { |macro, args| exec_macro(macro, obj, args) }
++    else
++      text = Redmine::WikiFormatting.to_html(Setting.text_formatting, text) { |macro, args| exec_macro(macro, obj, args) }
++    end
+ 
+     # different methods for formatting wiki links
+     case options[:wiki_links]
+Index: app/views/repositories/revision.rhtml
+===================================================================
+--- app/views/repositories/revision.rhtml	(リビジョン 2798)
++++ app/views/repositories/revision.rhtml	(作業コピー)
+@@ -24,7 +24,7 @@
+ <p><% if @changeset.scmid %>ID: <%= @changeset.scmid %><br /><% end %>
+ <span class="author"><%= authoring(@changeset.committed_on, @changeset.author) %></span></p>
+ 
+-<%= textilizable @changeset.comments %>
++<p><%= textilizable @changeset.comments, {:lite_mode => true} %></p>
+ 
+ <% if @changeset.issues.any? %>
+ <h3><%= l(:label_related_issues) %></h3>
+Index: lib/redmine/wiki_formatting.rb
+===================================================================
+--- lib/redmine/wiki_formatting.rb	(リビジョン 2798)
++++ lib/redmine/wiki_formatting.rb	(作業コピー)
+@@ -43,8 +43,12 @@
+         @@formatters.keys.map
+       end
+       
+-      def to_html(format, text, options = {}, &block)
+-        formatter_for(format).new(text).to_html(&block)
++      def to_html(format, text, options = [], &block)
++        if format == "textile"
++          formatter_for(format).new(text, options).to_html(&block)
++        else
++          formatter_for(format).new(text).to_html(&block)
++        end
+       end
+     end
+     
+Index: lib/redcloth3.rb
+===================================================================
+--- lib/redcloth3.rb	(リビジョン 2798)
++++ lib/redcloth3.rb	(作業コピー)
+@@ -296,9 +296,11 @@
+         rip_offtags text
+         no_textile text
+         escape_html_tags text
++        unless @lite_mode
++            refs text
++        end
+         hard_break text 
+         unless @lite_mode
+-            refs text
+             # need to do this before text is split by #blocks
+             block_textile_quotes text
+             blocks text
