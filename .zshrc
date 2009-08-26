@@ -126,6 +126,8 @@ export PATH="${local_lib_path}/bin:$PATH"
 export PATH="${PATH}:$HOME/local/bin"
 # for Mac ports
 export PATH="${PATH}:/opt/local/bin"
+# for gems
+export PATH="${PATH}:/var/lib/gems/1.8/bin"
 
 # alias
 alias mv='nocorrect mv -i'
