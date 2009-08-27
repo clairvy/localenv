@@ -117,11 +117,18 @@ RPROMPT=$rprompt_color'[%~]'$clear_color
 PAGER=lv
 
 # for local::lib
-local_lib_path="/home/nagaya/perl5"
-export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
-export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
-export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/i486-linux-gnu-thread-multi"
-export PATH="${local_lib_path}/bin:$PATH"
+local_lib_path="$HOME/perl5"
+if [[ "x$HOSTNAME" == "xdv1" ]]; then
+  export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
+  export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
+  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/i486-linux-gnu-thread-multi"
+  export PATH="${local_lib_path}/bin:$PATH"
+else
+  export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
+  export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
+  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/darwin-thread-multi-2level"
+  export PATH="${local_lib_path}/bin:$PATH"
+fi
 
 export PATH="${PATH}:$HOME/local/bin"
 # for Mac ports
