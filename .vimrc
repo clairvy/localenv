@@ -1,6 +1,6 @@
 filetype plugin indent on
 syntax enable
-# from Ubuntu default
+" from Ubuntu default
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,utf-16,japan
