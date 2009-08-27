@@ -5,6 +5,9 @@
 == Ruby
   $ sudo aptitude install ruby
   $ sudo aptitude install ruby-dev
+  $ sudo aptitude install irb
+
+irb は、script/console に必要(irb1.8 は入るが、irb は自動では入らない)
 
 == SQLite3
   $ sudo aptitude install sqlite3
@@ -28,6 +31,10 @@
   $ cd redmines
   $ vi config/database.yml
   $ cat config/database.yml
+  test:
+    adapter: sqlite3
+    dbfile: db/test.db
+    timeout: 5000
   production:
     adapter: sqlite3
     dbfile: db/redmine.db
