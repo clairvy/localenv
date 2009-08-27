@@ -17,7 +17,7 @@ command = 記号(アップルキー)
 インストールしたports
   $ sudo port install zsh
   $ sudo port uninstall zsh
-  $ sudo port install zsh-devel
+  $ sudo port install zsh-devel +mp_completion
   $ port search zsh
   $ sudo port install lv
   $ sudo port install gmake
@@ -26,11 +26,19 @@ command = 記号(アップルキー)
   $ sudo port install w3m
   $ sudo port install svn
   $ sudo port install screen
-  $ sudo port install git-core
+  $ sudo port install git-core +svn
 
 # がーん。-devel なのね。
 # screen は，macports 版じゃないとnil server とかで怒られる．
 # と思ったらどっちでも怒られた。
+# port variants git-core とかで、情報が見られる
+# Variants 項目で+ するものを決める。
+# とりあえず、variants を変えたのをインストールして、
+# deactivate/activate すればいいみたい。
+#  $ sudo port deactivate git-core @1.6.4.1_0+doc
+#  $ sudo port   activate git-core @1.6.4_0+doc+svn
+#  $ sudo port uninstall git-core @1.6.4.1_0+doc
+# みたく。
 
 タッチパッドの設定を最初に変えないと死ねる。
 
