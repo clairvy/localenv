@@ -108,3 +108,10 @@ http://d.hatena.ne.jp/tanemori/20081029/SafariPlugins
 = Firefox
 
 = Opera
+
+= emacs
+- tuareg-mode
+- ddskk
+- egg
+- gist
+
