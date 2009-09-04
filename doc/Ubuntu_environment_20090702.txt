@@ -121,3 +121,30 @@ browser.search.openintab => true
 - http://smdn.invisiblefulmoon.net/linux/ubuntu/initialconfig_jaunty/
 キーボード
 - http://blog.goo.ne.jp/noriyo77/e/ab33fc1c6d522a6d3be200deff6189dd
+
+= Postfix
+ログを見るとpostfix は自分で入れたのか。
+dovecot-postfix を入れると吉なのか
+
+  $ sudo service postfix start
+  $ sudo dpkg-reconfigure -plow postfix
+
+- Catalyst 的には、Catalyst::View::Email
+  http://perl-mongers.org/2008/05/catalyst.html
+
+- Email::Sender::Transport::SMTP::TLS
+  Email::Sender replaces the old and sometimes problematic Email::Send library, while this module replaces the Email::Send::SMTP::TLS.
+
+- Email::Folder - 
+- Email::Store - DBIx::Class が必須
+
+- Email::Filter
+
+Email::Sender (new)
+Email::Send (old)
+
+MIME::Lite
+
+参考
+- https://forums.ubuntulinux.jp/viewtopic.php?id=5659
+- http://d.hatena.ne.jp/tokuhirom/20090714/1247564998
