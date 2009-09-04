@@ -97,6 +97,10 @@
   $ cpanp i Catalyst::Model::MultiAdapter
   $ cpanp i Catalyst::Plugin::StackTrace
   $ cpanp i Test::WWW::Mechanize::Catalyst
+  $ cpanp i Email::Sender
+  $ cpanp i Email::Simple::Creator
+  $ cpanp i Email::MIME
+  $ cpanp i Email::MIME::Modifier
 
 Resource と FormFu がマッチしない
 #  $ cpanp i Catalyst::Controller::Resources
@@ -104,10 +108,17 @@ Resource と FormFu がマッチしない
 #  $ cpanp i CPANPLUS::Dist::Build # Module::Build に依存？
 #  $ cpanp i Catalyst::Request::REST::ForBrowsers
 
+# 不要になった
+  $ cpanp u Email::Folder
+  $ cpanp u Email::Folder::POP3
+
 
 Imager がsegv したのでとりあえず使わない
 #  $ cpanp u HTML::FormFu::Imager
 #  $ cpanp u Imager # libgif-dev が必要
+
+古い
+#  $ cpanp u Email::Filter
 
 for sv
   $ cpanp i Class::Accessor::Fast
