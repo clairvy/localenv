@@ -40,6 +40,7 @@ irb は、script/console に必要(irb1.8 は入るが、irb は自動では入�
     dbfile: db/redmine.db
     timeout: 5000
   $ /var/lib/gems/1.8/bin/rake db:migrate RAILS_ENV=production
+  $ /var/lib/gems/1.8/bin/rake redmine:load_default_data RAILS_ENV=production
   $ script/server -e production
 
 ここまでで、localhost:3000 admin:admin にてログインできるようになる。
