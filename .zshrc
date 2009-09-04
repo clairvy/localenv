@@ -132,7 +132,8 @@ fi
 
 export PATH="${PATH}:$HOME/local/bin"
 # for Mac ports
-export PATH="${PATH}:/opt/local/bin"
+export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
+export MANPATH="/opt/local/share/man:${MANPATH}"
 # for gems
 export PATH="${PATH}:/var/lib/gems/1.8/bin"
 
@@ -156,7 +157,6 @@ alias first_release="perl -mModule::CoreList -le 'print Module::CoreList->first_
 alias scc='screen'
 alias scx='screen -x'
 alias hex='perl -le "print unpack q(H*), shift"'
-alias formfu="perl -MData::Dumper -MHTML::FormFu -lwe 'my \$f = HTML::FormFu->new(); \$f->load_config_file(shift); print Data::Dumper->Dump([\$f]); print \$f'"
 
 # 補完するかの質問は画面を超える時にのみに行う｡
 LISTMAX=0
