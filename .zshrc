@@ -163,3 +163,11 @@ LISTMAX=0
 
 # Ctrl+wで､直前の/までを削除する｡
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+
+keychain id_rsa id_dsa
+[ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+[ -f $HOME/.keychain/$HOSTNAME-sh ] &&
+     . $HOME/.keychain/$HOSTNAME-sh
+[ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] &&
+     . $HOME/.keychain/$HOSTNAME-sh-gpg
