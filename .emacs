@@ -11,13 +11,15 @@
 ;;; skk
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
                       load-path))
-(require 'skk-setup)
-(require 'skk-study)
 ;;(setq skk-server-host "localhost")
 ;;(setq skk-server-portnum 1178)
 (setq skk-use-azik t)
 (setq skk-azik-keyboard-type 'en)
-(setq skk-kutouten-type 'en)
+(add-hook 'skk-mode-hook
+          (lambda ()
+            (setq skk-kutouten-type 'en)))
+(require 'skk-setup)
+(require 'skk-study)
 
 ;;; とりあえずファイルで
 (cond ((string-match "apple-darwin" system-configuration)
