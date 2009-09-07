@@ -3,22 +3,33 @@
 (define-key global-map "\M-?" 'help-for-help)        ; ヘルプ
 (define-key global-map "\M-g" 'goto-line)
 
-;;; コマンドキィをMeta キィとして利用
-(setq mac-commandkey-is-meta t)
-
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d")
-		      load-path))
+(defvar os-type nil)
+(cond ((string-match "apple-darwin" system-configuration)
+       (setq os-type 'mac))
+      (t 'unknown))
 
 ;;; skk
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
-		      load-path))
+                      load-path))
 (require 'skk-setup)
+(require 'skk-study)
+;;(setq skk-server-host "localhost")
+;;(setq skk-server-portnum 1178)
 (setq skk-use-azik t)
 (setq skk-azik-keyboard-type 'en)
 (setq skk-kutouten-type 'en)
 
+;;; とりあえずファイルで
+(cond ((string-match "apple-darwin" system-configuration)
+       (setq skk-jisyo (concat (getenv "HOME") "/Library/AquaSKK/SKK-JISYO.L")))
+      )
+
+;;; コントロールキーをシステムにとられないようにする
+(setq mac-pass-control-to-system nil)
+
 ;;; Localeに合わせた環境の設定
 (set-locale-environment nil)
+(set-default-coding-systems 'utf-8)
 
 ;;; 対応する括弧を光らせる。
 (show-paren-mode t)
@@ -57,13 +68,29 @@
 
 ;;; git(egg)
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/egg")
-		      load-path))
+                      load-path))
 (require 'egg)
 
-;;; tt-mode
-(autoload 'tt-mode "tt-mode")
-;(setq auto-mode-alist
-;      (append '(("\\.tt$" . tt-mode))  auto-mode-alist))
+;;; gist
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/gist")
+                      load-path))
+(require 'gist)
+
+;;; OCaml
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/tuareg-mode")
+                      load-path))
+(setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
+(autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
+(autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+
+;;; howm
+(setq howm-directory "/Volumes/共有フォルダ/社員フォルダ/永谷/howm/")
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/rd-mode")
+                      load-path))
+(add-to-list 'auto-mode-alist '("\\.howm$" . rd-mode))
+(autoload 'rd-mode "rd-mode" "major mode for ruby document formatter RD" t)
+(add-to-list 'auto-mode-alist '("\\.rd$" . rd-mode))
+(require 'rd-mode-plus)
 
 ;;; perl
 (autoload 'cperl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
@@ -99,4 +126,5 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "unknown" :family "VL ゴシック")))))
+; '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "unknown" :family "VL ゴシック"))))
+ )
