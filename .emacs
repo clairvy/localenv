@@ -1,3 +1,5 @@
+;;; -*- mode: emacs-lisp; coding: utf-8-unix; -*-
+
 ;;; キーバインド
 (define-key global-map "\C-h" 'delete-backward-char) ; 削除
 (define-key global-map "\M-?" 'help-for-help)        ; ヘルプ
