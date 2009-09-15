@@ -13,7 +13,7 @@
 
 (defvar hostname nil)
 (let ((local-config-file (expand-file-name ".emacs.local" (getenv "HOME"))))
-  (load local-config-file))
+  (load local-config-file t))
 (defvar os-type nil)
 (cond ((string-match "apple-darwin" system-configuration)
        (setq os-type 'mac))
