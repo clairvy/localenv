@@ -10,6 +10,17 @@
        (setq os-type 'mac))
       (t 'unknown))
 
+;;; anything
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/anything")
+                      load-path))
+(require 'anything)
+
+;;; session
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/session/lisp")
+                      load-path))
+(require 'session)
+(add-hook 'after-init-hook 'session-initialize)
+
 ;;; skk
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
                       load-path))
@@ -97,6 +108,8 @@
 (require 'rd-mode-plus)
 
 ;;; perl
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/cperl-mode")
+                      load-path))
 (autoload 'cperl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
 (fset 'perl-mode 'cperl-mode)
 (add-hook 'cperl-mode-hook
@@ -114,7 +127,21 @@
              '(cperl-indent-parens-as-block t)
              '(cperl-tab-always-indent t)
              ))
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/perl-completion")
+                      load-path))
+(add-hook 'cperl-mode-hook
+          (lambda()
+            (require 'perl-completion)
+            (perl-completion-mode t)))
+(add-hook  'cperl-mode-hook
+           (lambda ()
+             (when (require 'auto-complete nil t) ; no error whatever auto-complete.el is not installed.
+               (auto-complete-mode t)
+               (make-variable-buffer-local 'ac-sources)
+               (setq ac-sources
+                     '(ac-source-perl-completion)))))
 
+;;; font for ubuntu
 (cond ((string-match "linux" system-configuration)
        (custom-set-faces
 	;; custom-set-faces was added by Custom.
