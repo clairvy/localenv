@@ -109,9 +109,27 @@ http://d.hatena.ne.jp/tanemori/20081029/SafariPlugins
 
 = Opera
 
-= emacs
+= Emacs
+  $ cd ~/.emacs.d
+  $ tar xf ~/Download/ddskk-20090823.tar
+  $ ln -s ddskk-20090823 ddskk
+  $ cd ddskk
+  $ make EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
+  $ cp skk-setup.el.in skk-setup.el
+
 - tuareg-mode
 - ddskk
 - egg
 - gist
 
+-------------------------------------------------------------------------
+;;; skk
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
+		      load-path))
+(require 'skk-setup)
+(setq skk-use-azik t)
+;(setq skk-azik-keyboard-type 'en)
+(setq skk-kutouten-type 'en)
+(setq skk-jisyo (concat (getenv "HOME") "/Library/AquaSKK/SKK-JISYO.L"))
+(setq mac-pass-control-to-system nil) ; コントロールを渡さない
+-------------------------------------------------------------------------
