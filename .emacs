@@ -5,10 +5,17 @@
 (define-key global-map "\M-?" 'help-for-help)        ; ヘルプ
 (define-key global-map "\M-g" 'goto-line)
 
+(defvar hostname nil)
+(let ((local-config-file (expand-file-name ".emacs.local" (getenv "HOME"))))
+  (load local-config-file))
 (defvar os-type nil)
 (cond ((string-match "apple-darwin" system-configuration)
        (setq os-type 'mac))
       (t 'unknown))
+
+;;; anything
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/anything")
+                      load-path))
 
 ;;; skk
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
@@ -16,7 +23,9 @@
 ;;(setq skk-server-host "localhost")
 ;;(setq skk-server-portnum 1178)
 (setq skk-use-azik t)
-(setq skk-azik-keyboard-type 'en)
+(if (not (string-equal hostname "canaan"))
+    (setq skk-azik-keyboard-type 'en))
+(setq skk-azik-keyboard-type 'jp106)
 (add-hook 'skk-mode-hook
           (lambda ()
             (setq skk-kutouten-type 'en)))
@@ -33,7 +42,7 @@
 
 ;;; Localeに合わせた環境の設定
 (set-locale-environment nil)
-(set-default-coding-systems 'utf-8)
+(set-default-coding-systems 'utf-8-unix)
 
 ;;; 対応する括弧を光らせる。
 (show-paren-mode t)
@@ -88,7 +97,11 @@
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
 ;;; howm
-(setq howm-directory "/Volumes/共有フォルダ/社員フォルダ/永谷/howm/")
+(cond ((string-equal hostname "canaan") ; for private pc
+       (setq howm-directory (expand-file-name "Dropbox/howm" (getenv "HOME"))))
+      (t
+       (setq howm-directory "/Volumes/共有フォルダ/社員フォルダ/永谷/howm/")))
+                                        
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/rd-mode")
                       load-path))
 (add-to-list 'auto-mode-alist '("\\.howm$" . rd-mode))
@@ -97,6 +110,8 @@
 (require 'rd-mode-plus)
 
 ;;; perl
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/cperl-mode")
+                      load-path))
 (autoload 'cperl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
 (fset 'perl-mode 'cperl-mode)
 (add-hook 'cperl-mode-hook
@@ -114,6 +129,20 @@
              '(cperl-indent-parens-as-block t)
              '(cperl-tab-always-indent t)
              ))
+;; perl-completion
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/perl-completion")
+                      load-path))
+(add-hook 'cperl-mode-hook
+          (lambda()
+            (require 'perl-completion)
+            (perl-completion-mode t)))
+(add-hook  'cperl-mode-hook
+           (lambda ()
+             (when (require 'auto-complete nil t) ; no error whatever auto-complete.el is not installed.
+               (auto-complete-mode t)
+               (make-variable-buffer-local 'ac-sources)
+               (setq ac-sources
+                     '(ac-source-perl-completion)))))
 
 (cond ((string-match "linux" system-configuration)
        (custom-set-faces
