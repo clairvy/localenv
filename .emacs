@@ -20,6 +20,10 @@
                       load-path))
 (require 'session)
 (add-hook 'after-init-hook 'session-initialize)
+;;; tails-history
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/tails-history")
+                      load-path))
+(load-library "tails-history")
 
 ;;; skk
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
