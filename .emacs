@@ -145,6 +145,11 @@
                (setq ac-sources
                      '(ac-source-perl-completion)))))
 
+;;; tiarra-conf
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/tiarra-conf")
+                      load-path))
+(load-library "tiarra-conf")
+
 ;;; font for ubuntu
 (cond ((string-match "linux" system-configuration)
        (custom-set-faces
