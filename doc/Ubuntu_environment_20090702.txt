@@ -34,6 +34,8 @@ Disk:     54.3GB
 xev マンドでkeycode は調べられる．窓使いっぽい
 
 = apt でインストールしたソフト
+  $ sudo aptitude install build-essentioal
+
   $ sudo aptitude install emacs-snapshot
   $ sudo aptitude install scim-skk
   $ sudo aptitude install elscreen

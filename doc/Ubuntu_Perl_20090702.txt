@@ -11,7 +11,8 @@
 
 = 前準備
 == perldoc
-  $ sudo aptitude install perldoc
+#  $ sudo aptitude install perldoc
+  $ sudo aptitude install perl-doc
 
 == CPAN::Mini
   $ minicpan -r http://ftp.jaist.ac.jp/ -l ~/minicpan

@@ -116,6 +116,10 @@ RPROMPT=$rprompt_color'[%~]'$clear_color
 
 PAGER=lv
 
+# for Mac ports
+export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
+export MANPATH="/opt/local/share/man:${MANPATH}"
+
 # for local::lib
 local_lib_path="$HOME/perl5"
 if [[ "x$HOSTNAME" == "xdv1" ]]; then
@@ -126,14 +130,11 @@ if [[ "x$HOSTNAME" == "xdv1" ]]; then
 else
   export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
   export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
-  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/darwin-thread-multi-2level"
+  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/darwin-2level"
   export PATH="${local_lib_path}/bin:$PATH"
 fi
 
 export PATH="${PATH}:$HOME/local/bin"
-# for Mac ports
-export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
-export MANPATH="/opt/local/share/man:${MANPATH}"
 # for gems
 export PATH="${PATH}:/var/lib/gems/1.8/bin"
 
@@ -157,13 +158,14 @@ alias first_release="perl -mModule::CoreList -le 'print Module::CoreList->first_
 alias scc='screen'
 alias scx='screen -x'
 alias hex='perl -le "print unpack q(H*), shift"'
+alias grep='grep --color'
+alias egrep='egrep --color'
 
 # 補完するかの質問は画面を超える時にのみに行う｡
 LISTMAX=0
 
 # Ctrl+wで､直前の/までを削除する｡
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
-
 
 if whence -p keychain 2>&1 > /dev/null; then
     keychain id_rsa id_dsa
