@@ -22,6 +22,42 @@
 ;;; anything
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/anything")
                       load-path))
+(require 'anything)
+
+;;; session
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/session/lisp")
+                      load-path))
+(require 'session)
+(add-hook 'after-init-hook 'session-initialize)
+;;; tails-history
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/tails-history")
+                      load-path))
+(load-library "tails-history")
+
+;;; color-moccur
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/occur")
+                      load-path))
+(require 'color-moccur)
+(require 'moccur-edit)
+(setq *moccur-buffer-name-exclusion-list*
+      '(".+TAGS.+" "*Completions*" "*Messages*"
+        "newsrc.eld" ".bbdb"))
+(setq moccur-split-word t)
+(setq dmoccur-use-list t)
+(setq dmoccur-use-project t)
+(setq dmoccur-list
+      '(
+        ("dir" default-directory (".*") dir)
+        ("soft" "~/www/soft/" ("\\.texi$") nil)
+        ("config" "~/mylisp/"  ("\\.js" "\\.el$") nil)
+        ("1.99" "d:/unix/Meadow2/1.99a6/" (".*") sub)
+        ))
+(global-set-key "\C-x\C-o" 'occur-by-moccur)
+(define-key Buffer-menu-mode-map "O" 'Buffer-menu-moccur)
+;(define-key dired-mode-map "O" 'dired-do-moccur)
+(global-set-key "\C-c\C-x\C-o" 'moccur)
+(global-set-key "\M-f" 'grep-buffers)
+(global-set-key "\C-c\C-o" 'search-buffers)
 
 ;;; skk
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
@@ -150,6 +186,12 @@
                (setq ac-sources
                      '(ac-source-perl-completion)))))
 
+;;; tiarra-conf
+(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/tiarra-conf")
+                      load-path))
+(load-library "tiarra-conf")
+
+;;; font for ubuntu
 (cond ((string-match "linux" system-configuration)
        (custom-set-faces
 	;; custom-set-faces was added by Custom.

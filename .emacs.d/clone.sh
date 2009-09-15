@@ -7,3 +7,7 @@ rmdir perl-completion
 git clone git://github.com/imakado/perl-completion.git
 rmdir cperl-mode
 git clone git://github.com/jrockway/cperl-mode.git
+rmdir cperl-mode
+git clone git://github.com/jrockway/cperl-mode.git
+rmdir perl-completion
+git clone git://github.com/imakado/perl-completion.git

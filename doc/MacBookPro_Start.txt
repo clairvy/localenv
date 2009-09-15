@@ -97,11 +97,12 @@ http://d.hatena.ne.jp/aduka/20090211/1234312204
 
 - SIMBL (/Library/Application Support/SIMBL/Plugins 配下にインストール)
   - SafariTabConfig
-#  - SafariTabMemento
+  - SafariTabMemento
   - GraseKit
     - AutoPagerize
 - Glims for Safari
 - GrowlSafari
+
 
 http://d.hatena.ne.jp/tanemori/20081029/SafariPlugins
 
@@ -133,3 +134,5 @@ http://d.hatena.ne.jp/tanemori/20081029/SafariPlugins
 (setq skk-jisyo (concat (getenv "HOME") "/Library/AquaSKK/SKK-JISYO.L"))
 (setq mac-pass-control-to-system nil) ; コントロールを渡さない
 -------------------------------------------------------------------------
+
+= Quicksilver
