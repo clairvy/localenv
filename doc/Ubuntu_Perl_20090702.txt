@@ -69,6 +69,11 @@
   export PATH="${local_lib_path}/bin:$PATH"
 
   $ cpanp 's conf prereqs 1; s save'
+  $ cpanp i DBIx::Simple
+  $ cpanp i DBD::SQLite
+  $ cpanp i CPANPLUS::Internals::Source::SQLite
+  $ cpanp 's conf source_engine CPANPLUS::Internals::Source::SQLite; s save'
+  $ cpanp i 'Term::ReadLine::Perl'
 
 = Catalyst
 現代のPerl WAF 標準っぽいもの。
