@@ -5,6 +5,12 @@
 (define-key global-map "\M-?" 'help-for-help)        ; ヘルプ
 (define-key global-map "\M-g" 'goto-line)
 
+(set-language-environment "UTF-8")
+(set-default-coding-systems 'utf-8-unix)
+
+;;; コマンドキィをMeta キィとして利用
+(setq mac-commandkey-is-meta t)
+
 (defvar hostname nil)
 (let ((local-config-file (expand-file-name ".emacs.local" (getenv "HOME"))))
   (load local-config-file))
@@ -24,8 +30,8 @@
 ;;(setq skk-server-portnum 1178)
 (setq skk-use-azik t)
 (if (not (string-equal hostname "canaan"))
-    (setq skk-azik-keyboard-type 'en))
-(setq skk-azik-keyboard-type 'jp106)
+    (setq skk-azik-keyboard-type 'en)
+  (setq skk-azik-keyboard-type 'jp106))
 (add-hook 'skk-mode-hook
           (lambda ()
             (setq skk-kutouten-type 'en)))
