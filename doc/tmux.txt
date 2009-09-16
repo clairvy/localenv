@@ -1,0 +1,176 @@
+# -*- mode: rd; coding: utf-8-unix; -*-
+
+基本は screen と同じっぽい．
+オプションよりコマンドが多い感じか．
+
+= WORDS
+
+: client
+  tmux のローカルプロセス
+: session
+  tmux のサーバープロセス
+: window / layout / pane
+  window のpane の配置をlayout と呼ぶ．
+  window の中の区分を pane と呼ぶ．
+
+: mode
+  vi のようなモードがある．
+  output, scroll, copy
+: status line
+
+: buffer
+  クリップボードのこと
+
+== LAYOUT
+select-layout で選択できる layout
+: active-only
+  シングルになる
+: even-horizontal
+  横に広がる(spread)
+: main-horizontal
+  large(main) pane は，top になり，残りは横に広がる(spread)．
+  main-pane-height window option でtop pane の高さを指定する．
+: main-vertical (お勧め)
+  large pane は，left になり，残りは縦に広がる．
+  main-pane-width window option を使う．
+: manual
+  window をvertically に分割する．
+
+= SYNTAX
+
+  tmux [-28dqUuv] [-f file] [-L socket-name] [-S socket-path]
+       [command [flags]]
+
+= OPTIONS
+
+== 使う
+: -f <file>
+  load <file>.
+  default ~/.tmux.conf
+: -q
+  quiet mode.
+: -u
+  UTF-8
+
+== 不明
+: U
+  Unlock the server
+
+== 使わね
+: -2
+  256 colors
+: -8
+  88 colors
+: -d
+  defaults colors
+: -L socket-name
+: S socket-path
+: -v
+  verbose
+
+= EXAMPLE
+
+  $ tmux new-session vi
+  $ tmux new vi
+  $ tmux n
+
+command は，1つの引数で与えるみたいです．
+  $ tmux new-window 'man tmux'
+
+= KEYBIND
+prefix のデフォルトは，'C-b'．
+なんか違う画面だと'q' で抜けることが多い気がする．
+
+== screen と同じ
+: prefix ?
+  list-keys
+: prefix c
+  new-window
+: prefix n/p
+  next-window
+  previous-window
+: prefix d
+  detach-client
+: prefix :
+  command-prompt
+: prefix 0-9 (数字)
+  select-window -t :0
+  -> select-window -t :9
+: prefix [
+  copy-mode
+: prefix ]
+  paste-buffer
+: prefix w
+  choose-window
+
+== screen と違う
+: prefix '
+  select-prompt
+  window を選択するプロンプトを出す
+: prefix ,
+  rename-window
+: prefix =
+  scroll-mode
+  移動がEmacs キーバインド(C-n/p)
+  C-a/e とかが使えなくて微妙．
+
+== screen にない
+
+=== window/pane 関連
+: prefix "
+  split-window
+: prefix .
+  move-window
+  window のインデックスを変える(これ便利)
+  存在するインデックスには変更できない．
+: prefix '
+  select-prompt
+  window を選択する
+: prefix !
+  break-pane
+  現在のpane を唯一のpane に持つ window を新しく作る．
+
+: prefix   (スペース)
+  next-layout
+: prefix s
+  choose session
+: prefix #
+  list-buffers
+: prefix -
+  delete-buffer
+: prefix t
+  clock-mode
+
+= COMMAND
+
+== OPTION
+
+: set-option
+: set-window-option
+  -g => global
+  -u => unset
+
+== WINDOW
+: split-window  
+
+== LAYOUT
+: next-layout
+: select-layout
+
+== PANE
+: up-pane
+: down-pane
+: rotate-window
+: swap-pane
+
+= MODES
+
+: output mode
+: scroll mode
+: copy mode
+
+= FILES
+
+tmux サーバーの起動時の設定は，~/.tmux.conf に書く．
+中にコマンドを書く．
+
