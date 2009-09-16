@@ -136,3 +136,12 @@ http://d.hatena.ne.jp/tanemori/20081029/SafariPlugins
 -------------------------------------------------------------------------
 
 = Quicksilver
+
+= tscreen
+
+  $ ./configure --prefix=$HOME/modules/tscreen-0.4.9
+      2> c.err | tee c.log
+  $ make 2> m.ett | tee m.log
+  $ make check
+  $ ./tscreen
+  $ make install
