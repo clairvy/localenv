@@ -1,0 +1,13 @@
+#contributor : Jimmy Wu <frozenthrone88@gmail.com>
+
+#name : <ul id="...">...</ul>
+
+#group : list
+
+# --
+
+<ul id="$1">
+
+  $0
+
+</ul>

@@ -11,31 +11,116 @@
 ;;; コマンドキィをMeta キィとして利用
 (setq mac-commandkey-is-meta t)
 
+(defvar home (getenv "HOME"))
 (defvar hostname nil)
-(let ((local-config-file (expand-file-name ".emacs.local" (getenv "HOME"))))
+(let ((local-config-file (expand-file-name ".emacs.local" home)))
   (load local-config-file t))
 (defvar os-type nil)
 (cond ((string-match "apple-darwin" system-configuration)
        (setq os-type 'mac))
       (t 'unknown))
 
+;;; dired HACK
+(setq load-path (cons (concat home "/.emacs.d/dired")
+                      load-path))
+(require 'sorter)
+(defface my-face-f-2 '((t (:foreground "GreenYellow"))) nil)
+(defvar my-face-f-2 'my-face-f-2)
+(defun my-dired-today-search (arg)
+  "Fontlock search function for dired."
+  (search-forward-regexp
+;   (concat (format-time-string "%Y-%m-%d" (current-time)) " [0-9]....") arg t))
+   (concat (format-time-string "%b %e" (current-time)) " [0-9]....") arg t))
+(add-hook 'dired-mode-hook
+          '(lambda ()
+             (font-lock-add-keywords
+              major-mode
+              (list
+               '(my-dired-today-search . my-face-f-2)
+               ))))
+(defun ls-lisp-handle-switches (file-alist switches)
+  ;; FILE-ALIST's elements are (FILE . FILE-ATTRIBUTES).
+  ;; Return new alist sorted according to SWITCHES which is a list of
+  ;; characters.  Default sorting is alphabetically.
+  (let (index)
+    (setq file-alist
+          (sort file-alist
+                (cond
+                 ((memq ?S switches)    ; sorted on size
+                  (function
+                   (lambda (x y)
+                     ;; 7th file attribute is file size
+                     ;; Make largest file come first
+                     (if (equal (nth 0 (cdr y))
+                                (nth 0 (cdr x)))
+                         (< (nth 7 (cdr y))
+                            (nth 7 (cdr x)))
+                       (nth 0 (cdr x))))))
+                 ((memq ?t switches)    ; sorted on time
+                  (setq index (ls-lisp-time-index switches))
+                  (function
+                   (lambda (x y)
+                     (if (equal (nth 0 (cdr y))
+                                (nth 0 (cdr x)))
+                         (ls-lisp-time-lessp (nth index (cdr y))
+                                             (nth index (cdr x)))
+                       (nth 0 (cdr x))
+                       ))))
+                 ((memq ?X switches)    ; sorted on ext
+                  (function
+                   (lambda (x y)
+                     (if (equal (nth 0 (cdr y))
+                                (nth 0 (cdr x)))
+                         (string-lessp (file-name-extension (upcase (car x)))
+                                       (file-name-extension (upcase (car y))))
+                       (nth 0 (cdr x))))))
+                 (t                     ; sorted alphabetically
+                  (if ls-lisp-dired-ignore-case
+                      (function
+                       (lambda (x y)
+                         (if (equal (nth 0 (cdr y))
+                                    (nth 0 (cdr x)))
+                             (string-lessp (upcase (car x))
+                                           (upcase (car y)))
+                           (nth 0 (cdr x)))))
+                    (function
+                     (lambda (x y)
+                       (if (equal (nth 0 (cdr y))
+                                  (nth 0 (cdr x)))
+                           (string-lessp (car x)
+                                         (car y))
+                         (nth 0 (cdr x)))))
+                    )))))
+    )
+
+  (if (memq ?r switches)                ; reverse sort order
+      (setq file-alist (nreverse file-alist)))
+  file-alist)
+
+;;; yasnippet
+(setq load-path (cons (concat home "/.emacs.d/yasnippet")
+                      load-path))
+
 ;;; anything
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/anything")
+(setq load-path (cons (concat home "/.emacs.d/anything")
                       load-path))
 (require 'anything)
+(setq yas/trigger-key "TAB")
+(require 'yasnippet-config)
+(yas/setup ".emacs.d/yasnippet")
 
 ;;; session
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/session/lisp")
+(setq load-path (cons (concat home "/.emacs.d/session/lisp")
                       load-path))
 (require 'session)
 (add-hook 'after-init-hook 'session-initialize)
 ;;; tails-history
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/tails-history")
+(setq load-path (cons (concat home "/.emacs.d/tails-history")
                       load-path))
 (load-library "tails-history")
 
 ;;; color-moccur
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/occur")
+(setq load-path (cons (concat home "/.emacs.d/occur")
                       load-path))
 (require 'color-moccur)
 (require 'moccur-edit)
@@ -61,9 +146,9 @@
 
 ;;; skk
 (if (string-equal hostname "mbp1")
-    (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/apel")
+    (setq load-path (cons (concat home "/.emacs.d/apel")
 			  load-path)))
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
+(setq load-path (cons (concat home "/.emacs.d/ddskk")
                       load-path))
 ;;(setq skk-server-host "localhost")
 ;;(setq skk-server-portnum 1178)
@@ -79,7 +164,7 @@
 
 ;;; とりあえずファイルで
 (cond ((string-match "apple-darwin" system-configuration)
-       (setq skk-jisyo (concat (getenv "HOME") "/Library/AquaSKK/SKK-JISYO.L")))
+       (setq skk-jisyo (concat home "/Library/AquaSKK/SKK-JISYO.L")))
       )
 
 ;;; コントロールキーをシステムにとられないようにする
@@ -125,17 +210,17 @@
 (load "elscreen" "Elscreen" t)
 
 ;;; git(egg)
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/egg")
+(setq load-path (cons (concat home "/.emacs.d/egg")
                       load-path))
 (require 'egg)
 
 ;;; gist
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/gist")
+(setq load-path (cons (concat home "/.emacs.d/gist")
                       load-path))
 (require 'gist)
 
 ;;; OCaml
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/tuareg-mode")
+(setq load-path (cons (concat home "/.emacs.d/tuareg-mode")
                       load-path))
 (setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
@@ -143,11 +228,11 @@
 
 ;;; howm
 (cond ((string-equal hostname "canaan") ; for private pc
-       (setq howm-directory (expand-file-name "Dropbox/howm" (getenv "HOME"))))
+       (setq howm-directory (expand-file-name "Dropbox/howm" home)))
       (t
        (setq howm-directory "/Volumes/共有フォルダ/社員フォルダ/永谷/howm/")))
                                         
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/rd-mode")
+(setq load-path (cons (concat home "/.emacs.d/rd-mode")
                       load-path))
 (add-to-list 'auto-mode-alist '("\\.howm$" . rd-mode))
 (autoload 'rd-mode "rd-mode" "major mode for ruby document formatter RD" t)
@@ -155,7 +240,7 @@
 (require 'rd-mode-plus)
 
 ;;; perl
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/cperl-mode")
+(setq load-path (cons (concat home "/.emacs.d/cperl-mode")
                       load-path))
 (autoload 'cperl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
 (fset 'perl-mode 'cperl-mode)
@@ -175,10 +260,10 @@
              '(cperl-tab-always-indent t)
              ))
 ;; perl-completion
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/perl-completion")
+(setq load-path (cons (concat home "/.emacs.d/perl-completion")
                       load-path))
 (add-hook 'cperl-mode-hook
-          (lambda()
+          (lambda ()
             (require 'perl-completion)
             (perl-completion-mode t)))
 (add-hook  'cperl-mode-hook
@@ -190,7 +275,7 @@
                      '(ac-source-perl-completion)))))
 
 ;;; tiarra-conf
-(setq load-path (cons (concat (getenv "HOME") "/.emacs.d/tiarra-conf")
+(setq load-path (cons (concat home "/.emacs.d/tiarra-conf")
                       load-path))
 (load-library "tiarra-conf")
 
@@ -215,3 +300,5 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(show-paren-mode t))
+
+(put 'dired-find-alternate-file 'disabled nil)
