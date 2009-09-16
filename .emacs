@@ -60,6 +60,9 @@
 (global-set-key "\C-c\C-o" 'search-buffers)
 
 ;;; skk
+(if (string-equal hostname "mbp1")
+    (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/apel")
+			  load-path)))
 (setq load-path (cons (concat (getenv "HOME") "/.emacs.d/ddskk")
                       load-path))
 ;;(setq skk-server-host "localhost")
