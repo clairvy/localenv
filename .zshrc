@@ -134,7 +134,8 @@ else
   export PATH="${local_lib_path}/bin:$PATH"
 fi
 
-export PATH="${PATH}:$HOME/local/bin"
+export PATH="$HOME/local/bin:${PATH}"
+export MANPATH="$HOME/local/man:${MANPATH}"
 # for gems
 export PATH="${PATH}:/var/lib/gems/1.8/bin"
 
