@@ -89,6 +89,8 @@ setopt transient_rprompt
 # 文字列末尾に改行コードが無い場合でも表示する
 unsetopt promptcr
 
+setopt no_clobber
+
 setopt notify
 setopt print_exit_value
 
