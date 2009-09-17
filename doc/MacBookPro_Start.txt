@@ -145,3 +145,6 @@ http://d.hatena.ne.jp/tanemori/20081029/SafariPlugins
   $ make check
   $ ./tscreen
   $ make install
+  $ cd ~/local
+  $ vi .setup/tscreen-0.4.9.sh
+  $ sh .setup/tscreen-0.4.9.sh
