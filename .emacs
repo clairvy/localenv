@@ -242,6 +242,8 @@
 ;;; perl
 (setq load-path (cons (concat home "/.emacs.d/cperl-mode")
                       load-path))
+(setq load-path (cons (concat home "/.emacs.d/cperl-calculate-indent")
+                      load-path))
 (autoload 'cperl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
 (fset 'perl-mode 'cperl-mode)
 (add-hook 'cperl-mode-hook
@@ -273,6 +275,7 @@
                (make-variable-buffer-local 'ac-sources)
                (setq ac-sources
                      '(ac-source-perl-completion)))))
+(load "cperl-calculate-indent")
 
 ;;; tiarra-conf
 (setq load-path (cons (concat home "/.emacs.d/tiarra-conf")

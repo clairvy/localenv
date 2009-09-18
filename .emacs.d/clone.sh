@@ -11,3 +11,7 @@ rmdir cperl-mode
 git clone git://github.com/jrockway/cperl-mode.git
 rmdir perl-completion
 git clone git://github.com/imakado/perl-completion.git
+# id:IMAKADO++
+rmdir cperl-calculate-indent
+git clone git://gist.github.com/145957.git cperl-calculate-indent
+( cd cperl-calculate-indent && git mv cperl-calculate-indent.txt cperl-calculate-indent.el )
