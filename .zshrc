@@ -88,7 +88,7 @@ setopt numeric_glob_sort
 setopt transient_rprompt
 # 文字列末尾に改行コードが無い場合でも表示する
 unsetopt promptcr
-
+# リダイレクトでファイルを消さない
 setopt no_clobber
 
 setopt notify
@@ -170,6 +170,7 @@ LISTMAX=0
 # Ctrl+wで､直前の/までを削除する｡
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+# keychain
 if whence -p keychain 2>&1 > /dev/null; then
     keychain id_rsa id_dsa
     [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
