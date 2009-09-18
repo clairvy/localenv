@@ -85,6 +85,9 @@ X11
 /usr/X11/bin/xhost +192.168.0.221 とかすると，X11 が起動する．
 環境設定→セキュリティ→ネットワーククライアントからの接続を許可にチェック
 
+iStat
+  http://www.islayer.com/index.php?op=item&id=28
+
 = Growl
 - Growl
 - GrowlSafari
