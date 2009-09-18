@@ -141,6 +141,11 @@ export MANPATH="$HOME/local/man:${MANPATH}"
 # for gems
 export PATH="${PATH}:/var/lib/gems/1.8/bin"
 
+# for perl Devel::Cover
+alias cover='cover -test -ignore "^inc/"'
+# for perl Test::Pod::Coverage
+export TEST_POD=1
+
 # alias
 alias mv='nocorrect mv -i'
 alias cp='nocorrect cp -ip'
