@@ -183,3 +183,5 @@ and closing parentheses and brackets."
 	  (error "Unrecognized value of indent: %s" i))))
        (t
 	(error "Got strange value of indent: %s" i))))))
+
+(provide 'cperl-calculate-indent)

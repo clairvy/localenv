@@ -275,7 +275,9 @@
                (make-variable-buffer-local 'ac-sources)
                (setq ac-sources
                      '(ac-source-perl-completion)))))
-(load "cperl-calculate-indent")
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (require 'cperl-calculate-indent)))
 
 ;;; tiarra-conf
 (setq load-path (cons (concat home "/.emacs.d/tiarra-conf")
