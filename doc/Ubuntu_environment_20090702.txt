@@ -60,6 +60,7 @@ xev マンドでkeycode は調べられる．窓使いっぽい
   $ sudo aptitude install mysql-server-5.1
   $ sudo aptitude install libdevel-nytprof-perl
   $ sudo aptitude install keychain
+  $ sudo aptitude install libncurses5-dev
 
 #  $ sudo aptitude install libimager-perl
 #  $ sudo aptitude install giflib-dbg
@@ -78,6 +79,8 @@ Devel::NYTProf は、local::lib に入れたくなかったので、
 aptitude でインストール
 
 keychain が入ってなかった
+
+install libncurses5-dev for tscreen.
 
 == 他
 
