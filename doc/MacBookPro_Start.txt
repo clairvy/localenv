@@ -95,6 +95,19 @@ iStat
 
 = Perl
 
+
+  $ cpanp i CPANPLUS
+  $ cpanp i Module::Install::AuthorTests
+  $ cpanp i Test::Output
+  $ cpanp i Test::Pod::Coverage
+  $ cpanp i Devel::Cover
+  $ cpanp i Test::Pod
+  $ cpanp i Test::Spelling
+  $ sudo port install aspell
+  $ sudo port install aspell-dict-en
+  $ sudo port install enchant
+  $ cpanp i Test::Perl::Critic
+
 = Safari
 http://d.hatena.ne.jp/aduka/20090211/1234312204
 
