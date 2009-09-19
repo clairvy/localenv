@@ -95,7 +95,6 @@ iStat
 
 = Perl
 
-
   $ cpanp i CPANPLUS
   $ cpanp i Module::Install::AuthorTests
   $ cpanp i Test::Output
@@ -107,6 +106,13 @@ iStat
   $ sudo port install aspell-dict-en
   $ sudo port install enchant
   $ cpanp i Test::Perl::Critic
+
+  $ git clone git://github.com/yusukebe/miyagawanize
+  $ cpanp i Imager
+  $ sudo port install opencv
+  $ cpanp i Imager::ObjectDetect
+  $ cd miyagawanize
+  $ ./miyagawanize.pl clairvy.png
 
 = Safari
 http://d.hatena.ne.jp/aduka/20090211/1234312204
