@@ -155,7 +155,7 @@ alias mgdir='nocorrect mkdir -m 775'
 alias rm='rm -i'
 alias history='builtin history -Di'
 alias his='history | tail'
-if [[ `uname -s` == "Darwin" ]]; then
+if [[ `uname -s` == "Darwin" || `uname -s` == "FreeBSD" ]]; then
   alias ls='command ls -AFG'
 else
   alias ls='command ls -AF --color=auto --show-control-chars'
