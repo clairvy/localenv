@@ -1,4 +1,5 @@
-.emacs.d/auto-save-list
-.emacs.d/url
-.emacs.d/ddskk-20090823/*.elc
 *~
+.emacs.d/auto-save-list
+.emacs.d/ddskk-20090823/*.elc
+.emacs.d/js2-mode/build/
+.emacs.d/url

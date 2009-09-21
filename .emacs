@@ -226,6 +226,12 @@
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
+;;; JavaScript
+(setq load-path (cons (concat home "/.emacs.d/js2-mode/build")
+                      load-path))
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
 ;;; howm
 (cond ((string-equal hostname "canaan") ; for private pc
        (setq howm-directory (expand-file-name "Dropbox/howm" home)))
