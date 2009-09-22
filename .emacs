@@ -145,7 +145,8 @@
 (global-set-key "\C-c\C-o" 'search-buffers)
 
 ;;; skk
-(if (string-equal hostname "mbp1")
+(if (or (string-equal hostname "mbp1")
+	(= (string-to-int emacs-version) 23))
     (setq load-path (cons (concat home "/.emacs.d/apel")
 			  load-path)))
 (setq load-path (cons (concat home "/.emacs.d/ddskk")
