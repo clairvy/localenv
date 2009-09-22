@@ -20,6 +20,12 @@
        (setq os-type 'mac))
       (t 'unknown))
 
+;;; apel
+(if (or (string-equal hostname "mbp1")
+	(= (string-to-int emacs-version) 23))
+    (setq load-path (cons (concat home "/.emacs.d/apel")
+			  load-path)))
+
 ;;; dired HACK
 (setq load-path (cons (concat home "/.emacs.d/dired")
                       load-path))
@@ -97,6 +103,12 @@
       (setq file-alist (nreverse file-alist)))
   file-alist)
 
+;;; elscreen
+(cond ((= (string-to-int emacs-version) 23)
+       (setq load-path (cons (concat home "/.emacs.d/elscreen")
+                             load-path))
+       (load "elscreen" "ElScreen" t)))
+
 ;;; yasnippet
 (setq load-path (cons (concat home "/.emacs.d/yasnippet")
                       load-path))
@@ -107,7 +119,7 @@
 (require 'anything)
 (setq yas/trigger-key "TAB")
 (require 'yasnippet-config)
-(yas/setup ".emacs.d/yasnippet")
+(yas/setup (expand-file-name ".emacs.d/yasnippet" home))
 
 ;;; session
 (setq load-path (cons (concat home "/.emacs.d/session/lisp")
@@ -145,10 +157,6 @@
 (global-set-key "\C-c\C-o" 'search-buffers)
 
 ;;; skk
-(if (or (string-equal hostname "mbp1")
-	(= (string-to-int emacs-version) 23))
-    (setq load-path (cons (concat home "/.emacs.d/apel")
-			  load-path)))
 (setq load-path (cons (concat home "/.emacs.d/ddskk")
                       load-path))
 ;;(setq skk-server-host "localhost")
