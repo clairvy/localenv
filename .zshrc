@@ -130,10 +130,21 @@ if [[ "x$HOSTNAME" == "xdv1" ]]; then
   export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/i486-linux-gnu-thread-multi"
   export PATH="${local_lib_path}/bin:$PATH"
 else
-  export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
-  export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
-  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/darwin-2level"
-  export PATH="${local_lib_path}/bin:$PATH"
+  function set_perl_env () {
+    local site='darwin-2level'
+    export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
+    export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
+    export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
+    export PATH="${local_lib_path}/bin:$PATH"
+  }
+  function set_perl_env_wx () {
+    local site='darwin-thread-multi-2level'
+    export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
+    export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
+    export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
+    export PATH="${local_lib_path}/bin:$PATH"
+  }
+  set_perl_env
 fi
 
 export PATH="$HOME/local/bin:${PATH}"
