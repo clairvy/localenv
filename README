@@ -6,3 +6,14 @@
 
 できるだけメモを増やしたいと思っています。
 blog だと埋もれちゃうんで。
+
+使っている構成
+- Ubuntu 9.04 i686
+  - emacs-snapshot (23.0.91.1)
+- Mac OS 10.5.8
+  - 英語キーボード
+  - Carbon Emacs (2009年夏版 http://homepage.mac.com/zenitani/emacs-j.html
+- Mac OS 10.5.8
+  - 日本語キーボード
+  - Carbon Emacs 
+  - emacs-app (ports 版 - alt が遠くて面倒に思えてきた
