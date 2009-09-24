@@ -1945,6 +1945,7 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
 (defun twittering-retweet ()
   (interactive)
   (let ((username (get-text-property (point) 'username))
+	(id (get-text-property (point) 'id))
 	(text (get-text-property (point) 'text)))
     (when username
 	(twittering-update-status-from-minibuffer
@@ -1963,12 +1964,13 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
     (if uri
 	(browse-url uri))))
 
-(defun twittering-other-user-timeline ()
+(defun twittering-other-user-timeline (&optional username)
   (interactive)
-  (let ((username (get-text-property (point) 'username)))
-    (if (> (length username) 0)
-	(twittering-get-timeline (concat "user_timeline/" username))
-      (message "No user selected"))))
+  (if (null username)
+      (setq username (get-text-property (point) 'username)))
+  (if (> (length username) 0)
+      (twittering-get-timeline (concat "user_timeline/" username))
+    (message "No user selected")))
 
 (defun twittering-other-user-timeline-interactive ()
   (interactive)
