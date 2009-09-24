@@ -1,5 +1,8 @@
 ;;; -*- mode: emacs-lisp; coding: utf-8-unix; -*-
 
+;;; より一般度の高いものを上にする方針．
+;;; 途中でコケて，C-h が効かなかったらアレでしょ？
+
 ;;; キーバインド
 (define-key global-map "\C-h" 'delete-backward-char) ; 削除
 (define-key global-map "\M-?" 'help-for-help)        ; ヘルプ
@@ -298,6 +301,11 @@
 (setq load-path (cons (concat home "/.emacs.d/tiarra-conf")
                       load-path))
 (load-library "tiarra-conf")
+
+;;; twittering-mode
+(setq load-path (cons (concat home "/.emacs.d/twittering-mode")
+                      load-path))
+(require 'twittering-mode)
 
 ;;; font for ubuntu
 (cond ((string-match "linux" system-configuration)
