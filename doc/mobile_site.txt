@@ -1,0 +1,13 @@
+# -*- mode: rd; coding: utf-8-unix; -*-
+
+- http://mobilebeginner.com/basic-site.html
+
+モバイルサイトについて勉強してみる．
+
+横幅230px がいいらしい．
+
+公式サイト
+- http://www.nttdocomo.co.jp/service/imode/make/
+- http://www.au.kddi.com/ezfactory/
+- http://creation.mb.softbank.jp/
+
