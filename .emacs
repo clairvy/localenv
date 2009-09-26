@@ -307,13 +307,11 @@
                       load-path))
 (require 'twittering-mode)
 
-;;; for simple-hatena-mode                                                      
-(setq load-path (cons (expand-file-name ".emacs.d/html-helper-mode" home)
-                      load-path))
-(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
-(setq auto-mode-alist (cons '("\\.html$" . html-helper-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.asp$" . html-helper-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\\.phtml$" . html-helper-mode) auto-mode-alist))
+;;; for simple-hatena-mode
+(cond ((>= (string-to-int emacs-version) 23)
+       (setq load-path (cons (expand-file-name ".emacs.d/html-helper-mode" home)
+                             load-path))
+       (autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)))
 
 (setq load-path (cons (expand-file-name ".emacs.d/simple-hatena-mode" home)
                       load-path))
