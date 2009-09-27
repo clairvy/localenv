@@ -308,6 +308,106 @@
                       load-path))
 (require 'twittering-mode)
 
+;;; for simple-hatena-mode
+(cond ((>= (string-to-int emacs-version) 23)
+       (setq load-path (cons (expand-file-name ".emacs.d/html-helper-mode" home)
+                             load-path))
+       (autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)))
+
+(setq load-path (cons (expand-file-name ".emacs.d/simple-hatena-mode" home)
+                      load-path))
+(require 'simple-hatena-mode)
+(setq simple-hatena-root (expand-file-name ".hatena" home))
+;(require 'hatenahelper-mode)
+;(add-hook 'simple-hatena-mode-hook
+;          '(lambda ()
+;             (hatenahelper-mode 1)))
+
+;;; transrate URL to id notation                                                
+(defun my-hatena-convert-url-to-id ()
+  "カーソル付近のURLをはてなID記法に変換する。"
+  (interactive)
+  (let ((bounds (bounds-of-thing-at-point 'url)))
+    (if bounds
+        (let* ((beg (car bounds))
+               (end (cdr bounds))
+               (idstr (my-hatena-convert-url-to-id-1
+                       (buffer-substring beg end))))
+          (if idstr
+              (progn
+                (delete-region beg end)
+                (insert idstr)))))))
+
+(defun my-hatena-convert-url-to-id-1 (url)
+  "与えられた URL をはてなID記法に変換する"
+  (let* ((delim ":")
+         (urls (split-string url "/"))
+         (authority (nth 2 urls))
+         (user (nth 3 urls))
+         (date (nth 4 urls))
+         (item (nth 5 urls))
+         (idstr (concat "id:" user)))
+    (if (string-match "\\<\\(.\\)\\.hatena\\.ne\\.jp\\>" authority)
+        (setq idstr (concat (match-string 1 authority) delim idstr)))
+    (if (and date (not (string-equal date "")))
+        (setq idstr (concat idstr delim date)))
+    (if (and item (not (string-equal item "")))
+        (setq idstr (concat idstr delim item)))
+    idstr))
+
+(defun my-hatena-convert-amazon ()
+  "カーソル付近の値をはてなamazon記法に変換する。"
+  (interactive)
+  (let ((bounds (bounds-of-thing-at-point 'word)))
+    (if bounds
+        (let* ((beg (car bounds))
+               (end (cdr bounds))
+               (amazon-str (my-hatena-convert-amazon-1
+                       (buffer-substring beg end))))
+          (if amazon-str
+              (progn
+                (delete-region beg end)
+                (insert amazon-str)))))))
+
+(defun my-hatena-convert-amazon-1 (id &optional title)
+  "id でamazon へのリンクをつくる"
+  (let ((url '("[http://www.amazon.co.jp/dp/")))
+    (if (stringp id)
+        (setq url (append url (list id "/search042-22/ref=nosim/")))
+      (error "Invalid argument %s" x))
+    (if (stringp title)
+        (setq url (append url (list ":title=" title "]"))))
+    (setq url (append url '("]")))
+    (mapconcat (lambda (x) x) url "")))
+
+(defun my-hatena-get-near-word (string-maker)
+;  (let ((bounds (bounds-of-thing-at-point 'word)))                             
+  (let ((bounds (bounds-of-thing-at-point 'filename))) ; :: のためにこっちに    
+    (if bounds
+        (let* ((beg (car bounds))
+               (end (cdr bounds))
+               (new-str (funcall string-maker (buffer-substring beg end))))
+          (if new-str
+              (progn
+                (delete-region beg end)
+                (insert new-str)))))))
+
+(defun my-hatena-convert-cpan ()
+  "カーソル付近のモジュール名をcpan URLに変換する。"
+  (interactive)
+  (my-hatena-get-near-word 'my-hatena-convert-cpan-1))
+
+(defun my-hatena-convert-cpan-1 (name)
+  "search.cpan へのリンクを作る"
+  (let ((url '("[http://search.cpan.org/dist/")))
+    (if (stringp name)
+        (let ((new-name name))
+          (while (string-match "::" new-name)
+            (setq new-name (replace-match "-" t t new-name)))
+          (setcdr url (list new-name "/:title=" name "]")))
+      (error "Invalid argument %s" x))
+    (mapconcat (lambda (n) n) url "")))
+
 ;;; font for ubuntu
 (cond ((string-match "linux" system-configuration)
        (custom-set-faces

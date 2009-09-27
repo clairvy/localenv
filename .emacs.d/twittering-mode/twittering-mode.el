@@ -355,17 +355,18 @@ directory. You should change through function'twittering-icon-mode'")
       (define-key km "\C-cd" 'twittering-received-direct-messages)
       (define-key km "\C-cD" 'twittering-sent-direct-messages)
       (define-key km "\C-d" 'twittering-send-direct-message)
-      (define-key km "g" 'twittering-current-timeline-interactive)
+;      (define-key km "g" 'twittering-current-timeline-interactive)
       (define-key km "v" 'twittering-other-user-timeline)
       (define-key km "V" 'twittering-other-user-timeline-interactive)
       (define-key km "f" 'twittering-favorites)
       (define-key km "F" 'twittering-other-user-favorites)
       (define-key km "\C-cfa" 'twittering-add-favorite)
-      (define-key km "\C-c\C-x" 'twittering-destroy-favorite)
+      (define-key km "\C-cfd" 'twittering-destroy-favorite)
       ;; (define-key km "j" 'next-line)
       ;; (define-key km "k" 'previous-line)
       (define-key km "j" 'twittering-goto-next-status)
       (define-key km "k" 'twittering-goto-previous-status)
+      (define-key km "\t" 'twittering-goto-next-status)
       (define-key km " " 'scroll-up)
       (define-key km "b" 'scroll-down)
       (define-key km "l" 'forward-char)
@@ -373,11 +374,15 @@ directory. You should change through function'twittering-icon-mode'")
       (define-key km "0" 'beginning-of-line)
       (define-key km "^" 'beginning-of-line-text)
       (define-key km "$" 'end-of-line)
+      (define-key km "<" 'beginning-of-buffer)
+      (define-key km ">" 'end-of-buffer)
       (define-key km "n" 'twittering-goto-next-status-of-user)
       (define-key km "p" 'twittering-goto-previous-status-of-user)
       (define-key km [backspace] 'backward-char)
+      (define-key km "g" 'beginning-of-buffer)
       (define-key km "G" 'end-of-buffer)
       (define-key km "H" 'beginning-of-buffer)
+      (define-key km "/" 'isearch-forward)
       (define-key km "i" 'twittering-icon-mode)
       (define-key km "s" 'twittering-scroll-mode)
       (define-key km "t" 'twittering-toggle-proxy)
@@ -542,7 +547,9 @@ directory. You should change through function'twittering-icon-mode'")
 	    " HTTP/1.1" nl
 	    "Host: twitter.com" nl
 	    "User-Agent: " (twittering-user-agent) nl
-	    "Authorization: Basic " (twittering-basic-authorization twittering-username (twittering-get-password)) nl)))
+	    "Authorization: Basic " (twittering-basic-authorization
+                                     (twittering-get-username)
+                                     (twittering-get-password)) nl)))
   
 (defun twittering-create-request (http-method method-class method &optional parameters)
   "create http request, http-method is (GET|POST)"
@@ -774,15 +781,26 @@ PARAMETERS is alist of URI parameters.
     ))
 
 
-(defun twittering-profile-image (profile-image-url)
+(defun twittering-profile-image (profile-image-url user-id)
   (let ((icon-string "\n  "))
     (if (string-match "/\\([^/?]+\\)\\(?:\\?\\|$\\)" profile-image-url)
 	(let* ((filename (match-string-no-properties 1 profile-image-url))
-	      (fullpath (concat twittering-tmp-dir "/" filename)))
+	      (fullpath (concat twittering-tmp-dir "/" user-id "/" filename))
+	      (user-image-dir (concat twittering-tmp-dir "/" user-id)))
 	  ;; download icons if does not exist
+	  (if (not (file-directory-p user-image-dir))
+	      (make-directory user-image-dir))
+
 	  (if (file-exists-p fullpath)
 	      t
-	    (add-to-list 'twittering-image-stack profile-image-url))
+	    (when (and icon-string twittering-icon-mode)
+	      (start-process "wget-images"
+			     (twittering-wget-buffer)
+			     "wget"
+			     (format "--directory-prefix=%s" (concat twittering-tmp-dir "/" user-id))
+			     "--no-clobber"
+			     "--quiet"
+			     profile-image-url)))
 
 	  (when (and icon-string twittering-icon-mode)
 	    (set-text-properties
@@ -829,7 +847,7 @@ PARAMETERS is alist of URI parameters.
 	   (list-push (attr 'user-name) result))
 	  ((?i)                         ; %i - profile_image
 	   (list-push (twittering-profile-image 
-		       (attr 'user-profile-image-url)) result))
+		       (attr 'user-profile-image-url) (attr 'user-id)) result))
 	  ((?d)                         ; %d - description
 	   (list-push (attr 'user-description) result))
 	  ((?l)                         ; %l - location
@@ -956,7 +974,7 @@ PARAMETERS is alist of URI parameters.
 	   (list-push (attr 'name) result))
 	  ((?i)                         ; %i - profile_image
 	   (list-push (twittering-profile-image 
-		       (attr 'profile-image-url)) result))
+		       (attr 'profile-image-url) (attr 'user-id)) result))
 	  ((?d)                         ; %d - description
 	   (list-push (attr 'description) result))
 	  ((?l)                         ; %l - location
@@ -1049,7 +1067,7 @@ PARAMETERS is alist of URI parameters.
 	   (list-push (attr 'sender-name) result))
 	  ((?i)                         ; %i - profile_image
 	   (list-push (twittering-profile-image 
-		       (attr 'sender-profile-image-url)) result))
+		       (attr 'sender-profile-image-url) (attr 'sender-id)) result))
 	  ((?d)                         ; %d - description
 	   (list-push (attr 'sender-description) result))
 	  ((?l)                         ; %l - location
@@ -1703,10 +1721,7 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
                    "%a, %d %b %Y %H:%M:%S GMT"
                    twittering-timeline-last-update)))
             (twittering-http-method "GET" "statuses" method noninteractive
-                                 `(("since" . ,since))))))))
-  (if (and twittering-icon-mode window-system)
-      (if twittering-image-stack
-	  (twittering-get-image-stack))))
+                                 `(("since" . ,since)))))))))
 
 
 (defun twittering-get-favorites (username &optional noninteractive id)
@@ -1733,11 +1748,11 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
 		   "%a, %d %b %Y %H:%M:%S GMT"
 		   twittering-timeline-last-update)))
 	    (twittering-http-method "GET" "favorites" username noninteractive
-				    `(("since" . ,since))))))))
+				    `(("since" . ,since)))))))))
 
-  (if (and twittering-icon-mode window-system)
-      (if twittering-image-stack
-	  (twittering-get-image-stack))))
+;  (if (and twittering-icon-mode window-system)
+;      (if twittering-image-stack
+;	  (twittering-get-image-stack))))
 
 (defun twittering-get-followers (username &optional noninteractive page)
   (if (or (not (eq twittering-last-used-method username)) 
@@ -1763,22 +1778,14 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
 				username 
 				noninteractive 
 				""
-				'twittering-http-get-user-sentinel))))
-
-
-  (if (and twittering-icon-mode window-system)
-      (if twittering-image-stack
-	  (twittering-get-image-stack))))
+				'twittering-http-get-user-sentinel)))))
 
 (defun twittering-get-followings (username)
   (setq twittering-user-data nil)
   (let ((buf (get-buffer twittering-buffer)))
     (if (not buf)
 	(twittering-stop)
-      (twittering-http-method "GET" "statuses/friends" username noninteractive "" 'twittering-http-get-user-sentinel)))
-  (if (and twittering-icon-mode window-system)
-      (if twittering-image-stack
-	  (twittering-get-image-stack))))
+      (twittering-http-method "GET" "statuses/friends" username noninteractive "" 'twittering-http-get-user-sentinel))))
 
 (defun twittering-get-received-direct-messages ()
   (setq twittering-timeline-last-update nil
@@ -1786,11 +1793,7 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
   (let ((buf (get-buffer twittering-buffer)))
     (if (not buf)
 	(twittering-stop)
-      (twittering-http-method "GET" "" "direct_messages" noninteractive "" 'twittering-http-get-dm-sentinel)))
-
-  (if (and twittering-icon-mode window-system)
-      (if twittering-image-stack
-	  (twittering-get-image-stack))))
+      (twittering-http-method "GET" "" "direct_messages" noninteractive "" 'twittering-http-get-dm-sentinel))))
 
 
 (defun twittering-get-sent-direct-messages ()
@@ -1799,30 +1802,8 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
   (let ((buf (get-buffer twittering-buffer)))
     (if (not buf)
 	(twittering-stop)
-      (twittering-http-method "GET" "direct_messages" "sent" noninteractive "" 'twittering-http-get-dm-sentinel)))
+      (twittering-http-method "GET" "direct_messages" "sent" noninteractive "" 'twittering-http-get-dm-sentinel))))
 
-  (if (and twittering-icon-mode window-system)
-      (if twittering-image-stack
-	  (twittering-get-image-stack))))
-
-(defun twittering-get-image-stack ()
-  (let ((proc
-	 (apply
-	  #'start-process
-	  "wget-images"
-	  (twittering-wget-buffer)
-	  "wget"
-	  (format "--directory-prefix=%s" twittering-tmp-dir)
-	  "--no-clobber"
-	  "--quiet"
-	  twittering-image-stack)))
-    (set-process-sentinel
-     proc
-     (lambda (proc stat)
-       (clear-image-cache)
-       (save-excursion
-	 (set-buffer (twittering-wget-buffer))
-	 )))))
 
 (defun twittering-received-direct-messages ()
   (interactive)
@@ -1832,8 +1813,7 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
   (interactive)
   (twittering-get-sent-direct-messages)
 )
-;(defun twittering-new-direct-message())
-;(defun twittering-remove-direct-message())
+
 (defun twittering-following-list()
   (interactive)
   (twittering-get-followings twittering-username)
@@ -1945,11 +1925,10 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
 (defun twittering-retweet ()
   (interactive)
   (let ((username (get-text-property (point) 'username))
-	(id (get-text-property (point) 'id))
 	(text (get-text-property (point) 'text)))
     (when username
 	(twittering-update-status-from-minibuffer
-	 (concat "RT @" username ": " text) id))))
+	 (concat "RT @" username ": " text)))))
 
 (defun twittering-send-direct-message ()
   (interactive)
@@ -1964,6 +1943,7 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
     (if uri
 	(browse-url uri))))
 
+;;; patched by clairvy for specified user timeline 2009/09/25.
 (defun twittering-other-user-timeline (&optional username)
   (interactive)
   (if (null username)
@@ -1971,6 +1951,7 @@ If STATUS-DATUM is already in DATA-VAR, return nil. If not, return t."
   (if (> (length username) 0)
       (twittering-get-timeline (concat "user_timeline/" username))
     (message "No user selected")))
+;;; patched by clairvy for specified user timeline 2009/09/25.
 
 (defun twittering-other-user-timeline-interactive ()
   (interactive)
