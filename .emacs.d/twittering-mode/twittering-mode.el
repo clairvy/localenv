@@ -547,7 +547,9 @@ directory. You should change through function'twittering-icon-mode'")
 	    " HTTP/1.1" nl
 	    "Host: twitter.com" nl
 	    "User-Agent: " (twittering-user-agent) nl
-	    "Authorization: Basic " (twittering-basic-authorization twittering-username (twittering-get-password)) nl)))
+	    "Authorization: Basic " (twittering-basic-authorization
+                                     (twittering-get-username)
+                                     (twittering-get-password)) nl)))
   
 (defun twittering-create-request (http-method method-class method &optional parameters)
   "create http request, http-method is (GET|POST)"
