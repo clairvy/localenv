@@ -162,22 +162,19 @@
 ;;; skk
 (setq load-path (cons (concat home "/.emacs.d/ddskk")
                       load-path))
-;;(setq skk-server-host "localhost")
-;;(setq skk-server-portnum 1178)
 (setq skk-use-azik t)
-(if (not (string-equal hostname "canaan"))
-    (setq skk-azik-keyboard-type 'en)
-  (setq skk-azik-keyboard-type 'jp106))
+(cond ((string-equal hostname "canaan")
+       (setq skk-azik-keyboard-type 'jp106))
+      (t
+       (setq skk-azik-keyboard-type 'en)))
 (add-hook 'skk-mode-hook
           (lambda ()
+            (setq skk-server-host "localhost")
+            (setq skk-server-portnum 1178)
+            (setq skk-auto-insert-paren t)
             (setq skk-kutouten-type 'en)))
 (require 'skk-setup)
 (require 'skk-study)
-
-;;; とりあえずファイルで
-(cond ((string-match "apple-darwin" system-configuration)
-       (setq skk-jisyo (concat home "/Library/AquaSKK/SKK-JISYO.L")))
-      )
 
 ;;; コントロールキーをシステムにとられないようにする
 (setq mac-pass-control-to-system nil)
