@@ -162,6 +162,7 @@
 ;;; skk
 (setq load-path (cons (concat home "/.emacs.d/ddskk")
                       load-path))
+(setq skk-use-azik t)
 (cond ((string-equal hostname "canaan")
        (setq skk-azik-keyboard-type 'jp106))
       (t
