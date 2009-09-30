@@ -404,6 +404,17 @@
       (error "Invalid argument %s" x))
     (mapconcat (lambda (n) n) url "")))
 
+;;; fixed-width-font for mac
+;;; http://macemacsjp.sourceforge.jp/matsuan/FontSettingJp.html
+(if (eq window-system 'mac)
+    (progn
+      (setq load-path (cons (expand-file-name ".emacs.d/fixed-width-fontset"
+                                              home)
+                            load-path))
+      (require 'carbon-font)
+      (fixed-width-set-fontset "hiramaru" 12)
+      ))
+
 ;;; font for ubuntu
 (cond ((string-match "linux" system-configuration)
        (custom-set-faces
