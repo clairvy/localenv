@@ -116,7 +116,9 @@ fi
 PROMPT=$prompt_color'%U%B%n'$rprompt_color'%U@'$prompt_color'%B%m%b %h '$prompt_char$clear_color'%u '
 RPROMPT=$rprompt_color'[%~]'$clear_color
 
-PAGER=lv
+if which lv 2&>1 > /dev/null; then
+  export PAGER=lv
+fi
 
 # for Mac ports
 export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
