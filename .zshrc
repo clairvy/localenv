@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# -*- coding: utf-8-unix; sh-basic-offset: 2; -*-
 
 HISTFILE=~/.zhistory
 HISTSIZE=100000
@@ -98,6 +99,15 @@ stty -istrip
 bindkey -e
 bindkey '^W' kill-region
 
+# 状態変数
+local os='unknown'
+if [[ `uname -s` == "Darwin" ]]; then
+  os='mac'
+elif [[ `uname -s` == "FreeBSD" ]]; then
+  os='bsd'
+fi
+[ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
+
 # すごいプロンプト
 setopt prompt_subst
 autoload -U colors; colors
@@ -116,7 +126,7 @@ fi
 PROMPT=$prompt_color'%U%B%n'$rprompt_color'%U@'$prompt_color'%B%m%b %h '$prompt_char$clear_color'%u '
 RPROMPT=$rprompt_color'[%~]'$clear_color
 
-if which lv 2&>1 > /dev/null; then
+if whence -p lv 2>&1 > /dev/null; then
   export PAGER=lv
 fi
 
@@ -168,21 +178,21 @@ alias mgdir='nocorrect mkdir -m 775'
 alias rm='rm -i'
 alias history='builtin history -Di'
 alias his='history | tail'
-if [[ `uname -s` == "Darwin" || `uname -s` == "FreeBSD" ]]; then
+if [[ $os == 'mac' || $os == 'bsd' ]]; then
   alias ls='command ls -AFG'
 else
   alias ls='command ls -AF --color=auto --show-control-chars'
 fi
 alias ln='ln -n'
-alias x=exit
+alias x='exit'
 alias first_release="perl -mModule::CoreList -le 'print Module::CoreList->first_release(@ARGV)'"
 alias scc='screen'
 alias scx='screen -x'
 alias hex='perl -le "print unpack q(H*), shift"'
 alias grep='grep --color'
 alias egrep='egrep --color'
-if [[ `uname -s` == "Darwin" ]]; then
-    alias emacs-app='/opt/local/var/macports/software/emacs-app/23.1_0/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
+if [[ $os == 'mac' ]]; then
+  alias emacs-app='/opt/local/var/macports/software/emacs-app/23.1_0/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
 fi
 
 # 補完するかの質問は画面を超える時にのみに行う｡
@@ -193,10 +203,11 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # keychain
 if whence -p keychain 2>&1 > /dev/null; then
-    keychain id_rsa id_dsa
-    [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
-    [ -f $HOME/.keychain/$HOSTNAME-sh ] &&
-         . $HOME/.keychain/$HOSTNAME-sh
-    [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ] &&
-         . $HOME/.keychain/$HOSTNAME-sh-gpg
+  keychain id_rsa id_dsa
+  if [ -f $HOME/.keychain/$HOSTNAME-sh ]; then
+    . $HOME/.keychain/$HOSTNAME-sh
+  fi
+  if [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ]; then
+    . $HOME/.keychain/$HOSTNAME-sh-gpg
+  fi
 fi

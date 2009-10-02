@@ -406,6 +406,9 @@
       (error "Invalid argument %s" x))
     (mapconcat (lambda (n) n) url "")))
 
+;;; shell
+(setq sh-basic-offset 2)
+
 ;;; fixed-width-font for mac
 ;;; http://macemacsjp.sourceforge.jp/matsuan/FontSettingJp.html
 (if (eq window-system 'mac)
