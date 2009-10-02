@@ -131,30 +131,46 @@ if whence -p lv 2>&1 > /dev/null; then
 fi
 
 # for Mac ports
-export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
-export MANPATH="/opt/local/share/man:${MANPATH}"
+if [[ $os == 'mac' ]]; then
+  export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
+  export MANPATH="/opt/local/share/man:${MANPATH}"
+fi
+# for BSDPAN
+if [[ $os == 'bsd' ]]; then
+  export PKG_DBDIR=$HOME/local/var/db/pkg
+  export PORT_DBDIR=$HOME/local/var/db/pkg
+  export INSTALL_AS_USER
+  export LD_LIBRARY_PATH=$HOME/local/lib
+fi
 
 # for local::lib
 local_lib_path="$HOME/perl5"
-if [[ "x$HOSTNAME" == "xdv1" ]]; then
+function _set_perl_env () {
   export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
   export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
-  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/i486-linux-gnu-thread-multi"
+  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
   export PATH="${local_lib_path}/bin:$PATH"
-else
+}
+if [[ "x$HOSTNAME" == "xdv1" ]]; then
+  function set_perl_env () {
+    local site='i486-linux-gnu-thread-multi'
+    _set_perl_env
+  }
+  set_perl_env
+elif [[ $os == 'mac' ]]; then
   function set_perl_env () {
     local site='darwin-2level'
-    export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
-    export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
-    export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
-    export PATH="${local_lib_path}/bin:$PATH"
+    _set_perl_env
   }
   function set_perl_env_wx () {
     local site='darwin-thread-multi-2level'
-    export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
-    export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
-    export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
-    export PATH="${local_lib_path}/bin:$PATH"
+    _set_perl_env
+  }
+  set_perl_env
+elif [[ $os == 'bsd' ]]; then
+  function set_perl_env () {
+    local site='i386-freebsd-64int'
+    _set_perl_env
   }
   set_perl_env
 fi
