@@ -243,15 +243,21 @@
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
+;;; org-mode
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+
 ;;; howm
 (cond ((string-equal hostname "canaan") ; for private pc
        (setq howm-directory (expand-file-name "Dropbox/howm" home)))
       (t
        (setq howm-directory "/Volumes/共有フォルダ/社員フォルダ/永谷/howm/")))
-                                        
+(add-to-list 'auto-mode-alist '("\\.howm$" . org-mode))
+
+;;; rd-mode
 (setq load-path (cons (concat home "/.emacs.d/rd-mode")
                       load-path))
-(add-to-list 'auto-mode-alist '("\\.howm$" . rd-mode))
 (autoload 'rd-mode "rd-mode" "major mode for ruby document formatter RD" t)
 (add-to-list 'auto-mode-alist '("\\.rd$" . rd-mode))
 (require 'rd-mode-plus)
