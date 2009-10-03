@@ -189,6 +189,9 @@ if [[ $os == 'mac' ]]; then
   alias perldoc='perldoc -t'
 fi
 
+# ignore mailcheck
+export MAILCHECK=0
+
 # alias
 alias mv='nocorrect mv -i'
 alias cp='nocorrect cp -ip'
