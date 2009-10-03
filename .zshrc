@@ -226,7 +226,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # keychain
 if whence -p keychain 2>&1 > /dev/null; then
-  keychain id_rsa id_dsa
+  keychain id_rsa
   if [ -f $HOME/.keychain/$HOSTNAME-sh ]; then
     . $HOME/.keychain/$HOSTNAME-sh
   fi
