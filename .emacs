@@ -284,6 +284,40 @@
              '(cperl-indent-parens-as-block t)
              '(cperl-tab-always-indent t)
              ))
+;;; perl flymake
+;;; - http://d.hatena.ne.jp/sun-basix/20080705/1215278204
+;;; - http://d.hatena.ne.jp/antipop/20080701/1214838633
+(require 'flymake)
+(push '("\\.pl$" flymake-perl-init) flymake-allowed-file-name-masks)
+(push '("\\.pm$" flymake-perl-init) flymake-allowed-file-name-masks)
+(push '("\\.t$" flymake-perl-init) flymake-allowed-file-name-masks)
+(push '("\\(.*\\) at \\([^ \n]+\\) line \\([0-9]+\\)[,.\n]" 2 3 nil 1) flymake-err-line-patterns)
+(add-hook 'cperl-mode-hook
+ '(lambda ()
+    (define-key cperl-mode-map "\C-ce" 'credmp/flymake-display-err-minibuf)
+;    (set-perl5lib)
+    (flymake-mode)))
+
+;;; for flymake
+; http://www.credmp.org/index.php/2007/07/20/on-the-fly-syntax-checking-java-in-emacs/
+(defun credmp/flymake-display-err-minibuf () 
+  "Displays the error/warning for the current line in the minibuffer"
+  (interactive)
+  (let* ((line-no             (flymake-current-line-no))
+         (line-err-info-list  (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+         (count               (length line-err-info-list))
+         )
+    (while (> count 0)
+      (when line-err-info-list
+        (let* ((file       (flymake-ler-file (nth (1- count) line-err-info-list)))
+               (full-file  (flymake-ler-full-file (nth (1- count) line-err-info-list)))
+               (text (flymake-ler-text (nth (1- count) line-err-info-list)))
+               (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
+          (message "[%s] %s" line text)
+          )
+        )
+      (setq count (1- count)))))
+
 ;; perl-completion
 (setq load-path (cons (concat home "/.emacs.d/perl-completion")
                       load-path))
