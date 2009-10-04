@@ -294,12 +294,13 @@
 (push '("\\(.*\\) at \\([^ \n]+\\) line \\([0-9]+\\)[,.\n]" 2 3 nil 1) flymake-err-line-patterns)
 (add-hook 'cperl-mode-hook
  '(lambda ()
-    (define-key cperl-mode-map "\C-ce" 'credmp/flymake-display-err-minibuf)
 ;    (set-perl5lib)
     (flymake-mode)))
 
 ;;; for flymake
-; http://www.credmp.org/index.php/2007/07/20/on-the-fly-syntax-checking-java-in-emacs/
+;;; - http://www.credmp.org/index.php/2007/07/20/on-the-fly-syntax-checking-java-in-emacs/
+;;; copy - http://d.hatena.ne.jp/khiker/20070720/emacs_flymake
+(define-key global-map "\C-ce" 'credmp/flymake-display-err-minibuf)
 (defun credmp/flymake-display-err-minibuf () 
   "Displays the error/warning for the current line in the minibuffer"
   (interactive)
