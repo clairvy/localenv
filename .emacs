@@ -302,6 +302,20 @@
           (lambda ()
             (require 'cperl-calculate-indent)))
 
+;;; scala
+(add-to-list 'load-path (expand-file-name ".emacs.d/scala-mode" home))
+(require 'scala-mode-auto)
+;;; with yasnippet
+(setq yas/my-directory
+      (expand-file-name ".emacs.d/scala-mode/contrib/yasnippet/snippets" home))
+(yas/load-directory yas/my-directory)
+(add-hook 'scala-mode-hook
+          '(lambda ()
+             (yas/minor-mode-on)
+             ))
+;;; flymake - http://d.hatena.ne.jp/kiris60/20091004/1254586627
+(require 'scala-mode-flymake)
+
 ;;; tiarra-conf
 (setq load-path (cons (concat home "/.emacs.d/tiarra-conf")
                       load-path))
