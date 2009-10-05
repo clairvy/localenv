@@ -1,0 +1,55 @@
+# -*- mode: org; coding: utf-8-unix; -*-
+
+* [BSD]local::lib + cpanp + minicpan
+
+- http://blog.hide-k.net/archives/2009/02/locallibrootcpa.php
+
+この設定が必要っぽい．
+>||
+export PKG_DBDIR=$HOME/local/var/db/pkg
+export PORT_DBDIR=$HOME/local/var/db/pkg
+export INSTALL_AS_USER
+export LD_LIBRARY_PATH=$HOME/local/lib
+mkdir -p ~/local/var/db/pkg
+||<
+
+無くても動くけど，pkg 配下になんか作るみたい．
+
+>||
+$ mkdir -p ~/local/var/db/pkg
+$ wget http://search.cpan.org/CPAN/authors/id/A/AP/APEIRON/local-lib-1.004007.tar.gz
+$ tar zxf local-lib-1.004007.tar.gz
+$ cd local-lib-1.004007
+$ perl Makefile.PL --bootstrap
+$ cpan
+> o conf prerequisites_policy follow
+> o conf commit
+> install CPANPLUS
+> q
+$ cpanp 's conf prereqs 1; s save'
+$ cpanp i CPAN::Mini
+$ minicpan -r http://ftp.jaist.ac.jp/pub/CPAN -l ~/minicpan
+||<
+
+cpanp へのmirror の設定は省略．
+s reconfigure -> でインタラクティブにすればできる．
+file:///<home>/minicpan + mirrors にすればいい．
+
+* [BSD]keychain
+>||
+$ wget http://agriffis.n01se.net/keychain/keychain-2.6.8.tar.bz2
+$ tar zxf keychain-2.6.8.tar.bz2
+$ mv keychain-2.6.8 ~/modules
+$ cd ~/local
+$ ln -s ~/modules/keychain-2.6.8/bin/keychain bin/keychain
+||<
+
+* [BSD]lv
+>||
+$ wget http://www.ff.iij4u.or.jp/~nrt/freeware/lv451.tar.gz
+$ tar zxf lv451.tar.gz
+$ cd lv451/build
+$ ../src/configure --prefix=$HOME/modules/lv-4.51 2> c.err | tee c.log
+$ make 2> m.err | tee m.log
+$ make install
+||<
