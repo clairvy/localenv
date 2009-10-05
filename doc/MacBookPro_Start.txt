@@ -85,8 +85,8 @@ X11
 /usr/X11/bin/xhost +192.168.0.221 とかすると，X11 が起動する．
 環境設定→セキュリティ→ネットワーククライアントからの接続を許可にチェック
 
-iStat
-  http://www.islayer.com/index.php?op=item&id=28
+iStat Menus
+- http://www.islayer.com/apps/istatmenus/
 
 = Growl
 - Growl
@@ -96,6 +96,9 @@ iStat
 = Perl
 
   $ cpanp i CPANPLUS
+  $ cpanp 's conf prereqs 1; s save'
+  $ cpanp i CPAN::Mini
+
   $ cpanp i Module::Install::AuthorTests
   $ cpanp i Test::Output
   $ cpanp i Test::Pod::Coverage
@@ -117,7 +120,7 @@ iStat
 = Safari
 http://d.hatena.ne.jp/aduka/20090211/1234312204
 
-- SIMBL (/Library/Application Support/SIMBL/Plugins 配下にインストール)
+- SIMBL (/Library/Application Support/SIMBL/Plugins 配下にインストール) - http://www.culater.net/software/SIMBL/SIMBL.php
   - SafariTabConfig
   - SafariTabMemento
   - GraseKit
@@ -170,3 +173,8 @@ http://d.hatena.ne.jp/tanemori/20081029/SafariPlugins
   $ cd ~/local
   $ vi .setup/tscreen-0.4.9.sh
   $ sh .setup/tscreen-0.4.9.sh
+
+= KeyRemap4MacBookPro
+
+
+  $
