@@ -15,7 +15,7 @@
   $ sudo aptitude install perl-doc
 
 == CPAN::Mini
-  $ minicpan -r http://ftp.jaist.ac.jp/ -l ~/minicpan
+  $ minicpan -r http://ftp.jaist.ac.jp/pub/CPAN -l ~/minicpan
   $ cpanp
   CPAN Terminal> s mirrors
   Readonly list of mirrors (in order of preference):
@@ -31,10 +31,10 @@
   n
   2> Custom
   file:///home/nagaya/minicpan
-  http://ftp.jaist.ac.jp
-  http://ftp.nara.wide.ad.jp
-  http://ftp.riken.jp
-  http://ftp.yz.yamagata-u.ac.jp
+  9 http://ftp.jaist.ac.jp
+  10 http://ftp.nara.wide.ad.jp
+  11 http://ftp.riken.jp
+  12 http://ftp.yz.yamagata-u.ac.jp
   ^D
   1> Mirror
   9> Save & exit
