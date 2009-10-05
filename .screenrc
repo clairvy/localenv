@@ -3,5 +3,6 @@
 source $HOME/.screenrc-gen
 
 screen -t BS 0
-screen -t mb 1
-screen -t mb 2
+screen -t lo 1
+screen -t lo 2
+screen -t lo 3
