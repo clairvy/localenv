@@ -184,7 +184,7 @@ export PATH="${PATH}:/var/lib/gems/1.8/bin"
 alias cover='cover -test -ignore "^inc/"'
 # for perl Test::Pod::Coverage
 export TEST_POD=1
-# for perl
+# for perldoc
 if [[ $os == 'mac' ]]; then
   alias perldoc='perldoc -t'
 fi
