@@ -249,6 +249,7 @@
 (define-key global-map "\C-ca" 'org-agenda)
 
 ;;; howm
+(define-key global-map "\C-c,," 'howm-menu)
 (cond ((string-equal hostname "canaan") ; for private pc
        (setq howm-directory (expand-file-name "Dropbox/howm" home)))
       (t
