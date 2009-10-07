@@ -221,6 +221,7 @@
 (load "elscreen" "Elscreen" t)
 
 ;;; git(egg)
+(setq egg-git-command "/opt/local/bin/git")
 (setq load-path (cons (concat home "/.emacs.d/egg")
                       load-path))
 (require 'egg)
