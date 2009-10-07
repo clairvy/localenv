@@ -355,6 +355,32 @@
              ))
 ;;; flymake - http://d.hatena.ne.jp/kiris60/20091004/1254586627
 (require 'scala-mode-flymake)
+;;; scaladoc
+(let ((ih (expand-file-name "s/app/InteractiveHelp/" home)))
+  (setq scala-interpreter
+        (concat "scala -cp "
+                (concat ih "interactive-help-1.0.jar")
+                " -i "
+                (concat ih "import.scala"))))
+;(setenv "SCALA_DOC_HELP" (expand-file-name "s/app/InteractiveHelp/scala-2.7.5-apidocs-fixed/" home))
+(defun my-scala-doc ()
+  "カーソル付近のScala doc を引く"
+  (interactive)
+  (let ((bounds (bounds-of-thing-at-point 'word)))
+    (if bounds
+        (let* ((beg (car bounds))
+               (end (cdr bounds)))
+          (my-scala-doc-1 (concat "\"" (buffer-substring beg end) "\""))))))
+(defun my-scala-doc-1 (&optional arg)
+  "引数指定をして直接scala doc を引く"
+  (interactive "sscala help args(ex \"List\", 0): ")
+  (scala-check-interpreter-running)
+  (comint-send-string scala-inf-buffer-name (concat "h(" arg ")\n")))
+(add-hook 'scala-mode-hook
+          '(lambda ()
+             (define-key scala-mode-map "\C-ch" 'my-scala-doc)
+             (define-key scala-mode-map "\C-cH" 'my-scala-doc-1)
+             ))
 
 ;;; tiarra-conf
 (setq load-path (cons (concat home "/.emacs.d/tiarra-conf")

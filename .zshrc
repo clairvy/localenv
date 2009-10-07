@@ -188,6 +188,8 @@ export TEST_POD=1
 if [[ $os == 'mac' ]]; then
   alias perldoc='perldoc -t'
 fi
+# for scaladoc
+export SCALA_DOC_HOME=/Users/s_nag/s/app/InteractiveHelp/scala-2.7.5-apidocs-fixed/
 
 # ignore mailcheck
 export MAILCHECK=0
