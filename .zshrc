@@ -215,7 +215,7 @@ alias hex='perl -le "print unpack q(H*), shift"'
 alias grep='grep --color'
 alias egrep='egrep --color'
 if [[ $os == 'mac' ]]; then
-  alias emacs-app='/opt/local/var/macports/software/emacs-app/23.1_0/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
+  alias emacs-app='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
 fi
 
 # 補完するかの質問は画面を超える時にのみに行う｡
