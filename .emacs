@@ -250,6 +250,9 @@
 
 ;;; howm
 (define-key global-map "\C-c,," 'howm-menu)
+(when (> (string-to-int emacs-version) 22); in MacOS Emacs Cocoa
+  (add-to-list 'load-path (expand-file-name ".emacs.d/howm" home))
+  (autoload 'howm-menu "howm-mode" "Hitori Otegaru Wiki Modoki" t))
 (cond ((string-equal hostname "canaan") ; for private pc
        (setq howm-directory (expand-file-name "Dropbox/howm" home)))
       (t
