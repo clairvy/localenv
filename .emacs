@@ -109,7 +109,7 @@
   file-alist)
 
 ;;; elscreen
-(cond ((= (string-to-int emacs-version) 23)
+(cond ((= (string-to-int emacs-version) 23) ; carbon だと同梱
        (setq load-path (cons (concat home "/.emacs.d/elscreen")
                              load-path))
        (load "elscreen" "ElScreen" t)))
@@ -465,27 +465,85 @@
 ;;; shell
 (setq sh-basic-offset 2)
 
-;;; fixed-width-font for mac
-;;; http://macemacsjp.sourceforge.jp/matsuan/FontSettingJp.html
-(if (eq window-system 'mac)
-    (progn
-      (setq load-path (cons (expand-file-name ".emacs.d/fixed-width-fontset"
-                                              home)
-                            load-path))
-      (require 'carbon-font)
-      (fixed-width-set-fontset "hiramaru" 12)
-      ))
+;;; use command key as Meta
+;;; http://cgi.NetLaputa.ne.jp/~kose/diary/?200908a&to=200908060#200908060
+(when (and (eq window-system 'ns)
+           (string-match " NS " (emacs-version)))
+  (setq ns-command-modifier (quote meta))
+  (setq ns-alternate-modifier (quote super)))
 
-;;; font for ubuntu
-(cond ((string-match "linux" system-configuration)
+;;; insert \ instead of ¥
+(when (and (eq window-system 'ns)
+           (string-match " NS " (emacs-version))
+           (string= hostname "canaan")) ; keyboard jp106
+  (define-key global-map [165] nil)
+  (define-key global-map [67109029] nil)
+  (define-key global-map [134217893] nil)
+  (define-key global-map [201326757] nil)
+  (define-key function-key-map [165] [?\\])
+  (define-key function-key-map [67109029] [?\C-\\])
+  (define-key function-key-map [134217893] [?\M-\\])
+  (define-key function-key-map [201326757] [?\C-\M-\\])
+  )
+
+(cond (;; fixd-width-font
+       ;; http://d.hatena.ne.jp/kazu-yamamoto/20090122/1232589385
+       (and (eq window-system 'ns)
+            (string-match " NS " (emacs-version)))
+       (setq my-font "-*-*-medium-r-normal--12-*-*-*-*-*-fontset-hiramaru")
+       (setq fixed-width-use-QuickDraw-for-ascii t)
+       (setq mac-allow-anti-aliasing t)
+       (if (= emacs-major-version 22)
+           (require 'carbon-font))
+       (set-default-font my-font)
+       (add-to-list 'default-frame-alist `(font . ,my-font))
+       (when (= emacs-major-version 23)
+         (set-fontset-font
+          (frame-parameter nil 'font)
+          'japanese-jisx0208
+          '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+         (setq face-font-rescale-alist
+               '(("^-apple-hiragino.*" . 1.2)
+                 (".*osaka-bold.*" . 1.2)
+                 (".*osaka-medium.*" . 1.2)
+                 (".*courier-bold-.*-mac-roman" . 1.0)
+                 (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
+                 (".*monaco-bold-.*-mac-roman" . 0.9)
+                 ("-cdac$" . 1.3))))
+       )
+      (;; fixed-width-font for mac
+       ;; http://macemacsjp.sourceforge.jp/matsuan/FontSettingJp.html
+       (and (eq window-system 'mac)
+            (string-match "Carbon" (emacs-version)))
+       (setq load-path (cons (expand-file-name ".emacs.d/fixed-width-fontset"
+                                               home)
+                             load-path))
+       (require 'carbon-font)
+       (fixed-width-set-fontset "hiramaru" 12))
+      (;; font for ubuntu
+       (string-match "linux" system-configuration)
        (custom-set-faces
 	;; custom-set-faces was added by Custom.
 	;; If you edit it by hand, you could mess it up, so be careful.
 	;; Your init file should contain only one such instance.
 	;; If there is more than one, they won't work right.
-	'(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "unknown" :family "VL ゴシック"))))
-	)
-       ))
+	'(default ((t (:inherit nil
+                       :stipple nil
+                       :background "white"
+                       :foreground "black"
+                       :inverse-video nil
+                       :box nil
+                       :strike-through nil
+                       :overline nil
+                       :underline nil
+                       :slant normal
+                       :weight normal
+                       :height 100
+                       :width normal
+                       :foundry "unknown"
+                       :family "VL ゴシック"))))
+	))
+      )
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
