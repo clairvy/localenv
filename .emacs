@@ -231,6 +231,16 @@
                       load-path))
 (require 'gist)
 
+;;; auto-complete
+(add-to-list 'load-path (expand-file-name ".emacs.d/auto-complete" home))
+(require 'auto-complete nil t)
+(define-key ac-complete-mode-map "\C-n" 'ac-next)
+(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+
+;;;
+;;; Programming Languages
+;;;
+
 ;;; OCaml
 (setq load-path (cons (concat home "/.emacs.d/tuareg-mode")
                       load-path))
