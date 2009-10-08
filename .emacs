@@ -383,7 +383,7 @@
           (my-scala-doc-1 (concat "\"" (buffer-substring beg end) "\""))))))
 (defun my-scala-doc-1 (&optional arg)
   "引数指定をして直接scala doc を引く"
-  (interactive "sscala help args(ex \"List\", 0): ")
+  (interactive "sscala help args(ex \"List\")(0: ")
   (scala-check-interpreter-running)
   (comint-send-string scala-inf-buffer-name (concat "h(" arg ")\n")))
 (add-hook 'scala-mode-hook
