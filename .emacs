@@ -527,9 +527,12 @@
 ;          '(lambda ()
 ;             (hatenahelper-mode 1)))
 
-;;; transrate URL to twitter-id notation
-(defun my-hatena-convert-twitter-id-to-link ()
-  "カーソル付近の@付きID をはてな記法のリンクに変換する"
+;;; transrate twitter-id notation to hatena-notation
+;;; and transrate hashtag(#) to hatena-notation
+(defun my-hatena-convert-twitter-notation-to-link ()
+  "カーソル付近の@ 付きID をはてな記法のリンクに変換する．
+又は，カーソル付近の# 付き文字列をはてな記法のリンクに変換する．
+"
   (interactive)
   (let ((bounds (bounds-of-thing-at-point 'symbol)))
     (if bounds
@@ -540,12 +543,20 @@
                (idstr (buffer-substring beg end)))
           (cond ((string-equal "@" prestr)
                  (delete-region pre end)
-                 (insert (my-hatena-convert-twitter-id-to-link-1 idstr))))))))
+                 (insert (my-hatena-convert-twitter-id-to-link idstr)))
+                ((string-equal "#" prestr)
+                 (delete-region pre end)
+                 (insert (my-hatena-convert-twitter-hashtag-to-link idstr))))))))
 
-(defun my-hatena-convert-twitter-id-to-link-1 (id)
+(defun my-hatena-convert-twitter-id-to-link (id)
   "twitter の id をはてな記法のリンクに変換する"
   (if id
       (concat "[http://twitter.com/" id ":title=@" id "]")))
+
+(defun my-hatena-convert-twitter-hashtag-to-link (tag)
+  "twitter の hashtag をはてな記法のリンクに変換する"
+  (if tag
+      (concat "[http://twitter.com/search?q=%23" tag ":title=#" tag "]"))) ;; %23 = # だよ
 
 ;;; transrate URL to hatena-id notation
 (defun my-hatena-convert-url-to-id ()
