@@ -114,17 +114,76 @@
                              load-path))
        (load "elscreen" "ElScreen" t)))
 
+;;; anything (yasnippet / auto-install)
+(add-to-list 'load-path (expand-file-name ".emacs.d/auto-install-mode" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/yasnippet" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/anything" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/auto-install" home))
+(require 'auto-install)
+(auto-install-update-emacswiki-package-name t)
+(require 'anything-auto-install)
 ;;; yasnippet
-(setq load-path (cons (concat home "/.emacs.d/yasnippet")
-                      load-path))
-
-;;; anything
-(setq load-path (cons (concat home "/.emacs.d/anything")
-                      load-path))
-(require 'anything)
 (setq yas/trigger-key "TAB")
 (require 'yasnippet-config)
 (yas/setup (expand-file-name ".emacs.d/yasnippet" home))
+;;; anything
+(require 'anything-config)
+(require 'anything)
+;; (install-elisp "http://svn.coderepos.org/share/lang/elisp/anything-c-yasnippet/anything-c-yasnippet.el")
+(require 'anything-c-yasnippet)         ;[2008/03/25]
+(setq anything-c-yas-space-match-any-greedy t) ;[default: nil]
+(global-set-key (kbd "C-c y") 'anything-c-yas-complete)
+(yas/initialize)
+
+(add-to-list 'anything-sources 'anything-c-source-emacs-commands)
+(define-key global-map (kbd "C-;") 'anything)
+(require 'anything-show-completion)
+(require 'anything-kyr-config)
+(require 'anything-match-plugin)
+(define-key anything-map "\C-k" (lambda () (interactive) (delete-minibuffer-contents)))
+(setq anything-map-C-j-binding 'anything-select-3rd-action)
+;; [2008/04/02]
+(define-key anything-map [end] 'anything-scroll-other-window)
+(define-key anything-map [home] 'anything-scroll-other-window-down)
+(define-key anything-map [next] 'anything-next-page)
+(define-key anything-map [prior] 'anything-previous-page)
+(define-key anything-map [delete] 'anything-execute-persistent-action)
+;; [2008/08/22]
+(define-key anything-map (kbd "C-:") 'anything-for-create-from-anything)
+;; (@> " frequently used commands - keymap")
+(define-key anything-isearch-map "\C-m"  'anything-isearch-default-action)
+(setq anything-enable-digit-shortcuts nil)
+(define-key anything-map (kbd "M-1") 'anything-select-with-digit-shortcut)
+(define-key anything-map (kbd "M-2") 'anything-select-with-digit-shortcut)
+(define-key anything-map (kbd "M-3") 'anything-select-with-digit-shortcut)
+(define-key anything-map (kbd "M-4") 'anything-select-with-digit-shortcut)
+(define-key anything-map (kbd "M-5") 'anything-select-with-digit-shortcut)
+(define-key anything-map (kbd "M-6") 'anything-select-with-digit-shortcut)
+(define-key anything-map (kbd "M-7") 'anything-select-with-digit-shortcut)
+(define-key anything-map (kbd "M-8") 'anything-select-with-digit-shortcut)
+(define-key anything-map (kbd "M-9") 'anything-select-with-digit-shortcut)
+(define-key anything-map (kbd "C-SPC") 'anything-toggle-visible-mark)
+(define-key anything-map "\M-[" 'anything-prev-visible-mark)
+(define-key anything-map "\M-]" 'anything-next-visible-mark)
+(define-key anything-map "\C-a" 'beginning-of-line)
+;; (install-elisp-from-emacswiki "anything-dabbrev-expand.el")
+(require 'anything-dabbrev-expand)
+(define-key anything-dabbrev-map [(control ?@)] 'anything-dabbrev-find-all-buffers)
+(setq anything-dabbrev-input-idle-delay 0.0)
+(setq anything-dabbrev-idle-delay 1.0)
+(setq anything-dabbrev-expand-candidate-number-limit 20)
+(setq anything-dabbrev-expand-strategies
+      '(;; anything-dabbrev-expand--first-partial-dabbrev
+        anything-dabbrev-expand--anything))
+(setq anything-dabbrev-sources
+      '(anything-dabbrev-partial-source
+        anything-c-source-complete-emacs-commands
+        anything-c-source-complete-emacs-functions
+        anything-c-source-complete-emacs-variables
+        anything-c-source-complete-emacs-other-symbols
+        anything-dabbrev-all-source))
+(require 'anything-complete nil t)
+(anything-read-string-mode 1)
 
 ;;; session
 (setq load-path (cons (concat home "/.emacs.d/session/lisp")
@@ -234,9 +293,51 @@
 ;;; auto-complete
 (add-to-list 'load-path (expand-file-name ".emacs.d/auto-complete" home))
 (require 'auto-complete nil t)
+(global-auto-complete-mode t)
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
+;;; - http://d.hatena.ne.jp/rubikitch/20081109/autocomplete
+(defvar ac-chars "0-9a-zA-Z¥¥?!_-")
+(defun ac-candidate-substrings-in-buffer ()
+  "partial dabbrev for auto-complete."
+  (when (> (length ac-target) 1)
+    (let ((inhibit-quit nil)            ;for debug
+          (i 0)
+          candidate
+          candidates
+          (regexp (concat (regexp-quote ac-target) "[" ac-chars "]*¥¥b")))
+      (save-excursion
+        ;; search backward
+        (goto-char ac-point)
+        (while (and (< i ac-candidate-max)
+                    (re-search-backward regexp nil t))
+          (skip-chars-backward ac-chars)
+          (setq candidate (buffer-substring-no-properties
+                           (point)
+                           (match-end 0)))
+          (when (and (>= (length candidate) 3)
+                     (not (member candidate candidates)))
+            (setq candidates (cons candidate candidates))
+            (setq i (1+ i))))
+        ;; search backward
+        (goto-char (+ ac-point (length ac-target)))
+        (while (and (< i ac-candidate-max)
+                    (re-search-forward regexp nil t))
+          (goto-char (match-beginning 0))
+          (skip-chars-backward ac-chars)
+          (setq candidate (buffer-substring-no-properties
+                           (point)
+                           (match-end 0)))
+          (goto-char (match-end 0))
+          (when (and (>= (length candidate) 3)
+                     (not (member candidate candidates)))
+            (setq candidates (cons candidate candidates))
+            (setq i (1+ i))))
+        (nreverse candidates)))))
 
+(setq ac-source-substrings-in-buffer
+      '((candidates  . ac-candidate-substrings-in-buffer)
+        (limit . 4)))
 ;;;
 ;;; Programming Languages
 ;;;
@@ -316,7 +417,7 @@
 ;;; - http://www.credmp.org/index.php/2007/07/20/on-the-fly-syntax-checking-java-in-emacs/
 ;;; copy - http://d.hatena.ne.jp/khiker/20070720/emacs_flymake
 (define-key global-map "\C-ce" 'credmp/flymake-display-err-minibuf)
-(defun credmp/flymake-display-err-minibuf () 
+(defun credmp/flymake-display-err-minibuf ()
   "Displays the error/warning for the current line in the minibuffer"
   (interactive)
   (let* ((line-no             (flymake-current-line-no))
@@ -397,6 +498,15 @@
                       load-path))
 (load-library "tiarra-conf")
 
+;;; schema
+(setq scheme-program-name "gosh -i")
+(autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
+(autoload 'run-scheme "cmuscheme" "Run an inferior Scheme process." t)
+
+;;;
+;;; Application
+;;;
+
 ;;; twittering-mode
 (setq load-path (cons (concat home "/.emacs.d/twittering-mode")
                       load-path))
@@ -417,7 +527,27 @@
 ;          '(lambda ()
 ;             (hatenahelper-mode 1)))
 
-;;; transrate URL to id notation                                                
+;;; transrate URL to twitter-id notation
+(defun my-hatena-convert-twitter-id-to-link ()
+  "カーソル付近の@付きID をはてな記法のリンクに変換する"
+  (interactive)
+  (let ((bounds (bounds-of-thing-at-point 'symbol)))
+    (if bounds
+        (let* ((beg (car bounds))
+               (pre (- beg 1))
+               (end (cdr bounds))
+               (prestr (buffer-substring pre (+ 1 pre)))
+               (idstr (buffer-substring beg end)))
+          (cond ((string-equal "@" prestr)
+                 (delete-region pre end)
+                 (insert (my-hatena-convert-twitter-id-to-link-1 idstr))))))))
+
+(defun my-hatena-convert-twitter-id-to-link-1 (id)
+  "twitter の id をはてな記法のリンクに変換する"
+  (if id
+      (concat "[http://twitter.com/" id ":title=@" id "]")))
+
+;;; transrate URL to hatena-id notation
 (defun my-hatena-convert-url-to-id ()
   "カーソル付近のURLをはてなID記法に変換する。"
   (interactive)
@@ -475,8 +605,8 @@
     (mapconcat (lambda (x) x) url "")))
 
 (defun my-hatena-get-near-word (string-maker)
-;  (let ((bounds (bounds-of-thing-at-point 'word)))                             
-  (let ((bounds (bounds-of-thing-at-point 'filename))) ; :: のためにこっちに    
+;  (let ((bounds (bounds-of-thing-at-point 'word)))
+  (let ((bounds (bounds-of-thing-at-point 'filename))) ; :: のためにこっちに
     (if bounds
         (let* ((beg (car bounds))
                (end (cdr bounds))
@@ -504,6 +634,20 @@
 
 ;;; shell
 (setq sh-basic-offset 2)
+
+;;; color-theme
+;;; - http://www.cs.cmu.edu/~maverick/GNUEmacsColorThemeTest/
+(add-to-list 'load-path (expand-file-name ".emacs.d/color-theme" home))
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-hober)))
+
+
+;;; eslide
+(add-to-list 'load-path (expand-file-name ".emacs.d/eslide" home))
+(require 'eslide)
 
 ;;; use command key as Meta
 ;;; http://cgi.NetLaputa.ne.jp/~kose/diary/?200908a&to=200908060#200908060
