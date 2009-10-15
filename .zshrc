@@ -32,12 +32,11 @@ setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 
-
 autoload -Uz compinit; compinit
 
 # ファイルリスト補完でもlsと同様に色をつける｡
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+export LSCOLORS=GxFxCxdxBxegedabagacad
+export LS_COLORS='di=01;36:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*:default' group-name ''
 zstyle ':completion:*:default' use-cache true
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
@@ -65,6 +64,8 @@ setopt print_eight_bit
 setopt auto_param_keys
 # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt auto_param_slash
+# 最後がディレクトリ名で終わっている場合末尾の / を自動的に取り除く
+setopt auto_remove_slash
 # {a-c} を a b c に展開する機能を使えるようにする
 setopt brace_ccl
 # コマンドのスペルチェックをする
@@ -75,6 +76,10 @@ setopt equals
 setopt NO_hup
 # Ctrl+D では終了しないようになる（exit, logout などを使う）
 setopt ignore_eof
+# コマンドラインでも # 以降をコメントと見なす
+setopt interactive_comments
+# auto_list の補完候補一覧で、ls -F のようにファイルの種別をマーク表示しない
+setopt list_types
 # 内部コマンド jobs の出力をデフォルトで jobs -l にする
 setopt long_list_jobs
 # コマンドラインの引数で --prefix=/usr などの = 以降でも補完できる
@@ -85,6 +90,8 @@ setopt mark_dirs
 setopt multios
 # ファイル名の展開で、辞書順ではなく数値的にソートされるようになる
 setopt numeric_glob_sort
+# for, repeat, select, if, function などで簡略文法が使えるようになる
+setopt short_loops
 #コピペの時rpromptを非表示する
 setopt transient_rprompt
 # 文字列末尾に改行コードが無い場合でも表示する
@@ -218,6 +225,7 @@ alias grep='grep --color'
 alias egrep='egrep --color'
 if [[ $os == 'mac' ]]; then
   alias emacs-app='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
+  alias emacsclient='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient'
 fi
 
 # 補完するかの質問は画面を超える時にのみに行う｡
