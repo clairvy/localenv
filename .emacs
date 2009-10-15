@@ -556,7 +556,7 @@
 (defun my-hatena-convert-twitter-hashtag-to-link (tag)
   "twitter の hashtag をはてな記法のリンクに変換する"
   (if tag
-      (concat "[http://twitter.com/search?q=%23" tag ":title=#" tag "]"))) ;; %23 = # だよ
+      (concat "[http://search.twitter.com/search?q=%23" tag "&lang=ja:title=#" tag "]"))) ;; %23 = # だよ
 
 ;;; transrate URL to hatena-id notation
 (defun my-hatena-convert-url-to-id ()
