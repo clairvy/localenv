@@ -512,6 +512,26 @@
                       load-path))
 (require 'twittering-mode)
 
+;;; typing-outputz
+(add-to-list 'load-path (expand-file-name ".emacs.d/typing-outputz" home))
+(require 'typing-outputz)
+(global-typing-outputz-mode t)
+(add-to-list 'typing-outputz-counted-commands
+             'skk-insert)
+(defun to-growl-record-buffer ()
+  (let ((growl-command-template
+         (cond
+          ((eq 0 (shell-command "which notify-send"))
+           "notify-send -i gnome-emacs \"Emacs notify\" \"%s\"")
+          (t nil))))
+    (when growl-command-template
+      (shell-command
+       (format growl-command-template
+               (format "Outputz: %d chars"
+                       typing-outputz-buffer-local-counter))))))
+(add-hook 'typing-outputz-record-buffer-hook
+          'to-growl-record-buffer nil)
+
 ;;; for simple-hatena-mode
 (cond ((>= (string-to-int emacs-version) 23)
        (setq load-path (cons (expand-file-name ".emacs.d/html-helper-mode" home)
