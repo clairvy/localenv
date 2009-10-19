@@ -118,23 +118,35 @@ fi
 # すごいプロンプト
 setopt prompt_subst
 autoload -U colors; colors
-local prompt_color='%{[32m%}'
-local clear_color='%{[0m%}'
-local rprompt_color='%{[33m%}' # yellow [0m
-local prompt_char='$'
-if [[ "x$USER" == "xs-nag" || "x$USER" == "xnagaya" || "x$USER" == "xs_nag" ]]; then
-  prompt_color='%{[32m%}'      # green [0m
-elif [[ "x$USER" == "xroot" ]]; then
-  prompt_color='%{[37m%}'      # white [0m
-  prompt_char='#'
+
+if [[ x"$TERM" == x"dumb" || x"$TERM" == x"sun" || x"$TERM" == x"emacs" ]]; then
+  use_color=
 else
-  prompt_color='%{[35m%}'      # pink [0m
+  use_color='true'
 fi
-PROMPT=$prompt_color'%U%B%n'$rprompt_color'%U@'$prompt_color'%B%m%b %h '$prompt_char$clear_color'%u '
-RPROMPT=$rprompt_color'[%~]'$clear_color
+
+if [[ x"$use_color" != x"true" ]]; then
+  PROMPT='%U%B%n@%m%b %h %#%u '
+  RPROMPT=
+else
+  local prompt_color='%{[32m%}'
+  local clear_color='%{[0m%}'
+  local rprompt_color='%{[33m%}' # yellow [0m
+  local prompt_char='$'
+  if [[ x"$USER" == x"s-nag" || x"$USER" == x"nagaya" || x"$USER" == x"s_nag" ]]; then
+    prompt_color='%{[32m%}'      # green [0m
+  elif [[ x"$USER" == x"root" ]]; then
+    prompt_color='%{[37m%}'      # white [0m
+    prompt_char='#'
+  else
+    prompt_color='%{[35m%}'      # pink [0m
+  fi
+  PROMPT=$prompt_color'%U%B%n'$rprompt_color'%U@'$prompt_color'%B%m%b %h '$prompt_char$clear_color'%u '
+  RPROMPT=$rprompt_color'[%~]'$clear_color
+fi
 
 if whence -p lv 2>&1 > /dev/null; then
-  export PAGER=lv
+  export PAGER='lv'
 fi
 
 # for Mac ports
@@ -210,10 +222,14 @@ alias mgdir='nocorrect mkdir -m 775'
 alias rm='rm -i'
 alias history='builtin history -Di'
 alias his='history | tail'
-if [[ $os == 'mac' || $os == 'bsd' ]]; then
-  alias ls='command ls -AFG'
+if [[ $use_color == 'true' ]]; then
+  if [[ $os == 'mac' || $os == 'bsd' ]]; then
+    alias ls='command ls -AFG'
+  else
+    alias ls='command ls -AF --color=auto --show-control-chars'
+  fi
 else
-  alias ls='command ls -AF --color=auto --show-control-chars'
+  alias ls='command ls -AF'
 fi
 alias ln='ln -n'
 alias x='exit'
