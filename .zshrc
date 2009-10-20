@@ -110,6 +110,8 @@ bindkey '^W' kill-region
 local os='unknown'
 if [[ `uname -s` == "Darwin" ]]; then
   os='mac'
+elif [[ `uname -s` == "SunOS" ]]; then
+  os='sun'
 elif [[ `uname -s` == "FreeBSD" ]]; then
   os='bsd'
 fi
@@ -210,7 +212,7 @@ alias mgdir='nocorrect mkdir -m 775'
 alias rm='rm -i'
 alias history='builtin history -Di'
 alias his='history | tail'
-if [[ $os == 'mac' || $os == 'bsd' ]]; then
+if [[ $os == 'mac' || $os == 'bsd' || $os == 'sun' ]]; then
   alias ls='command ls -AFG'
 else
   alias ls='command ls -AF --color=auto --show-control-chars'
