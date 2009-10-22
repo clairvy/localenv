@@ -1,4 +1,4 @@
-# -*- mode: rd; coding: utf-8-unix; -*-
+# -*- mode: org; coding: utf-8-unix; -*-
 
 とりあえず、Ubuntu, MacOSX 対応という感じで、
 使っているコンフィグを晒していこうと思います。
@@ -8,19 +8,11 @@
 blog だと埋もれちゃうんで。
 
 使っている構成
-- Mac OS 10.5.8
+- Mac OS 10.6.1
   - 日本語キーボード
-  - Carbon Emacs 
-  - emacs-app (ports 版 - alt が遠くて面倒に思えてきた
+  - emacs-app (ports 版 23.1.1)
 - debian - squeeze/sid
   - emacs 22.3.1
 - bsd
 - solaris
 - WindowsXP
-
-古い情報
-<del>- Ubuntu 9.04 i686
-  - emacs-snapshot (23.0.91.1)</del>
-<del>- Mac OS 10.5.8
-  - 英語キーボード
-  - Carbon Emacs (2009年夏版 http://homepage.mac.com/zenitani/emacs-j.html</del>
