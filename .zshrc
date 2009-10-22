@@ -108,10 +108,13 @@ bindkey '^W' kill-region
 
 # 状態変数
 local os='unknown'
-if [[ `uname -s` == "Darwin" ]]; then
+local uname_s=`uname -s`
+if [[ $uname_s == "Darwin" ]]; then
   os='mac'
-elif [[ `uname -s` == "FreeBSD" ]]; then
+elif [[ $uname_s == "FreeBSD" ]]; then
   os='bsd'
+elif [[ $uname_s == "SunOS" ]]; then
+  os='sun'
 fi
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
 
@@ -160,6 +163,10 @@ if [[ $os == 'bsd' ]]; then
   export PORT_DBDIR=$HOME/local/var/db/pkg
   export INSTALL_AS_USER
   export LD_LIBRARY_PATH=$HOME/local/lib
+fi
+# for csw
+if [[ $os == 'sun' && -d /opt/csw/bin ]]; then
+  export PATH="/opt/csw/bin:$PATH"
 fi
 
 # for local::lib
@@ -225,6 +232,8 @@ alias his='history | tail'
 if [[ $use_color == 'true' ]]; then
   if [[ $os == 'mac' || $os == 'bsd' ]]; then
     alias ls='command ls -AFG'
+  elif [[ $os == 'sun' ]]; then
+    alias ls='command ls -AF'
   else
     alias ls='command ls -AF --color=auto --show-control-chars'
   fi
