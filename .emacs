@@ -665,6 +665,22 @@
 
 ;;; shell
 (setq sh-basic-offset 2)
+;; - http://dev.ariel-networks.com/Members/matsuyama/categories/emacs/cbcategory_view?b_start:int=8
+(add-hook 'term-mode-hook
+          '(lambda ()
+             (define-key term-raw-map "\C-z" (lookup-key (current-global-map) "\C-z"))
+             (define-key term-raw-map "\C-x" (lookup-key (current-global-map) "\C-x"))
+             (setq term-scroll-to-bottom-on-output 'all)
+             (defun term-send-raw ()
+               "Send the last character typed through the terminal-emulator
+without any interpretation."
+               (interactive)
+               ;; Convert `return' to C-m, etc.
+               (when (and (symbolp last-command-event)
+                          (get last-command-event 'ascii-character))
+                 (setq last-command-event (get last-command-event 'ascii-character)))
+               (term-send-raw-string (make-string 1 last-command-event)))
+             ))
 
 ;;; color-theme
 ;;; - http://www.cs.cmu.edu/~maverick/GNUEmacsColorThemeTest/
