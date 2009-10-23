@@ -2,6 +2,7 @@
 	st = status
 	ci = commit
 	co = checkout
+	br = branch
 [user]
 	name = NAGAYA Shinichiro
 	email = clairvy@gmail.com
