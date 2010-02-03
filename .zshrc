@@ -151,7 +151,11 @@ else
 fi
 
 if whence -p lv 2>&1 > /dev/null; then
-  export PAGER='lv'
+  if [[ $TERM_PROGRAM == "iTerm.app" ]]; then
+    alias lv='command lv -Ou'
+  fi
+  export PAGER='lv -Ou'
+  alias lc='lv | cat'
 fi
 
 # for Mac ports
@@ -245,6 +249,7 @@ fi
 alias ln='ln -n'
 alias x='exit'
 alias first_release="perl -mModule::CoreList -le 'print Module::CoreList->first_release(@ARGV)'"
+alias screen='command screen -U'
 alias scc='screen'
 alias scx='screen -x'
 alias hex='perl -le "print unpack q(H*), shift"'
