@@ -1,4 +1,4 @@
-# -*- mode: org; coding: utf-8-unix; -*-
+<!-- -*- mode: markdown; coding: utf-8-unix; -*- -->
 
 とりあえず、Ubuntu, MacOSX 対応という感じで、
 使っているコンフィグを晒していこうと思います。
@@ -8,11 +8,14 @@
 blog だと埋もれちゃうんで。
 
 使っている構成
-- Mac OS 10.6.1
-  - 日本語キーボード
-  - emacs-app (ports 版 23.1.1)
-- debian - squeeze/sid
-  - emacs 22.3.1
-- bsd
-- solaris
-- WindowsXP
+
+* Mac OS 10.6.1
+  * 日本語キーボード
+  * emacs-app (ports 版 23.1.1)
+* debian - squeeze/sid
+  * emacs 22.3.1
+* bsd
+* solaris
+* WindowsXP
+
+<http://daringfireball.net/projects/markdown/dingus>
