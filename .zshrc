@@ -259,6 +259,14 @@ LISTMAX=0
 # Ctrl+wで､直前の/までを削除する｡
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+# href の補完
+compctl -K _href href
+functions _href () {
+  local href_datadir=`href_datadir`
+  reply=(`cat $href_datadir/comptable|awk -F, '{print $2}'|sort|uniq`)
+  # /usr/share/href/comptable の Path は自分の環境に書き換える
+}
+
 # keychain
 if whence -p keychain 2>&1 > /dev/null; then
   keychain id_rsa
