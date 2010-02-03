@@ -113,10 +113,10 @@ local os='unknown'
 local uname_s=`uname -s`
 if [[ $uname_s == "Darwin" ]]; then
   os='mac'
-elif [[ $uname_s == "FreeBSD" ]]; then
-  os='bsd'
 elif [[ $uname_s == "SunOS" ]]; then
   os='sun'
+elif [[ $uname_s == "FreeBSD" ]]; then
+  os='bsd'
 fi
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
 
