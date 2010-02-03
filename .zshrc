@@ -25,6 +25,8 @@ setopt hist_no_store
 setopt hist_ignore_dups
 # 重複したヒストリは追加しない
 setopt hist_ignore_all_dups
+# incremental append
+setopt inc_append_history
 
 # ディレクトリ名だけで､ディレクトリの移動をする｡
 setopt auto_cd
