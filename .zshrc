@@ -207,6 +207,11 @@ elif [[ $os == 'bsd' ]]; then
   set_perl_env
 fi
 
+# for cabal
+if [[ -d $HOME/.cabal/bin ]]; then
+  export PATH="${PATH}:$HOME/.cabal/bin"
+fi
+
 export PATH="$HOME/local/bin:${PATH}"
 export MANPATH="$HOME/local/man:${MANPATH}"
 # for gems
