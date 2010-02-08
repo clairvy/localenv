@@ -703,6 +703,18 @@ without any interpretation."
   (setq ns-command-modifier (quote meta))
   (setq ns-alternate-modifier (quote super)))
 
+;;; text-translator
+;;; http://d.hatena.ne.jp/khiker/20070503/emacs_text_translator
+(add-to-list 'load-path (expand-file-name ".emacs.d/text-translator" home))
+(require 'text-translator)
+(global-set-key "\C-x\M-t" 'text-translator)
+(global-set-key "\C-x\M-T" 'text-translator-translate-last-string)
+;; 自動選択に使用する関数を設定
+(setq text-translator-auto-selection-func
+      'text-translator-translate-by-auto-selection-enja)
+;; グローバルキーを設定
+(global-set-key "\C-xt" 'text-translator-translate-by-auto-selection)
+
 ;;; insert \ instead of ¥
 (when (and (eq window-system 'ns)
            (string-match " NS " (emacs-version))
