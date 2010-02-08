@@ -34,6 +34,9 @@ setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 
+# fpath の追加
+fpath=(~/.zfunctions/Completion ${fpath})
+# 補完設定
 autoload -Uz compinit; compinit
 
 # ファイルリスト補完でもlsと同様に色をつける｡
@@ -216,6 +219,8 @@ export PATH="$HOME/local/bin:${PATH}"
 export MANPATH="$HOME/local/man:${MANPATH}"
 # for gems
 export PATH="${PATH}:/var/lib/gems/1.8/bin"
+# for gisty
+export GISTY_DIR="$HOME/work/gists"
 
 # for perl Devel::Cover
 alias cover='cover -test -ignore "^inc/"'
