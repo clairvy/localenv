@@ -714,6 +714,31 @@ without any interpretation."
       'text-translator-translate-by-auto-selection-enja)
 ;; グローバルキーを設定
 (global-set-key "\C-xt" 'text-translator-translate-by-auto-selection)
+;;; use dictionary.app
+;;; http://sakito.jp/mac/dictionary.html#emacs
+(defun dictionary ()
+  "dictionary.app"
+  (interactive)
+
+  (let ((editable (not buffer-read-only))
+        (pt (save-excursion (mouse-set-point last-nonmenu-event)))
+        beg end)
+
+    (if (and mark-active
+             (<= (region-beginning) pt) (<= pt (region-end)) )
+        (setq beg (region-beginning)
+              end (region-end))
+      (save-excursion
+        (goto-char pt)
+        (setq end (progn (forward-word) (point)))
+        (setq beg (progn (backward-word) (point)))
+        ))
+
+    (browse-url
+     (concat "dict:///"
+             (url-hexify-string (buffer-substring-no-properties beg end))))))
+(define-key global-map "\C-cw" 'dictionary)
+
 
 ;;; insert \ instead of ¥
 (when (and (eq window-system 'ns)
