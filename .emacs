@@ -338,6 +338,63 @@
 (setq ac-source-substrings-in-buffer
       '((candidates  . ac-candidate-substrings-in-buffer)
         (limit . 4)))
+
+;; pit
+(add-to-list 'load-path (expand-file-name ".emacs.d/pit" home))
+(require 'pit)
+
+;; autoinsert
+(require 'autoinsert)
+(auto-insert-mode)
+
+;; junk buffer and file
+;; - http://d.hatena.ne.jp/rubikitch/20080923/1222104034
+(defun open-junk-file ()
+  (interactive)
+  (let* ((file (expand-file-name
+                (format-time-string
+                 "%Y/%m/%Y-%m-%d-%H%M%S." (current-time))
+                "~/memo/junk/"))
+         (dir (file-name-directory file)))
+    (make-directory dir t)
+    (find-file-other-window (read-string "Junk Code: " file))))
+
+;; *scratch*バッファを kill できないように
+;; - http://www.bookshelf.jp/soft/meadow_29.html#SEC388
+(defun my-make-scratch (&optional arg)
+  (interactive)
+  (progn
+    ;; "*scratch*" を作成して buffer-list に放り込む
+    (set-buffer (get-buffer-create "*scratch*"))
+    (funcall initial-major-mode)
+    (erase-buffer)
+    (when (and initial-scratch-message (not inhibit-startup-message))
+      (insert initial-scratch-message))
+    (or arg (progn (setq arg 0)
+                   (switch-to-buffer "*scratch*")))
+    (cond ((= arg 0) (message "*scratch* is cleared up."))
+          ((= arg 1) (message "another *scratch* is created")))))
+(defun my-buffer-name-list ()
+  (mapcar (function buffer-name) (buffer-list)))
+(add-hook 'kill-buffer-query-functions
+          ;; *scratch* バッファで kill-buffer したら内容を消去するだけにする
+          (function (lambda ()
+                      (if (string= "*scratch*" (buffer-name))
+                          (progn (my-make-scratch 0) nil)
+                        t))))
+(add-hook 'after-save-hook
+          ;; *scratch* バッファの内容を保存したら *scratch* バッファを新しく作る
+          (function (lambda ()
+                      (unless (member "*scratch*" (my-buffer-name-list))
+                        (my-make-scratch 1)))))
+
+;; windmove
+(windmove-default-keybindings)
+(global-set-key (kbd "C-s-h") 'windmove-left)
+(global-set-key (kbd "C-s-j") 'windmove-down)
+(global-set-key (kbd "C-s-k") 'windmove-up)
+(global-set-key (kbd "C-s-l") 'windmove-right)
+
 ;;;
 ;;; Programming Languages
 ;;;
@@ -503,14 +560,68 @@
 (autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
 (autoload 'run-scheme "cmuscheme" "Run an inferior Scheme process." t)
 
+;;; haskell
+(add-to-list 'load-path (expand-file-name ".emacs.d/haskell-mode" home))
+(load-library "haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+;;; erlang
+(add-to-list 'load-path (expand-file-name ".emacs.d/distel/elisp" home))
+(require 'erlang-start)
+(require 'distel)
+(distel-setup)
+
+;;; php-mode
+(add-to-list 'load-path (expand-file-name ".emacs.d/php-mode" home))
+(require 'php-mode)
+(add-hook 'php-mode-hook
+          '(lambda () (define-abbrev php-mode-abbrev-table "ex" "extends")))
+
+;;; markdown-mode
+(add-to-list 'load-path (expand-file-name ".emacs.d/markdown-mode" home))
+(autoload 'markdown-mode "markdown-mode.el"
+  "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.mkdn" . markdown-mode))
+             
+
+;;; actionscript-mode
+(add-to-list 'load-path (expand-file-name ".emacs.d/actionscript-mode" home))
+(autoload 'actionscript-mode "actionscript-mode.el")
+(add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
+
+;;; clojure
+(setq swank-clojure-jar-path "/opt/local/share/java/clojure/lib/clojure.jar")
+(add-to-list 'load-path (expand-file-name ".emacs.d/swank-clojure/src/emacs"))
+(add-to-list 'load-path (expand-file-name ".emacs.d/clojure-mode"))
+(add-to-list 'load-path (expand-file-name ".emacs.d/slim"))
+(autoload 'clojure-mode "clojure-mode" "A major mode for Clojure" t)
+(require 'swank-clojure-autoload)
+(require 'slime)
+(slime-setup)
+
 ;;;
 ;;; Application
 ;;;
+
+;;; el-expectations
+;; M-x auto-install-from-emacswiki RET el-expectations.el
+;(require 'el-expectations)
 
 ;;; twittering-mode
 (setq load-path (cons (concat home "/.emacs.d/twittering-mode")
                       load-path))
 (require 'twittering-mode)
+(add-hook 'twittering-mode-hook
+          (lambda ()
+            (let ((alist (pit/get 'twitter.com
+                                  '(require ((username . "Your twitter username")
+                                             (password . "Your twitter password"))))))
+              (setq twittering-username (cdr (assoc 'username alist)))
+              (setq twittering-password (cdr (assoc 'password alist))))))
+
 
 ;;; typing-outputz
 (add-to-list 'load-path (expand-file-name ".emacs.d/typing-outputz" home))
