@@ -593,7 +593,7 @@
 (setq swank-clojure-jar-path "/opt/local/share/java/clojure/lib/clojure.jar")
 (add-to-list 'load-path (expand-file-name ".emacs.d/swank-clojure/src/emacs"))
 (add-to-list 'load-path (expand-file-name ".emacs.d/clojure-mode"))
-(add-to-list 'load-path (expand-file-name ".emacs.d/slim"))
+(add-to-list 'load-path (expand-file-name ".emacs.d/slime"))
 (autoload 'clojure-mode "clojure-mode" "A major mode for Clojure" t)
 (require 'swank-clojure-autoload)
 (require 'slime)
