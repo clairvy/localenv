@@ -209,9 +209,6 @@
 (setq dmoccur-list
       '(
         ("dir" default-directory (".*") dir)
-        ("soft" "~/www/soft/" ("\\.texi$") nil)
-        ("config" "~/mylisp/"  ("\\.js" "\\.el$") nil)
-        ("1.99" "d:/unix/Meadow2/1.99a6/" (".*") sub)
         ))
 (global-set-key "\C-x\C-o" 'occur-by-moccur)
 (define-key Buffer-menu-mode-map "O" 'Buffer-menu-moccur)
