@@ -127,6 +127,15 @@ fi
 setopt prompt_subst
 autoload -U colors; colors
 
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats '(%s)-[%b]'
+zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
+precmd () {
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+
 if [[ x"$TERM" == x"dumb" || x"$TERM" == x"sun" || x"$TERM" == x"emacs" ]]; then
   use_color=
 else
@@ -140,6 +149,7 @@ else
   local prompt_color='%{[32m%}'
   local clear_color='%{[0m%}'
   local rprompt_color='%{[33m%}' # yellow [0m
+  local vcs_prompot_color='%{[32m%}' # green [0m
   local prompt_char='$'
   if [[ x"$USER" == x"s-nag" || x"$USER" == x"nagaya" || x"$USER" == x"s_nag" ]]; then
     prompt_color='%{[32m%}'      # green [0m
@@ -150,7 +160,7 @@ else
     prompt_color='%{[35m%}'      # pink [0m
   fi
   PROMPT=$prompt_color'%U%B%n'$rprompt_color'%U@'$prompt_color'%B%m%b %h '$prompt_char$clear_color'%u '
-  RPROMPT=$rprompt_color'[%~]'$clear_color
+  RPROMPT=$vcs_prompot_color'%1(v|%1v|) '$rprompt_color'[%~]'$clear_color
 fi
 
 if whence -p lv 2>&1 > /dev/null; then
