@@ -175,13 +175,18 @@ if whence -p lv 2>&1 > /dev/null; then
   alias lc='lv | cat'
 fi
 
+# default path
+export PATH=/usr/bin:/bin
+
 # for Mac ports
 if [[ $os == 'mac' ]]; then
   export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
   export MANPATH="/opt/local/share/man:${MANPATH}"
 fi
-# for BSDPAN
+# for BSDPAN and local path
 if [[ $os == 'bsd' ]]; then
+  export PATH="${PATH}:/usr/local/bin:/usr/local/sbin"
+  export MANPATH="${MANPATH}:/usr/local/share/man:/usr/local/man"
   export PKG_DBDIR=$HOME/local/var/db/pkg
   export PORT_DBDIR=$HOME/local/var/db/pkg
   export INSTALL_AS_USER
@@ -236,10 +241,10 @@ if [[ -d /var/lib/gems/1.8/bin ]]; then
   export PATH="${PATH}:/var/lib/gems/1.8/bin"
 fi
 # for sbin
-if [[ $PATH == "*:/sbin:*" && -d "/sbin" ]];then
+if [[ $PATH != "*:/sbin:*" && -d "/sbin" ]];then
   export PATH="${PATH}:/sbin"
 fi
-if [[ $PATH == "*:/usr/sbin:*" && -d "/usr/sbin" ]];then
+if [[ $PATH != "*:/usr/sbin:*" && -d "/usr/sbin" ]];then
   export PATH="${PATH}:/usr/sbin"
 fi
 # for gisty
