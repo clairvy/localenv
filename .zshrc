@@ -120,6 +120,8 @@ elif [[ $uname_s == "SunOS" ]]; then
   os='sun'
 elif [[ $uname_s == "FreeBSD" ]]; then
   os='bsd'
+elif [[ $uname_s == "Linux" ]]; then
+  os='lin'
 fi
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
 
@@ -230,7 +232,9 @@ fi
 export PATH="$HOME/local/bin:${PATH}"
 export MANPATH="$HOME/local/man:${MANPATH}"
 # for gems
-export PATH="${PATH}:/var/lib/gems/1.8/bin"
+if [[ -d /var/lib/gems/1.8/bin ]]; then
+  export PATH="${PATH}:/var/lib/gems/1.8/bin"
+fi
 # for gisty
 export GISTY_DIR="$HOME/work/gists"
 
