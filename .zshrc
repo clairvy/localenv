@@ -235,6 +235,13 @@ export MANPATH="$HOME/local/man:${MANPATH}"
 if [[ -d /var/lib/gems/1.8/bin ]]; then
   export PATH="${PATH}:/var/lib/gems/1.8/bin"
 fi
+# for sbin
+if [[ $PATH == "*:/sbin:*" && -d "/sbin" ]];then
+  export PATH="${PATH}:/sbin"
+fi
+if [[ $PATH == "*:/usr/sbin:*" && -d "/usr/sbin" ]];then
+  export PATH="${PATH}:/usr/sbin"
+fi
 # for gisty
 export GISTY_DIR="$HOME/work/gists"
 
