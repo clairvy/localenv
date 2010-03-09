@@ -127,7 +127,7 @@ fi
 setopt prompt_subst
 autoload -U colors; colors
 
-if [[ $ZSH_VERSION =~ 4.3.* ]]; then
+if [[ $ZSH_VERSION == 4.3.* ]]; then
   autoload -Uz vcs_info
   zstyle ':vcs_info:*' formats '(%s)-[%b]'
   zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
