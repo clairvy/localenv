@@ -115,75 +115,76 @@
        (load "elscreen" "ElScreen" t)))
 
 ;;; anything (yasnippet / auto-install)
-(add-to-list 'load-path (expand-file-name ".emacs.d/auto-install-mode" home))
-(add-to-list 'load-path (expand-file-name ".emacs.d/yasnippet" home))
-(add-to-list 'load-path (expand-file-name ".emacs.d/anything" home))
-(add-to-list 'load-path (expand-file-name ".emacs.d/auto-install" home))
-(require 'auto-install)
-(auto-install-update-emacswiki-package-name t)
-(require 'anything-auto-install)
+(when (>= emacs-major-version 22)
+  (add-to-list 'load-path (expand-file-name ".emacs.d/auto-install-mode" home))
+  (add-to-list 'load-path (expand-file-name ".emacs.d/yasnippet" home))
+  (add-to-list 'load-path (expand-file-name ".emacs.d/anything" home))
+  (add-to-list 'load-path (expand-file-name ".emacs.d/auto-install" home))
+  (require 'auto-install)
+                                        ;(auto-install-update-emacswiki-package-name t)
+  (require 'anything-auto-install)
 ;;; yasnippet
-(setq yas/trigger-key "TAB")
-(require 'yasnippet-config)
-(yas/setup (expand-file-name ".emacs.d/yasnippet" home))
+  (setq yas/trigger-key "TAB")
+  (require 'yasnippet-config)
+  (yas/setup (expand-file-name ".emacs.d/yasnippet" home))
 ;;; anything
-(require 'anything-config)
-(require 'anything)
-;; (install-elisp "http://svn.coderepos.org/share/lang/elisp/anything-c-yasnippet/anything-c-yasnippet.el")
-(require 'anything-c-yasnippet)         ;[2008/03/25]
-(setq anything-c-yas-space-match-any-greedy t) ;[default: nil]
-(global-set-key (kbd "C-c y") 'anything-c-yas-complete)
-(yas/initialize)
+  (require 'anything-config)
+  (require 'anything)
+  ;; (install-elisp "http://svn.coderepos.org/share/lang/elisp/anything-c-yasnippet/anything-c-yasnippet.el")
+  (require 'anything-c-yasnippet)         ;[2008/03/25]
+  (setq anything-c-yas-space-match-any-greedy t) ;[default: nil]
+  (global-set-key (kbd "C-c y") 'anything-c-yas-complete)
+  (yas/initialize)
 
-(add-to-list 'anything-sources 'anything-c-source-emacs-commands)
-(define-key global-map (kbd "C-;") 'anything)
-(require 'anything-show-completion)
-(require 'anything-kyr-config)
-(require 'anything-match-plugin)
-(define-key anything-map "\C-k" (lambda () (interactive) (delete-minibuffer-contents)))
-(setq anything-map-C-j-binding 'anything-select-3rd-action)
-;; [2008/04/02]
-(define-key anything-map [end] 'anything-scroll-other-window)
-(define-key anything-map [home] 'anything-scroll-other-window-down)
-(define-key anything-map [next] 'anything-next-page)
-(define-key anything-map [prior] 'anything-previous-page)
-(define-key anything-map [delete] 'anything-execute-persistent-action)
-;; [2008/08/22]
-(define-key anything-map (kbd "C-:") 'anything-for-create-from-anything)
-;; (@> " frequently used commands - keymap")
-(define-key anything-isearch-map "\C-m"  'anything-isearch-default-action)
-(setq anything-enable-digit-shortcuts nil)
-(define-key anything-map (kbd "M-1") 'anything-select-with-digit-shortcut)
-(define-key anything-map (kbd "M-2") 'anything-select-with-digit-shortcut)
-(define-key anything-map (kbd "M-3") 'anything-select-with-digit-shortcut)
-(define-key anything-map (kbd "M-4") 'anything-select-with-digit-shortcut)
-(define-key anything-map (kbd "M-5") 'anything-select-with-digit-shortcut)
-(define-key anything-map (kbd "M-6") 'anything-select-with-digit-shortcut)
-(define-key anything-map (kbd "M-7") 'anything-select-with-digit-shortcut)
-(define-key anything-map (kbd "M-8") 'anything-select-with-digit-shortcut)
-(define-key anything-map (kbd "M-9") 'anything-select-with-digit-shortcut)
-(define-key anything-map (kbd "C-SPC") 'anything-toggle-visible-mark)
-(define-key anything-map "\M-[" 'anything-prev-visible-mark)
-(define-key anything-map "\M-]" 'anything-next-visible-mark)
-(define-key anything-map "\C-a" 'beginning-of-line)
-;; (install-elisp-from-emacswiki "anything-dabbrev-expand.el")
-(require 'anything-dabbrev-expand)
-(define-key anything-dabbrev-map [(control ?@)] 'anything-dabbrev-find-all-buffers)
-(setq anything-dabbrev-input-idle-delay 0.0)
-(setq anything-dabbrev-idle-delay 1.0)
-(setq anything-dabbrev-expand-candidate-number-limit 20)
-(setq anything-dabbrev-expand-strategies
-      '(;; anything-dabbrev-expand--first-partial-dabbrev
-        anything-dabbrev-expand--anything))
-(setq anything-dabbrev-sources
-      '(anything-dabbrev-partial-source
-        anything-c-source-complete-emacs-commands
-        anything-c-source-complete-emacs-functions
-        anything-c-source-complete-emacs-variables
-        anything-c-source-complete-emacs-other-symbols
-        anything-dabbrev-all-source))
-(require 'anything-complete nil t)
-(anything-read-string-mode 1)
+  (add-to-list 'anything-sources 'anything-c-source-emacs-commands)
+  (define-key global-map (kbd "C-;") 'anything)
+  (require 'anything-show-completion)
+  (require 'anything-kyr-config)
+  (require 'anything-match-plugin)
+  (define-key anything-map "\C-k" (lambda () (interactive) (delete-minibuffer-contents)))
+  (setq anything-map-C-j-binding 'anything-select-3rd-action)
+  ;; [2008/04/02]
+  (define-key anything-map [end] 'anything-scroll-other-window)
+  (define-key anything-map [home] 'anything-scroll-other-window-down)
+  (define-key anything-map [next] 'anything-next-page)
+  (define-key anything-map [prior] 'anything-previous-page)
+  (define-key anything-map [delete] 'anything-execute-persistent-action)
+  ;; [2008/08/22]
+  (define-key anything-map (kbd "C-:") 'anything-for-create-from-anything)
+  ;; (@> " frequently used commands - keymap")
+  (define-key anything-isearch-map "\C-m"  'anything-isearch-default-action)
+  (setq anything-enable-digit-shortcuts nil)
+  (define-key anything-map (kbd "M-1") 'anything-select-with-digit-shortcut)
+  (define-key anything-map (kbd "M-2") 'anything-select-with-digit-shortcut)
+  (define-key anything-map (kbd "M-3") 'anything-select-with-digit-shortcut)
+  (define-key anything-map (kbd "M-4") 'anything-select-with-digit-shortcut)
+  (define-key anything-map (kbd "M-5") 'anything-select-with-digit-shortcut)
+  (define-key anything-map (kbd "M-6") 'anything-select-with-digit-shortcut)
+  (define-key anything-map (kbd "M-7") 'anything-select-with-digit-shortcut)
+  (define-key anything-map (kbd "M-8") 'anything-select-with-digit-shortcut)
+  (define-key anything-map (kbd "M-9") 'anything-select-with-digit-shortcut)
+  (define-key anything-map (kbd "C-SPC") 'anything-toggle-visible-mark)
+  (define-key anything-map "\M-[" 'anything-prev-visible-mark)
+  (define-key anything-map "\M-]" 'anything-next-visible-mark)
+  (define-key anything-map "\C-a" 'beginning-of-line)
+  ;; (install-elisp-from-emacswiki "anything-dabbrev-expand.el")
+  (require 'anything-dabbrev-expand)
+  (define-key anything-dabbrev-map [(control ?@)] 'anything-dabbrev-find-all-buffers)
+  (setq anything-dabbrev-input-idle-delay 0.0)
+  (setq anything-dabbrev-idle-delay 1.0)
+  (setq anything-dabbrev-expand-candidate-number-limit 20)
+  (setq anything-dabbrev-expand-strategies
+        '(;; anything-dabbrev-expand--first-partial-dabbrev
+          anything-dabbrev-expand--anything))
+  (setq anything-dabbrev-sources
+        '(anything-dabbrev-partial-source
+          anything-c-source-complete-emacs-commands
+          anything-c-source-complete-emacs-functions
+          anything-c-source-complete-emacs-variables
+          anything-c-source-complete-emacs-other-symbols
+          anything-dabbrev-all-source))
+  (require 'anything-complete nil t)
+  (anything-read-string-mode 1))
 
 ;;; session
 (setq load-path (cons (concat home "/.emacs.d/session/lisp")
