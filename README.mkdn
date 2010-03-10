@@ -9,13 +9,16 @@ blog だと埋もれちゃうんで。
 
 使っている構成
 
-* Mac OS 10.6.1
+* Mac OS 10.6.2
   * 日本語キーボード
   * emacs-app (ports 版 23.1.1)
 * debian - squeeze/sid
   * emacs 22.3.1
+* CentOS
 * bsd
-* solaris
+* opensolaris
 * WindowsXP
+  * Meadow
+  * Cygwin
 
 <http://daringfireball.net/projects/markdown/dingus>
