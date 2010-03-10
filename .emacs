@@ -222,16 +222,20 @@
 (setq load-path (cons (concat home "/.emacs.d/ddskk")
                       load-path))
 (setq skk-use-azik t)
-(cond ((string-equal hostname "canaan")
+(cond ((or (string-equal hostname "canaan")
+           (string-equal hostname "vh001"))
        (setq skk-azik-keyboard-type 'jp106))
       (t
        (setq skk-azik-keyboard-type 'en)))
-(add-hook 'skk-mode-hook
-          (lambda ()
-            (setq skk-server-host "localhost")
-            (setq skk-server-portnum 1178)
-            (setq skk-auto-insert-paren t)
-            (setq skk-kutouten-type 'en)))
+(cond ((string-equal hostname "vh001")
+       (setq skk-large-jisyo (expand-file-name ".emacs.d/ddskk/dic/SKK-JISYO.L" home)))
+      (t
+       (add-hook 'skk-mode-hook
+                 (lambda ()
+                   (setq skk-server-host "localhost")
+                   (setq skk-server-portnum 1178)
+                   (setq skk-auto-insert-paren t)
+                   (setq skk-kutouten-type 'en)))))
 (require 'skk-setup)
 (require 'skk-study)
 
