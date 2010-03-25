@@ -300,6 +300,7 @@ if [[ $os == 'mac' ]]; then
     command javac -encoding utf8 -Xlint:unchecked -Xlint:deprecation $* 2>&1 | lv | cat
   }
   alias java='java -Dfile.encoding=UTF8'
+  alias mvim='/Applications/MacVim.app//Contents/MacOS//MacVim'
 fi
 
 # 補完するかの質問は画面を超える時にのみに行う｡
