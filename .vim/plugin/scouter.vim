@@ -1,0 +1,1 @@
+/Users/s_nag/work/vim-scouter/plugin/scouter.vim
