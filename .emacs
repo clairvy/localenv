@@ -416,6 +416,9 @@
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
+;;; Coq (ProofGeneral)
+(load "/opt/local/share/ProofGeneral/generic/proof-site.el" t)
+
 ;;; JavaScript
 (setq load-path (cons (concat home "/.emacs.d/js2-mode/build")
                       load-path))
@@ -604,13 +607,24 @@
 
 ;;; clojure
 (setq swank-clojure-jar-path "/opt/local/share/java/clojure/lib/clojure.jar")
-(add-to-list 'load-path (expand-file-name ".emacs.d/swank-clojure/src/emacs"))
-(add-to-list 'load-path (expand-file-name ".emacs.d/clojure-mode"))
-(add-to-list 'load-path (expand-file-name ".emacs.d/slime"))
+(add-to-list 'load-path (expand-file-name ".emacs.d/swank-clojure/src/emacs" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/clojure-mode" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/slime" home))
 (autoload 'clojure-mode "clojure-mode" "A major mode for Clojure" t)
 (require 'swank-clojure-autoload)
 (require 'slime)
 (slime-setup)
+
+;; android-mode
+(setq android-mode-sdk-dir (expand-file-name "local/android" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/android-mode" home))
+(require 'android-mode)
+(android-defun-ant-task "run-tests")
+(add-to-list 'android-mode-keys '("t" . android-ant-run-tests))
+
+;; R-lang
+(add-to-list 'load-path (expand-file-name ".emacs.d/ess/lisp" home))
+(require 'ess-site)
 
 ;;;
 ;;; Application
