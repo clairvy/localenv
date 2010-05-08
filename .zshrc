@@ -213,7 +213,7 @@ if [[ "x$HOSTNAME" == "xdv1" ]]; then
   set_perl_env
 elif [[ $os == 'mac' ]]; then
   function set_perl_env () {
-    local site='darwin-2level'
+    local site='darwin-multi-2level'
     _set_perl_env
   }
   function set_perl_env_wx () {
