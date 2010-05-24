@@ -27,7 +27,7 @@
 
 ;;; apel
 (if (or (string-equal hostname "mbp1")
-	(= (string-to-int emacs-version) 23))
+	(= (floor (string-to-int emacs-version)) 23))
     (setq load-path (cons (concat home "/.emacs.d/apel")
 			  load-path)))
 
