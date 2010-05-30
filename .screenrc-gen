@@ -46,3 +46,8 @@ bind  eval "echo 'Launcher-mode:  [ t: top ] [ w: w3m -B]'" "command -c launche
 bind -c launcher t screen top
 bind -c launcher w screen w3m -B
 bind -c launcher ^z command
+# encoding
+bind e eval "echo 'encoding-mode:  [ s: sjis ] [ u: utf-8] [ e: eucjp ]'" "command -c encoding"
+bind -c encoding 's' eval "encoding sjis" "stuff 'export LANG=ja_JP.SJIS\012'"
+bind -c encoding 'u' eval "encoding utf8" "stuff 'export LANG=ja_JP.UTF-8\012'"
+bind -c encoding 'e' eval "encoding euc"  "stuff 'export LANG=ja_JP.EUC-JP\012'"
