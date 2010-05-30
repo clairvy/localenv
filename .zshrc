@@ -297,11 +297,10 @@ alias egrep='egrep --color'
 if [[ $os == 'mac' ]]; then
   alias emacs-app='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
   alias emacsclient='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient'
-  function javac() {
-    command javac -encoding utf8 -Xlint:unchecked -Xlint:deprecation $* 2>&1 | lv | cat
-  }
+  alias javac='javac -J-Dfile.encoding=UTF-8 -Xlint:unchecked -Xlint:deprecation'
   alias java='java -Dfile.encoding=UTF8'
   alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
+  export ANT_OPTS='-Dfile.encoding=UTF-8'
 fi
 
 # 補完するかの質問は画面を超える時にのみに行う｡
