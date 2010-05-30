@@ -109,7 +109,7 @@
   file-alist)
 
 ;;; elscreen
-(cond ((= (string-to-int emacs-version) 23) ; carbon だと同梱
+(cond ((= (floor (string-to-int emacs-version)) 23) ; carbon だと同梱
        (setq load-path (cons (concat home "/.emacs.d/elscreen")
                              load-path))
        (load "elscreen" "ElScreen" t)))
@@ -439,7 +439,9 @@
        (setq howm-directory (expand-file-name "Dropbox/howm" home)))
       (t
        (setq howm-directory "/Volumes/共有フォルダ/社員フォルダ/永谷/howm/")))
+(add-hook 'org-mode-hook 'howm-mode)
 (add-to-list 'auto-mode-alist '("\\.howm$" . org-mode))
+(setq howm-view-title-header "*")
 
 ;;; rd-mode
 (setq load-path (cons (concat home "/.emacs.d/rd-mode")
@@ -889,7 +891,45 @@ without any interpretation."
   (define-key function-key-map [201326757] [?\C-\M-\\])
   )
 
-(cond (;; fixd-width-font
+(setq use-monaco nil)
+(cond (;; http://sakito.jp/emacs/emacs23.html
+       (and (= (string-to-number emacs-version) 23.2)
+            (not use-monaco))
+       (create-fontset-from-ascii-font "Menlo-14:weight=normal:slant=normal" nil "menlokakugo")
+       (set-fontset-font "fontset-menlokakugo"
+                         'unicode
+                         (font-spec :family "Hiragino Kaku Gothic ProN" :size 16)
+                         nil
+                         'append)
+       (add-to-list 'default-frame-alist '(font . "fontset-menlokakugo"))
+       )
+      (;; http://sakito.jp/emacs/emacs23.html
+       (= (string-to-number emacs-version) 23.2)
+       (set-face-attribute 'default nil
+                           :family "monaco"
+                           :height 140)
+       (set-fontset-font
+        (frame-parameter nil 'font)
+        'japanese-jisx0208
+        '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+       (set-fontset-font
+        (frame-parameter nil 'font)
+        'japanese-jisx0212
+        '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+       (set-fontset-font
+        (frame-parameter nil 'font)
+        'mule-unicode-0100-24ff
+        '("monaco" . "iso10646-1"))
+       (setq face-font-rescale-alist
+             '(("^-apple-hiragino.*" . 1.2)
+               (".*osaka-bold.*" . 1.2)
+               (".*osaka-medium.*" . 1.2)
+               (".*courier-bold-.*-mac-roman" . 1.0)
+               (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
+               (".*monaco-bold-.*-mac-roman" . 0.9)
+               ("-cdac$" . 1.3)))
+       )
+      (;; fixd-width-font
        ;; http://d.hatena.ne.jp/kazu-yamamoto/20090122/1232589385
        (and (eq window-system 'ns)
             (string-match " NS " (emacs-version)))
