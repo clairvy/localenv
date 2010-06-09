@@ -876,6 +876,13 @@ without any interpretation."
              (url-hexify-string (buffer-substring-no-properties beg end))))))
 (define-key global-map "\C-cw" 'dictionary)
 
+;;; riece
+(add-to-list 'load-path (expand-file-name ".emacs.d/riece/lisp" home))
+(autoload 'riece "riece" "Start Riece" t)
+(setq riece-server-alist
+      '(("atig.rb" :host "localhost" :service 16668 :coding utf-8 :nickname "clairvy")
+        ("friend" :host "irc.friend-chat.jp" :service 6664 :nickname "clairvy" :coding shift_jis)))
+(setq riece-server "atig.rb")
 
 ;;; insert \ instead of ¥
 (when (and (eq window-system 'ns)
