@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 # -*- coding: utf-8-unix; sh-basic-offset: 2; -*-
 
+stty -istrip
+bindkey -e
+bindkey '^W' kill-region
+
 HISTFILE=~/.zhistory
 HISTSIZE=100000
 SAVEHIST=10000000
@@ -106,10 +110,6 @@ setopt no_clobber
 
 setopt notify
 setopt print_exit_value
-
-stty -istrip
-bindkey -e
-bindkey '^W' kill-region
 
 # 状態変数
 local os='unknown'
