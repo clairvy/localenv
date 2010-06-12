@@ -593,7 +593,19 @@
 (add-to-list 'load-path (expand-file-name ".emacs.d/php-mode" home))
 (require 'php-mode)
 (add-hook 'php-mode-hook
-          '(lambda () (define-abbrev php-mode-abbrev-table "ex" "extends")))
+          '(lambda ()
+             (define-abbrev php-mode-abbrev-table "ex" "extends")
+             (setq c-basic-offset 4)
+             (setq indent-tabs-mode nil)
+             ;; php-completion
+             (require 'php-completion)
+             (php-completion-mode t)
+             (define-key php-mode-map (kbd "C-o") 'phpcmp-complete)
+             (when (require 'auto-complete nil t)
+               (make-variable-buffer-local 'ac-sources)
+               (add-to-list 'ac-sources 'ac-source-php-completion)
+               (auto-complete-mode t))
+             ))
 
 ;;; markdown-mode
 (add-to-list 'load-path (expand-file-name ".emacs.d/markdown-mode" home))
