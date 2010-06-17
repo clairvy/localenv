@@ -55,6 +55,7 @@
 	gn = grep -n
 	sm = submodule
 	smupdate = submodule foreach "git checkout master; git pull origin master"
+	show-graph = log --graph --abbrev-commit --pretty=oneline
 [user]
 	name = NAGAYA Shinichiro
 	email = clairvy@gmail.com
