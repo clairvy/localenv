@@ -630,6 +630,7 @@
 (slime-setup)
 
 ;; android-mode
+(setenv "ANT_OPTS" "-Dfile.encoding=UTF-8")
 (setq android-mode-sdk-dir (expand-file-name "local/android" home))
 (add-to-list 'load-path (expand-file-name ".emacs.d/android-mode" home))
 (require 'android-mode)
