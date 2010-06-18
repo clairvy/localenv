@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # -*- coding: utf-8-unix; sh-basic-offset: 2; -*-
 
-stty -xion
+stty -ixon
 stty -istrip
 bindkey -e
 bindkey '^W' kill-region
