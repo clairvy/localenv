@@ -7,3 +7,6 @@
 [submodule ".emacs.d/gist-snapshot"]
 	path = .emacs.d/gist-snapshot
 	url = git://github.com/defunkt/gist.el.git
+[submodule "clairvy-Scamacs"]
+	path = clairvy-Scamacs
+	url = git@github.com:clairvy/Scamacs.git
