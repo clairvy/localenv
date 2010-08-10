@@ -1,6 +1,7 @@
-
+" .vim/bundle を使う
 call pathogen#runtime_append_all_bundles()
 
+"{{{ Vim の流儀 より
 filetype plugin on
 filetype indent on
 syntax enable
@@ -85,6 +86,8 @@ endif
 
 "{{{ PHPManual
 " PHP マニュアルを設置している場合
+let g:ref_phpmanual_path = $HOME . 'modules/php-5.2.6/lib/php/data/phpman/php-chunked-xhtml/'
+let g:ref_phpmanual_cmd = 'w3m -dump %s'
 "let phpmanual_dir = $HOME . '/.vim/manual/php_manual_ja/'
 " マニュアルの拡張子
 "let phpmanual_file_ext = 'html'
