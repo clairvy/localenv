@@ -280,6 +280,9 @@ export SCALA_DOC_HOME=/Users/s_nag/s/app/InteractiveHelp/scala-2.7.5-apidocs-fix
 # ignore mailcheck
 export MAILCHECK=0
 
+# set tmpdir
+export TMPDIR=/var/tmp
+
 # alias
 alias mv='nocorrect mv -i'
 alias cp='nocorrect cp -ip'
