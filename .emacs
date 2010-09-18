@@ -108,6 +108,19 @@
       (setq file-alist (nreverse file-alist)))
   file-alist)
 
+;;; 行カーソルを表示する
+(defface hlline-face
+  '((((class color)
+      (background dark))
+     (:background "blue" :foreground "white"))
+    (((class color)
+      (background light))
+     (:background "ForestGreen"))
+    (t ()))
+  "*Face used by hl-line.")
+(setq hl-line-face 'hlline-face)
+(global-hl-line-mode)
+
 ;;; elscreen
 (cond ((= (floor (string-to-int emacs-version)) 23) ; carbon だと同梱
        (setq load-path (cons (concat home "/.emacs.d/elscreen")
