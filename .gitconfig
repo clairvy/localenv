@@ -57,6 +57,3 @@
 # github config in /etc/gitconfig
 [push]
 	default = tracking
-[github]
-	user = clairvy
-	token = 56b8aa90cedd1753550c2daf177af8a8
