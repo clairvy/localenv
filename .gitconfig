@@ -1,5 +1,6 @@
 [alias]
-	st = status
+	st = status -sb
+	sta = status
 	sh = show
 	so = remote show origin
 	ft = fetch
