@@ -10,11 +10,14 @@
 	ci = commit
 	cam = commit -a --amend  # 直前のcommitを修正
 	co = checkout
+	cb = checkout -b
+	cm = checkout master
 	# branch関連
 	br = branch
 	ba = branch -a           # originも含めた全てのbranchを表示
 	bm = branch --merged     # merge済みのbranchを表示
 	bn = branch --no-merged  # mergeしてないbranchを表示
+	bo = branch -r
 	# log関連
 	wc = whatchanged         # logに変更されたファイルも一緒に出す
 	ls = log --stat          # logに変更されたファイルも一緒に出す
@@ -46,6 +49,8 @@
 	# grep関連
 	gr = grep
 	gn = grep -n
+	sm = submodule
+	smupdate = submodule foreach "git checkout master; git pull origin master"
 [user]
 	name = NAGAYA Shinichiro
 	email = clairvy@gmail.com
