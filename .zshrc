@@ -124,6 +124,8 @@ elif [[ $uname_s == "FreeBSD" ]]; then
   os='bsd'
 elif [[ $uname_s == "Linux" ]]; then
   os='lin'
+elif [[ $uname_s == "CYGWIN_NT-5.1" ]]; then
+  os='win'
 fi
 [ -z "$HOSTNAME" ] && HOSTNAME=`uname -n`
 
@@ -140,6 +142,10 @@ if [[ $ZSH_VERSION == 4.3.* ]]; then
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
   }
+fi
+
+if [[ x"$os" == x"win" ]]; then
+  export TERM=cygwin
 fi
 
 if [[ x"$TERM" == x"dumb" || x"$TERM" == x"sun" || x"$TERM" == x"emacs" ]]; then
