@@ -1,0 +1,165 @@
+* System-dependent configurations
+
+For system-dependent configurations, see SKK-CFG in the top source
+directory.  It describes installation howto as well as
+system-dependent setting examples.
+
+If you are a user of Emacs on Apple Mac OS X or Microsoft Windows,
+also see one of the following files, which may be found in this
+directory.
+
+** README.MacOSX.ja
+
+Describes how to install SKK for Emacs on Apple Mac OS X (10.x).
+
+** README.w32.ja
+
+Describes how to install SKK for Emacs on Microsoft Windows.
+
+* Pre-installation
+
+** APEL
+
+In DDSKK 14.2, installation of APEL (A Portable Emacs Library) is no
+longer required under GNU Emacs 22 or later.  For Emacs 21 and XEmacs,
+make sure you have APEL 10.7 or later installed.  It is highly
+recommended that you install the latest release.  APEL is available
+at:
+
+    http://kanji.zinbun.kyoto-u.ac.jp/%7Etomo/lemi/dist/apel/
+or
+    ftp://ftp.jpl.org/pub/elisp/apel/
+
+** Get SKK dictionaries and copy them to ./dic subdirectory.
+
+In DDSKK 14.2, installation of an SKK dictionary is no longer
+mandatory under GNU Emacs 22 or later.  Emacs 22 contains a japanese
+kana-kanji dictionary called ja-dic as a part of the LEIM input
+method.  Indeed ja-dic is derived from SKK-JISYO.L and we wrote a
+code to use ja-dic for DDSKK.
+
+Although ja-dic may be of some use, it lacks entries for
+English-Japanese conversion and numeric conversion, making it inferior
+to SKK-JISYO.L.  In this way we recommend installing SKK dictionaries
+including SKK-JISYO.L. 
+
+If you do not have SKK dictionaries, get one or more from
+
+    http://openlab.jp/skk/wiki/wiki.cgi?page=SKK%BC%AD%BD%F1
+
+You should get at least one of "基本辞書" (i.e. basic dictionaries).
+If unsure, we recommend SKK-JISYO.L.  All other dictionaries are
+optional.
+
+Unpack and copy the downloaded dictionaries to ./dic subdirectory.
+They will be installed with `make install' or `make install-package',
+which is described below.
+
+If you want to install the SKK L dictionary converted in the CDB
+format, follow these steps.
+
+1. Obtain SKK-JISYO.L and copy it to ./dic.
+2. Type `make cdb'.  This will call a python script ./etc/skk2cdb.py
+   and convert SKK-JISYO.L into SKK-JISYO.L.cdb.  Note that you need
+   python installed before this step.
+3. After you read the following installation instructions, do `make
+   install'.  This will copy both SKK-JISYO.L and SKK-JISYO.L.cdb to
+   the same place as SKK.tut, e.g. /usr/share/skk or
+   c:/emacs-23.2/etc/skk.
+   
+4. Set skk-cdb-large-jisyo in your ~/.skk as the following.
+
+   (setq skk-cdb-large-jisyo "/usr/share/skk/SKK-JISYO.L.cdb")
+
+   In this case you may not want Emacs to read SKK-JISYO.L. If so, set
+   skk-large-jisyo and skk-aux-large-jisyo in your ~/.skk as the
+   following.
+   
+   (setq skk-large-jisyo nil
+   	 skk-aux-large-jisyo nil)
+
+** Edit SKK-CFG.
+
+Edit SKK-CFG for your installation.  Examples are found in SKK-CFG but
+commented out.  If you need to set some or all of these variables,
+uncomment them and specify the values.  Maybe you need not to edit
+Makefile at all.  All customizations can be done in SKK-CFG except for
+Emacs or XEmacs command name.  The way how to specify Emacs or XEmacs
+command name is described below.
+
+* Installation
+
+** Installation for GNU Emacs
+
+Before actual installation, you can find out installation paths with
+
+    % make what-where
+
+If your editor is not just named emacs, you can specify the name as
+the following.
+
+    % make what-where EMACS=/usr/bin/emacs-23.2
+
+If installation paths seem all right, proceed to installation with
+
+    % make install
+or
+    % make install EMACS=/usr/bin/emacs-23.2
+
+** Installation for XEmacs
+
+You can find out installation paths before actual installation with
+
+    % make what-where-package
+
+If your editor is not just named xemacs, you can specify the name as
+the following.
+
+    % make what-where-package XEMACS=/usr/bin/xemacs-21.5-b29
+
+If installation paths seem all right, proceed to installation with
+
+    % make install-package
+or
+    % make install-package XEMACS=/usr/bin/xemacs-21.5-b29
+
+* Post-installation
+
+** Obsolete check
+
+Many variables and functions have been renamed since the previous
+major release.  You are strongly recommended to check old user
+settings. This will be done with loading skk-obsolete.el and executing
+
+    M-x skk-obsolete-check-all-files.
+
+** Easy setup
+
+If you just intend to test the program, no prior setting is required.
+Just call SKK with typing C-x C-j or M-x skk-mode.
+
+If you are a novice SKK user, you can learn SKK basics with M-x
+skk-tutorial.  Follow the instructions.  If you prefer the English
+tutorial, type C-u M-x skk-tutorial and select "English".
+
+As you learn the usage of SKK, you might want to know more about its
+customization.  As a start point we recommend the SKK manual.  You
+can find the SKK manual with M-x info and looking for the following
+line.
+
+    * SKK: (skk).           Simple Kana to Kanji conversion program.
+
+You can also read the SKK manual on the web.
+
+    http://openlab.jp/skk/skk-manual/skk-manual-ja.html
+
+Since the web manual is for the latest Daredevil SKK, it might not be
+compatible with the version you installed.
+
+If you are looking for example elisp codes for customization, see files
+etc/dot.emacs and etc/dot.skk, which are included in this distribution.  
+
+
+Local variables:
+mode: outline
+end:

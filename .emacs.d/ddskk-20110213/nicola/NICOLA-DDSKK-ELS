@@ -1,0 +1,28 @@
+;;; NICOLA-DDSKK-ELS --- list of modules to install  -*-emacs-lisp-*-
+
+;;; Code:
+
+(if (locate-library "easymenu")
+    (require 'easymenu))
+
+(setq nicola-ddskk-modules
+      '(nicola-ddskk-autoloads
+	skk-106-jis
+	skk-kanagaki
+	skk-kanagaki-menu
+	skk-kanagaki-util
+	skk-nicola-dcomp
+	skk-nicola-dvorak
+	skk-nicola-jis
+	skk-nicola-us
+	skk-nicola
+	skk-oasys
+	skk-omelet-dvorak
+	skk-omelet-jis
+	skk-omelet-us))
+
+(if (featurep 'xemacs)
+    (setq nicola-ddskk-modules
+	  (delq 'nicola-ddskk-autoloads nicola-ddskk-modules)))
+
+;;; NICOLA-DDSKK-ELS ends here

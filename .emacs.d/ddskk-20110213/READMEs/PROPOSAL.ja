@@ -1,0 +1,591 @@
+このファイルには、SKK コーディングに関し、注意すべき点、統一した方が良い
+と思われる点を列挙しております。
+
+各項目に関しこれをご参考にしていただいて、コーディングする際は、特にご意
+見がなければこの方針に従っていただき、ご意見があれば、skk@ring.gr.jp
+までお寄せ下されば幸いです。
+
+* アウトラインモードの概略
+
+このファイルはアウトラインモードによって記述されています。
+	
+     C-c C-t (M-x hide-body)
+
+すれば、見出しだけがご覧になれます。ご興味のある項目にカーソルを合わせ、
+
+     C-c C-e (M-x show-entry)
+
+すると、その項目の内容がご覧になれます。
+
+     C-c C-c (M-x hide-entry)
+
+で再度その項目を隠すことができます。
+
+     C-c C-a (M-x show-all)
+
+で全てのテキストを表示することができます。カーソル移動については、下記の
+通りです。
+
+     C-c C-n (次の項目へ移動。階層は無視)
+
+     C-c C-p (前の項目へ移動。階層は無視)
+
+     C-c C-f (同じ階層の次の項目へ移動)
+
+     C-c C-b (同じ階層の前の項目へ移動)
+
+* Emacs のバージョン
+
+** Daredevil SKK 12 が動作する Emacs のバージョンは?
+
+Daredevil SKK 開発陣がサポート可能な Emacs のみが対象です。
+
+ただし、現実にはサポートのための労力と、サポートするメリットとをはかり
+にかけて決めることになります。Daredevil SKK 12 は Emacs 20.4 以降と
+XEmacs 21.1 以降をサポートしますが、各 Emacsen のバグ修正の状況を考え
+ると Emacs 20.7 以降、あるいは XEmacs 21.4 以降が推奨されます。
+
+** Emacs のバージョン間差異の吸収は?
+
+Emacs のバージョン間差異の吸収は APEL (A Portable Emacs Library。以前
+は emu として知られていた) によって行なわれます。APEL は
+
+    http://cvs.m17n.org/elisp/APEL
+
+    ftp://ftp.m17n.org/pub/mule/apel/
+
+    ftp://ftp.jpl.org/pub/elisp/apel/
+
+    http://openlab.jp/skk/apel/
+
+から get できます。
+
+この Emacs の関数は、最新の Emacs にしか装備されておらず (あるいは仕様
+が異なり)、私の Emacs では動かない、というものを発見された場合は、APEL
+に取り込んでいただきますので、「APEL に追加して」というような分りやす
+い Subject を付けて SKK Openlab ml か APEL ML までお知せ下さい。
+APEL ML には参加していなくとも
+
+	apel-en@m17n.org	(英語)
+	apel-ja@m17n.org	(日本語)
+
+にメールを送ることができます。
+
+* ファイル分割について
+
+** 分割の基準と目的
+
+(a)通常 SKK を使う範囲で必須の関数・変数、
+
+(b)分割するに至らないような小さな関数・変数あるいは、特殊機能として一
+   まとまりにならないようなもの、
+
+(c)各分割ファイルで共通で使う関数・変数
+
+に関しては skk.el の中に、これ以外については、skk-hoge.el (例えば、
+skk-auto.el) というファイルに分割して下さい。特殊機能を使いたい人だけ
+にそのファイルをロードさせるようにし、メモリを不必要に食うことを避ける
+ためです。
+
+** skk.el 以外のファイルに必須の記述
+
+ファイルの冒頭部分、`;;; Code:' の直後に
+
+     (eval-when-compile (require 'skk-macs) (require 'skk-vars))
+
+と書いて下さい。SKK 共通のマクロやインライン関数、primary
+variables/constants が skk-macs.el に、全ての変数が skk-vars.el に含ま
+れています。
+
+また、オートロードしたい関数の宣言の直前の行に、
+`;;;###autoload' と書いて下さい。こんな感じです。
+
+      ;;;###autoload
+      (defun skk-completion (first)
+         ...)
+
+これで autoload の設定も自動的に行なわれます。
+
+また、ファイルの末尾は、例えば skk-abbrev.el の場合は下記のように記述
+します。
+
+     (require 'product)
+     (product-provide (provide 'skk-abbrev) (require 'skk-version))
+
+     ;;; skk-abbrev.el ends here
+
+
+* 関数名・変数名について
+
+** プレフィックス
+
+skk-hoge.el というファイルを新規に作成したら、その中に書く関数・変数の
+プレフィックスは、可能な限り `skk-hoge-' として下さい。ファイル間の名
+前の重複を避けるためです。
+
+但し、
+
+(a)コマンド completion の際に余計なコマンド名を出力しないために、ある
+   いは、ユーザー変数と内部変数とを区別しやすいために、関数名・変数名
+   のプレフィックスを区別することを妨げません。例えば、`skk-tut-' と
+   `skktut-' など。
+
+(b)skk-gadget.el は実行変換プログラムを集めたものです。この中に収める
+   関数を `skk-gadget-' プレフィックスに統一するのは少々冗長な気がしま
+   すので、今のところ手を付けていません。
+
+元々、skk.el は 1 つのファイルでした。これを機能別に個別のファイルに分
+けました。従い、この時点で既に存在した関数名・変数名については、上記の
+基準に従ったネーミングになっていません。
+
+** ネーミングの統一
+
+変数名や関数名を付ける際に統一して欲しい名称を挙げておきます。概念的に
+よりクリアになるもの、どちらでも良いが統一によりユーザーがメリットを受
+けるもの、を挙げています。
+
+ +----------------------+----------------------+---------------------+
+ |       not used       |        used          |       memo          |
+ +----------------------+----------------------+---------------------+
+ | hirakana             | hiragana             | skk-isearch.el's    |
+ |     ^                |                      | canonical base.     |
+ +----------------------+----------------------+---------------------+
+ | zenkaku              | jisx0208-latin       | same as above.      |
+ +----------------------+----------------------+---------------------+
+ | ascii                | latin                | same as above.      |
+ +----------------------+----------------------+---------------------+
+
+** ネーミングを変更したときは
+
+skk-obsolete.el の中の `skk-obsolete-variable-alist',
+`skk-obsolete-function-alist' に新旧の変数名、あるいは関数名を記載して
+おいて下さい。こうすることで、
+
+     M-x skk-obsolete-check
+
+コマンドで、イニシャルファイルの書換えを半自動的に行なうことができます。
+
+* バッファローカル変数について
+
+SKK は SKK モードを起したバッファのみで作動するようになっているため、
+そのコードはバッファローカル変数の宝庫となっていますが、必然性のない変
+数のバッファローカル化は差し控えて下さい。
+
+ユーザー変数がグローバル変数であっても、ユーザーが個人的に特定のバッファ
+やメジャーモードよって環境を変える目的でこれをバッファローカル化したい
+場合は、例えば、下記のように ~/.emacs に書くことができます。
+
+これで、hode-mode における括弧のペア挿入文字列を変更することができます。
+
+     (add-hook 'hoge-mode-hook
+	       #'(lambda ()
+		   (make-local-variable 'skk-auto-paren-string-alist)
+		   (setq skk-auto-paren-string-alist ...)))
+
+** バッファローカル変数の宣言
+
+バッファローカル変数の宣言には、`defvar' の代りに `skk-deflocalvar' を
+使って下さい。宣言だけで自動的にバッファローカルにされ、ドキュメントに
+`(buffer local)' の文字列が挿入されます。
+
+** バッファローカル変数の初期値
+
+バッファローカル変数に対し破壊的操作を行なう場合、その初期値は nil でな
+ければなりません。その理由を以下に述べます。破壊的操作とは、delete,
+delq, nconc, nreverse, setcar, setcdr など、Lisp の一般的な破壊的関数
+(setcar や setcdr は一般的でない?  一般的なのは rplaca, rplacd か) を使
+用する場合の他、set-marker などのマーカー操作の関数を使用する場合も含まれます。
+
+例えば、あるバッファ Buffer A で下記のようなフォームを順次評価したとします。
+
+---------- Buffer A ---------------+--------------- Buffer B ----------
+(setq test '(A B C))               |
+ -> (A B C)                        |
+                                   |
+(make-variable-buffer-local 'test) |
+                                   |
+test                               | test
+ -> (A B C)                        |  -> (A B C)
+                                   |
+(setcar test 'X)                   |
+                                   |
+test                               | test
+ -> (X B C)                        |  -> (X B C)
+
+バッファローカル値としての宣言をする前に non-nil 値を代入し、その non-nil
+値を直接書き変えるようなフォームを評価すると Buffer B から見えるディフォル
+ト値まで書き変ってしまいます。上記の例はリストですが、下記のようにマーカー
+を set-marker 関数で操作したときも同様の結果となります。
+
+---------- Buffer A ---------------+--------------- Buffer B ----------
+(setq test (make-marker))          |
+ -> #<marker in no buffer>         |
+                                   |
+(make-variable-buffer-local 'test) |
+                                   |
+test                               | test
+ -> #<marker in no buffer>         |  -> #<marker in no buffer>
+                                   |
+(set-marker test (point))          |
+                                   |
+test                               | test
+ -> #<marker at 122 in A>          |  -> #<marker at 122 in A>
+
+ところが下記のように初期値を nil にして、バッファローカル値としての宣言後、
+non-nil 値を代入すれば、以後そのバッファローカル値に破壊的操作をしてもその
+バッファに固有の値しか変化しません。
+
+---------- Buffer A ---------------+--------------- Buffer B ----------
+(setq test nil)                    |
+                                   |
+(make-variable-buffer-local 'test) |
+                                   |
+test                               | test
+ -> nil                            |  -> nil
+                                   |
+(setq test (make-marker))          |
+ -> #<marker in no buffer>         |
+                                   |
+(set-marker test (point))          |
+                                   |
+test                               | test
+ -> #<marker at 122 in A>          |  -> nil
+
+この現象に対応した実装としては、skk-forword.el の skk-set-marker をご参
+照下さい。これは、初期値が nil のバッファローカルのマーカー、
+skk-henkan-start-point, skk-henkan-end-point, skk-kana-start-point,
+skk-okurigana-start-point の値を調整するマクロです。
+
+** バッファローカル変数とミニバッファ
+
+バッファローカル変数対応の一番の難関は、ミニバッファです。ミニバッファは
+アクティブになった際に新規に作られるか、あるいは既存のものがあればそこに
+入る度に Emacs は kill-all-local-variables を実行するので、SKK が正しく
+動作するためには、ミニバッファに突入する度に、ミニバッファでのバッファロー
+カル変数を一々調整しなくてはなりません。
+
+おまけにリカーシブにミニバッファに入れば、そこはまた別のバッファであり、
+そこでも再度調整を余儀なくされます。バッファローカル変数を使う場合は、こ
+のことを十分念頭に置いて下さい。
+
+** バッファローカル変数と let
+
+バッファローカル変数と同名の変数を let にて宣言することに関して、Emacs
+Lisp Reference Manual の記述を以下に一部引用します。
+
+   *Warning:* When a variable has buffer-local values in one or more
+buffers, you can get Emacs very confused by binding the variable with
+`let', changing to a different current buffer in which a different
+binding is in effect, and then exiting the `let'.  This can scramble
+the values of the buffer-local and default bindings.
+
+   To preserve your sanity, avoid using a variable in that way.  If you
+use `save-excursion' around each piece of code that changes to a
+different current buffer, you will not have this problem (*note
+Excursions::.).  Here is an example of what to avoid:
+
+     (setq foo 'b)
+     (set-buffer "a")
+     (make-local-variable 'foo)
+     (setq foo 'a)
+     (let ((foo 'temp))
+       (set-buffer "b")
+       BODY...)
+     foo => 'a      ; The old buffer-local value from buffer `a'
+                    ;   is now the default value.
+     (set-buffer "a")
+     foo => 'temp   ; The local `let' value that should be gone
+                    ;   is now the buffer-local value in buffer `a'.
+
+But `save-excursion' as shown here avoids the problem:
+
+     (let ((foo 'temp))
+       (save-excursion
+         (set-buffer "b")
+         BODY...))
+
+   Note that references to `foo' in BODY access the buffer-local
+binding of buffer `b'.
+
+* エラーやメッセージなどの表示 (日英表示) について
+
+SKK は `skk-japanese-message-and-error' 変数が nil の場合はエラーやメッ
+セージなどを英語で表示し、そうでなければ日本語で表示します。この目的の
+ために、`skk-message', `skk-error', `skk-yes-or-no-p', `skk-y-or-n-p'
+というマクロを提供しています。
+
+     (skk-error "既に▽モードに入っています"
+                "Already in ▽ mode")
+
+     (skk-message "\"%c\" は有効なキーではありません！"
+                  "\"%c\" is not valid here!"
+                  char )
+
+のように使います。但し、`%c' などで表示する文字列が、日本語と英語で順
+序が異なる可能性があります。このような場合は、通常の `error' や
+`message' 関数と `skk-japanese-message-and-error' 変数を組み合わせて使っ
+て下さい。こんな感じです。
+
+     (if skk-japanese-message-and-error
+         (error "\"%s\" で補完すべき見出し語は%sありません"
+                skk-completion-word (if first "" "他に"))
+       (error "No %scompletions for \"%s\""
+              (if first "" "more ") skk-completion-word))
+
+また、`skk-y-or-n-p' や `skk-yes-or-no-p' の引数には `%c', `%s' などを
+直接書くことができず、`format' 関数を使わなければなりません。このよう
+な場合は、通常の `y-or-n-p', `yes-or-no-p' を
+`skk-japanese-message-and-error' と組み合わせて直接書いた方が冗長にな
+りません。こんな感じです。
+
+     (if (yes-or-no-p
+         (format (if skk-japanese-message-and-error
+                     "辞書の保存をせずに %s を終了します。良いですか? "
+                   "Do you really wish to kill %s without saving Jisyo? ")
+                  (cond
+		   ((eq skk-emacs-type 'xemacs)
+		    "XEmacs")
+		   (t
+		    "Emacs")))))
+
+
+* 新規のユーザー変数 (オプション) を追加したときは
+
+チュートリアルでの動作をディフォルトに戻すため、
+`skktut-init-variables-alist' に変数名とチュートリアルでの値とのドット
+ペアを追加して下さい。
+
+追加する変数の性格により、skk.el でのディフォルト値ではなく、別の値を
+指定する必要がある場合があるので、ご注意下さい。例えば、
+`skk-keep-record' は non-nil であれば変換情報を ~/.skk-record に保存す
+るオプションで、そのディフォルト値は t ですが、チュートリアル中の辞書
+のデーターを取る必要はないので、`skktut-init-variables-alist' 中の値は、
+nil となっています。
+
+そもそも `skktut-init-variables-alist' に追加する必要のない変数もあり
+ます。例えば、チュートリアルでは、数値変換を行なわないので、
+`skk-num-type-list', `skk-numeric-conversion-float-num',
+`skk-uniq-numerals' などの変数については宣言する必要がありません。
+
+* リストの最後尾に安価に要素を追加する方法 (キュー) について
+
+リストの最後尾に安価に要素を追加する方法として、SKK ではキューを利用し
+ています。以下、キューについて説明します。
+
+キュー関連の関数の使用に際しては、「プログラムの構造と実行」(H. エーベ
+ルソン、G.J.サスマン、J.サスマン著、元吉文男訳。マグロウヒル出版) と
+Elib (the GNU emacs lisp library version 1.0) を参考にしました。なお、
+この文献で解説されているキューの表現は、Elib の queue-m.el において実
+現されているものとほぼ同じ実装となっています。
+
+リストでのキューの表現は、具体的には例えば
+
+     ((A B C D E F) F)
+
+のような形になっており、car のリスト
+
+     (A B C D E F)
+
+がキューの全体を表わし、キューの nth 1 を取ったときの F がキューの最後
+尾を表わします。キューの cdr を取ったときの
+
+     (F)
+
+というリストは、キューの car に対し nthcdr 5 を取ったときのリスト
+
+     (F)
+
+と eq です。従い、cdr のリストの後に新しい要素を追加することで、car で
+表わされるキューの末尾に新しい要素を追加することができます。
+
+一方、nconc や append でリストをつなぐには、それらの関数の第 1 引数の
+リストの全ての要素を走査せねばならず、O(n) の時間がかかるので、長いリ
+ストをつなぐときは比較的コストがかかります。
+
+さて、空の queue == (cons nil nil) に対し、新しい要素 A を追加する方法
+を説明します。まず、新しい要素 A のみを含んだ長さ 1 のリスト (A) を作
+ります (仮に new-pair という変数に取る)。次に、
+
+     (setcar queue new-pair)
+
+を行なうことにより、queue が
+
+     ((A))
+
+となります (setcar, setcdr の返り値は、new-pair であることに注意)。次
+に
+
+     (setcdr queue new-pair)
+
+して
+      ((A) A)
+
+となったところを図示します。front, rear の両方のポインタが (A) を指す
+ようにします (キューの要素が A しかないので、front, rear ポインタとも
+に同じものを指している)。
+
+        queue
+  +-------+-------+
+  | Front |  Rear |
+  +---|---+---|---+
+      |       +---> +---------------+
+      +------------>|   o   |  nil  |
+                    +---|---+-------+
+                        |      +-------+
+                        +----> |   A   |
+                               +-------+
+
+上記の queue,
+
+     ((A) A)
+
+に対し、更に新しい要素 B を追加します。例により B のみを含む長さ 1 の
+リスト (B) を作り、変数 new-pair に取ります。ここで
+
+     (setcdr (cdr queue) new-pair)
+
+を評価すると (注1)、* の個所のポインタ操作が行なわれ、キューの最後方に
+新しい要素である B が追加されることになります。queue は
+
+     ((A B) A B)
+
+となります。
+
+        queue
+  +-------+-------+
+  | Front |  Rear |
+  +---|---+---|---+
+      |       +---> +---------------+   *    +---------------+
+      +------------>|   o   |   o --|------->|   o   |  nil  |
+                    +---|---+-------+        +-------+-------+
+                        |      +-------+         |      +-------+
+                        +----> |   A   |         +----> |   B   |
+                               +-------+                +-------+
+
+  注1; 追加前のキューの要素が 1 つのときは、front も rear も同じものを指し
+       ているので (setcdr (car queue) new-pair) でも等価だが、キューの要素
+       が 2 つ以上のときは (setcdr (cdr queue) new-pair) でないとまずい。
+
+最後に
+
+     (setcdr queue new-pair)
+
+を評価することにより、rear ポインタを張り変えます (* の個所のポインタ
+操作が行なわれる)。rear ポインタがキューの最後方の要素を指すようにしま
+す。front ポインタが指すリストはキューの全ての要素を表わします。
+
+        queue
+  +-------+-------+           *
+  | Front |  Rear |---------------------+
+  +---|---+-------+                     |
+      |             +---------------+   +--> +---------------+
+      +------------>|   o   |   o --|------->|   o   |  nil  |
+                    +---|---+-------+        +-------+-------+
+                        |      +-------+         |      +-------+
+                        +----> |   A   |         +----> |   B   |
+                               +-------+                +-------+
+
+このようにキューの最後方に新しい要素を追加すること (リストの最後方に長さ 1
+の新しいリストをつなげること) が 2 回のポインタ操作で可能となるので、どのよ
+うな長いリストであっても連結にかかるコストは一定 (O(1) の関数である)
+です。
+
+なお、現状では、平均して安価にリストの最後方に要素をつなげる、という目
+的にだけキューを使っており、キュー本来の目的では使用していないので、例
+えば、queue-m.el の下記のような関数は使用していていません。
+
+  queue-last, queue-first, queue-nth, queue-nthcdr, queue-dequeue
+
+* skk-with-point-move のアイディアと実装について
+
+** 櫻田さんのアイディア
+
+Message-Id: <19981218224936N.sakurada@kuis.kyoto-u.ac.jp>
+From: Hideki Sakurada <sakurada@kuis.kyoto-u.ac.jp>
+Date: Fri, 18 Dec 1998 22:49:36 +0900 (JST)
+
+山下さん:
+> やはり、カーソル移動をした場合は skk-prefix をクリアしてれ
+> 方がうれしいような気がします。
+このあたりはなんとかしたいところの一つですね.
+コーディングする暇もないので単なる思いつきですが...
+
+(1) pre-command-hook よりも post-command-hook と
+last-command の組みあわせのほうがいい気がする.
+(2) 「カーソル(ポイント)の移動」を抽象化したほうが
+いい気がする. たとえばこんなかんじ.
+# 10分で書いたのであっさり破綻するかも...
+-- 櫻田
+
+仮定:
+  with-point-move ではバッファをまたがる移動はしない
+TODO:
+  hook/変数をバッファローカルにする必要がある
+  with-point-move でのエラーがおきたら? (unwinding)
+
+SKK側の変更:
+  skk-kana-input 等はほとんど (with-point-move ...)
+  で囲む
+
+point が移動したときに走る hook
+(defvar point-move-hook)
+
+ポイントを保存する変数
+(defvar previous-point nil)
+
+ポイントを移動するがフックを実行してほしくない場合に使う
+(defmacro with-point-move (&rest form)
+ `(progn
+    ,@form
+    (setq previous-point (point))))
+
+; ポイントが移動したら point-move-hook を実行
+(defun point-move-hook-execute ()
+ (if (and point-move-hook
+        (or (null previous-point)
+            (not (= previous-point (point)))))
+     (with-point-move
+      (run-hooks 'point-move-hook))))
+
+
+(add-hook 'post-command-hook 'point-move-hook-execute)
+
+例
+
+(defun foo ()
+  (message "move !")
+  (beep))
+
+(add-hook 'point-move-hook 'foo)
+
+** 中島の実装
+
+o with-point-move って名前はカッコいいし、そのまま使いたかったんだけど、
+  他のパッケージと名前の衝突が起こってはいけないので、`skk-' prefix を付けた。
+
+o with-point-move ではバッファをまたがる移動はしない、という仮定をその
+  まま前提とした。
+
+o skk-previous-point 変数、post-command-hook をそれぞれバッファローカ
+  ル変数・フックにした (skk-mode を起動したバッファだけで動作させるため)。
+
+o バッファをまたがない、という仮定をしたので、unwinding については
+  skk-previous-point のイニシャライズ以外は考慮していない。
+
+o post-command-hook というぐらいだから、interactive command だけに的を
+       ^^^^^^^
+  しぼって skk-with-point-move を使った。
+
+o 複数の関数をフックに入れたりしないので、point-move-hook は実装しない。
+
+o skk-previous-point を skk-deflocalvar で宣言。
+
+o skk-after-point-move として inline function として実装。フックを run
+  せずに、関数の中で必要処理をこなす。
+
+o skk-mode の中で post-command-hook のローカルフックとして
+  skk-after-point-move をフックした。
+
+Local variables:
+mode: outline
+end:

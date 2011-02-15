@@ -1,0 +1,299 @@
+2010-12-31  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Update.
+
+2010-12-19  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Add example for skk-tankan-face.
+	Add example for skk-display-code-prompt-face and skk-display-code-char-face.
+
+2010-12-17  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Update for skk-save-jisyo-instantly.
+	Update for 単漢字変換.
+
+2010-12-01  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk: Update for skk-search-katakana,
+	skk-search-sagyo-henkaku and skk-extra-jisyo-file-list.
+	* skk-dic.rb: No longer in the repository.
+
+2010-11-30  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: 単漢字変換の設定例から skk-rom-kana-rule-list の例を削除。
+
+2010-11-26  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: 単漢字変換の設定例を記載。
+
+2010-11-25  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk (skk-hyphen): コード見直し。
+
+2010-11-24  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk (skk-hyphen): コード見直し。
+
+2010-11-14  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Change default value skk-previous-completion-use-backtab.
+
+2010-11-13  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk (skk-tooltip-parameters): Add options.
+	foreground-color and internal-border-width.
+
+2010-11-08  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk (skk-comp-circulate): New description.
+	(skk-previous-completion-use-backtab): New description.
+
+2010-10-12  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Modify comment.
+
+2010-09-19  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Update.
+
+2010-09-12  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.emacs: Remove skk-startup-screen.
+
+2010-09-11  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk: Rename skk-e21-*-face to skk-emacs-*-face.
+
+2010-09-10  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.emacs: Add skk-startup-screen.
+
+2010-09-07  小林健一  <kobayashi@mamezou.com>
+
+	* SKK.tut: Fix typo [skk 7269].
+
+2010-08-23  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk: Add skk-tooltip-x-offset, skk-tooltip-y-offset and
+	`skk-annotation-wikipedia-region-or-at-point'.
+
+2010-08-17  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk: Add skk-cdb-large-jisyo.
+	* Emacs.ad: Modify according to the modification to
+	skk-menu-items.
+
+2010-08-07  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk (skk-candidate-buffer-background-color): Rename option
+	name from `skk-kouho-window-background'.
+
+2010-07-25  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: fix doc.
+
+2010-07-22  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: fix doc.
+
+2010-07-21  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Add examples for skk-henkan-rest-indicator-face and
+	skk-henkan-show-candidates-keys-face.
+
+2010-07-18  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk: Add examples for skk-verbose and
+	skk-j-mode-function-key-usage.
+
+2010-07-17  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Add sample skk-tooltip-function.
+
+2010-07-11  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Update.
+
+2010-07-10  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Add skk-henkan-rest-indicator and
+	skk-kouho-window-background.
+	
+2010-07-04  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: Update.
+
+2010-02-22  Tsuyoshi Kitamoto  <tsuyoshi.kitamoto@gmail.com>
+
+	* dot.skk: s/(SKK)?(辞書)?サーバ/辞書サーバ/g
+
+2009-01-06  Kitamoto Tsuyoshi  <lisp_interaction@yahoo.co.jp>
+
+	* dot.skk: Update.
+
+2008-10-31  Kazuhiro NISHIYAMA  <zn@mbf.nifty.com>
+
+	* dot.emacs: Fix typo.
+
+2008-09-28  Kitamoto Tsuyoshi  <lisp_interaction@yahoo.co.jp>
+
+	* dot.skk: Add skk-period and skk-comma.
+
+2008-04-18  Kitamoto Tsuyoshi  <lisp_interaction@yahoo.co.jp>
+
+	* dot.skk: Fix typo.
+
+2008-04-13  Kitamoto Tsuyoshi  <lisp_interaction@yahoo.co.jp>
+
+	* dot.skk: Fix typo.
+
+2008-04-13  IRIE Tetsuya  <irie@t.email.ne.jp>
+
+	* dot.skk: Update.
+
+2007-10-16  IRIE Tetsuya  <irie@t.email.ne.jp>
+
+	* dot.skk (skk-show-inline): Add about vertical.
+
+2007-10-16  Kitamoto Tsuyoshi  <lisp_interaction@yahoo.co.jp>
+
+	* dot.emacs: Update comment.
+
+2007-10-08  Kitamoto Tsuyoshi  <lisp_interaction@yahoo.co.jp>
+
+	* dot.skk (skk-treat-candidate-appearance-function): Use
+	`skk-e21-jisx0208-latin-face' instead of `skk-e21-latin-face'.
+
+2007-09-16  Kitamoto Tsuyoshi  <lisp_interaction@yahoo.co.jp>
+
+	* dot.skk: Add sample code for skk-show-japanese-menu,
+	skk-annotation-show-as-message, skk-cursor-latin-color and
+	skk-show-candidates-always-pop-to-buffer.
+
+2007-09-16  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.emacs: Update for skk-user-directory.
+
+2007-08-12  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk: Update for `skk-search-kakutei-jisyo-file' in
+	skk-search-prog-list.
+
+2007-08-10  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	Suggested by Eiji Obata <e-obata@zero.ad.jp>.
+
+	* dot.skk: Modify setting for skk-look-completion-arguments.
+
+2007-07-29  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	Suggested by Eiji Obata <e-obata@zero.ad.jp>.
+
+	* dot.skk: Modify setting for skk-dcomp-activate.
+
+2007-07-16  Kitamoto Tsuyoshi  <lisp_interaction@yahoo.co.jp>
+
+	* dot.emacs:
+	* dot.skk:
+
+	Add settings for skk-study.el.
+
+2007-04-10  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* Emacs.ad: Update.
+
+2005-12-23  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk: New examples for skk-tooltip-parameters,
+	skk-show-inline, skk-inline-show-face,
+	skk-treat-candidate-appearance-function, skk-dcomp-activate,
+	skk-use-numeric-conversion and skk-non-numeric-prog-list.
+
+	* skk-dic.rb: Remove spaces before argument parentheses.
+
+2005-12-10  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk: Use `add-hook' to modify
+	skk-search-excluding-word-pattern-function.
+
+2005-10-05  Kenichi Kurihara  <kenichi_kurihara@nifty.com>
+
+	* dot.skk: Add an example which determine `skk-kutouten-type'
+	dynamically.
+
+2005-10-01  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.emacs (skk-preload): New description.
+
+2005-09-24  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk (skk-jisyo-code): New description.
+	(skk-search-katakana): Describe how to get jisx0201 kana
+	candidates.
+
+2005-09-23  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.skk: Describe how to thoroughly control
+	`skk-search-prog-list'.
+
+2005-09-23  KOIE Hidetaka  <hide@koie.org>
+
+	* dot.skk: Describe how to auto-save private jisyo with timer.
+
+2004-03-04  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk.xpm: Make the background transparent.
+
+2002-08-15  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* dot.emacs:
+
+	Show how to turn on `skk-latin-mode' automatically.
+
+	* dot.skk:
+
+	Show how to avoid "C-j" overriden by skk-latin-mode in
+	lisp-interaction-mode.
+
+2002-05-27  Eiji Obata  <obata@suzuki.kuee.kyoto-u.ac.jp>
+
+	* SKK.tut, SKK.tut.E: Don't call `delete-region' many times.
+
+2002-03-01  IIDA Yosiaki  <iida@ring.gr.jp>
+
+	* NICOLA-SKK.tut, SKK.tut, SKK.tut.E: Correct cursor to point.
+	* SKK.tut.E: Correct display to buffer.
+
+2002-02-28  IIDA Yosiaki  <iida@ring.gr.jp>
+
+	* NICOLA-SKK.tut: Add RCS keyword.
+	* NICOLA-SKK.tut, SKK.tut, SKK.tut.E: Remove non-standard characters.
+	Correct window to buffer, JISYO buffer to JISYO and vice versa.
+	* SKK.tut.E: Correct kEkutei to kAkutei.
+
+2002-02-27  IIDA Yosiaki  <iida@ring.gr.jp>
+
+	* NICOLA-SKK.tut, SKK.tut: Correct minibuffer to echo area.
+	* SKK.tut.E: Ditto and vice versa.  Correct minibuffer to
+	JISYO buffer.
+
+2002-02-26  IIDA Yosiaki  <iida@ring.gr.jp>
+
+	* NICOLA-SKK.tut, SKK.tut: Fix lots of Japanese typos.
+	* NICOLA-SKK.tut, SKK.tut, SKK.tut.E: s/Mule/Emacs/g.
+
+2002-02-25  IIDA Yosiaki  <iida@ring.gr.jp>
+
+	* SKK.tut.E: Remove a whole sentence which reads
+	that SKK uses two buffers for a JISYO, which is now
+	not correct (but might be so at the time).
+	Fix lots of English typos.
+
+2002-02-04  IIDA Yosiaki  <iida@ring.gr.jp>
+
+	* NICOLA-SKK.tut, SKK.tut, SKK.tut.E:
+	Append copyright notice of SKK Development Team.
+	Add note for symbols not in S Jisyo.
+	Replace Russia with Cyrillic.  Typo fix for GIRISIA,
+	EUC KO^DO, whose C stands for code.
+
