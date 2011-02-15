@@ -41,6 +41,13 @@ setopt pushd_ignore_dups
 
 # fpath の追加
 fpath=(~/.zfunctions/Completion ${fpath})
+# unfunction して，autoload する
+function reload_function() {
+  local f
+  f=($HOME/.zfunctions/Completion/*(.))
+  unfunction $f:t 2> /dev/null
+  autoload -U $f:t
+}
 # 補完設定
 autoload -Uz compinit; compinit
 
@@ -309,6 +316,9 @@ if [[ $os == 'mac' ]]; then
   alias java='java -Dfile.encoding=UTF8'
   alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
   export ANT_OPTS='-Dfile.encoding=UTF-8'
+fi
+if whence -p vim 2>&1 > /dev/null; then
+  alias vi=vim
 fi
 
 # 補完するかの質問は画面を超える時にのみに行う｡
