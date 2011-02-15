@@ -248,8 +248,11 @@
        (setq skk-azik-keyboard-type 'jp106))
       (t
        (setq skk-azik-keyboard-type 'en)))
-(cond ((string-equal hostname "vh001")
-       (setq skk-large-jisyo (expand-file-name ".emacs.d/ddskk/dic/SKK-JISYO.L" home)))
+(cond ((or (string-equal hostname "vh001")
+	   (string-equal hostname "kaname"))
+       (setq skk-large-jisyo (expand-file-name ".emacs.d/ddskk/dic/SKK-JISYO.L" home))
+       (setq skk-auto-insert-paren t)
+       (setq skk-kutouten-type 'en))
       (t
        (add-hook 'skk-mode-hook
                  (lambda ()
