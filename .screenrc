@@ -1,6 +1,7 @@
 # -*- coding: utf-8-unix; -*-
 
 source $HOME/.screenrc-gen
+source $HOME/.screenrc-local
 
 screen -t BS 0
 screen -t lo 1

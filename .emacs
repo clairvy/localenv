@@ -450,6 +450,9 @@
   (autoload 'howm-menu "howm-mode" "Hitori Otegaru Wiki Modoki" t))
 (cond ((string-equal hostname "canaan") ; for private pc
        (setq howm-directory (expand-file-name "Dropbox/howm" home)))
+      ((or (string-equal hostname "fedora")
+           (string-equal hostname "kaname"))
+       (setq howm-directory (expand-file-name "howm" home)))
       (t
        (setq howm-directory "/Volumes/共有フォルダ/社員フォルダ/永谷/howm/")))
 (add-hook 'org-mode-hook 'howm-mode)
