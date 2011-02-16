@@ -191,18 +191,18 @@ if whence -p lv 2>&1 > /dev/null; then
 fi
 
 # default path
-export PATH=/usr/bin:/bin
+path=(/usr/bin /bin)
 
 # for Mac ports
 if [[ $os == 'mac' ]]; then
   export LC_ALL=ja_JP.UTF-8
-  export PATH="/opt/local/bin:/opt/local/sbin:${PATH}"
-  export MANPATH="/opt/local/share/man:${MANPATH}"
+  path=(/opt/local/bin /opt/local/sbin $path)
+  manpath=(/opt/local/share/man $manpath)
 fi
 # for BSDPAN and local path
 if [[ $os == 'bsd' ]]; then
-  export PATH="${PATH}:/usr/local/bin:/usr/local/sbin"
-  export MANPATH="${MANPATH}:/usr/local/share/man:/usr/local/man"
+  path=($path /usr/local/bin:/usr/local/sbin)
+  manpath=($manpath /usr/local/share/man /usr/local/man)
   export PKG_DBDIR=$HOME/local/var/db/pkg
   export PORT_DBDIR=$HOME/local/var/db/pkg
   export INSTALL_AS_USER
@@ -210,7 +210,7 @@ if [[ $os == 'bsd' ]]; then
 fi
 # for csw
 if [[ $os == 'sun' && -d /opt/csw/bin ]]; then
-  export PATH="/opt/csw/bin:$PATH"
+  path=(/opt/csw/bin $path)
 fi
 
 # for local::lib
@@ -219,7 +219,7 @@ function _set_perl_env () {
   export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
   export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
   export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
-  export PATH="${local_lib_path}/bin:$PATH"
+  path=(${local_lib_path}/bin $path)
 }
 if [[ "x$HOSTNAME" == "xdv1" ]]; then
   function set_perl_env () {
@@ -247,21 +247,27 @@ fi
 
 # for cabal
 if [[ -d $HOME/.cabal/bin ]]; then
-  export PATH="${PATH}:$HOME/.cabal/bin"
+  path=($path $HOME/.cabal/bin)
 fi
 
-export PATH="$HOME/local/bin:${PATH}"
-export MANPATH="$HOME/local/man:${MANPATH}"
+if [[ -d /usr/local ]]; then
+  path=(/usr/local/bin /usr/local/sbin $path)
+  manpath=(/usr/local/man $manpath)
+fi
+if [[ -d $HOME/local ]]; then
+  path=($HOME/local/bin $HOME/local/sbin $path)
+  manpath=($HOME/local/man $manpath)
+fi
 # for gems
 if [[ -d /var/lib/gems/1.8/bin ]]; then
-  export PATH="${PATH}:/var/lib/gems/1.8/bin"
+  path=($path /var/lib/gems/1.8/bin)
 fi
 # for sbin
-if [[ $PATH != "*:/sbin:*" && -d "/sbin" ]];then
-  export PATH="${PATH}:/sbin"
+if [[ -d "/sbin" ]];then
+  path=($path /sbin)
 fi
-if [[ $PATH != "*:/usr/sbin:*" && -d "/usr/sbin" ]];then
-  export PATH="${PATH}:/usr/sbin"
+if [[ -d "/usr/sbin" ]];then
+  path=($path /usr/sbin)
 fi
 # for gisty
 export GISTY_DIR="$HOME/work/gists"
@@ -337,6 +343,10 @@ functions _href () {
   reply=(`cat $href_datadir/comptable|awk -F, '{print $2}'|sort|uniq`)
   # /usr/share/href/comptable の Path は自分の環境に書き換える
 }
+
+typeset -U path
+typeset -U manpath
+typeset -U fpath
 
 # keychain
 if whence -p keychain 2>&1 > /dev/null; then
