@@ -243,8 +243,9 @@
 (setq skk-use-look t)
 (setq skk-auto-insert-paren nil)
 (setq skk-henkan-strict-okuri-precedence t)
-(cond ((or (string-equal hostname "canaan")
-           (string-equal hostname "vh001"))
+(setq skk-auto-insert-paren t)
+(setq skk-kutouten-type 'en)
+(cond ((string-equal hostname "vh001")
        (setq skk-azik-keyboard-type 'jp106))
       (t
        (setq skk-azik-keyboard-type 'en)))
