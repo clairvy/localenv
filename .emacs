@@ -259,8 +259,8 @@
                  (lambda ()
                    (setq skk-server-host "localhost")
                    (setq skk-server-portnum 1178)
-                   (setq skk-auto-insert-paren t)
-                   (setq skk-kutouten-type 'en)))))
+                   (define-key skk-abbrev-mode-map [(tab)] 'skk-comp-wrapper) ; for org-mode
+                   ))))
 (require 'skk-setup)
 (require 'skk-study)
 
