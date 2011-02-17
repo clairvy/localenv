@@ -3,7 +3,7 @@
 if [[ -x $HOME/local/bin/zsh ]]; then
   SHELL=$HOME/local/bin/zsh
   exec $SHELL
-if [[ -x /usr/local/bin/zsh ]]; then
+elif [[ -x /usr/local/bin/zsh ]]; then
   SHELL=/usr/local/bin/zsh
   exec $SHELL
 elif [[ -x /bin/zsh ]]; then
