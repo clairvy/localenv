@@ -249,6 +249,12 @@ elif [[ $os == 'bsd' ]]; then
     _set_perl_env
   }
   set_perl_env
+elif [[ x"$HOSTNAME" == x'kaname' ]]; then
+  function set_perl_env() {
+    local site='i686-linux-gnu-thread-multi'
+    _set_perl_env
+  }
+  set_perl_env
 fi
 
 # for cabal
