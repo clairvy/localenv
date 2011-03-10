@@ -370,3 +370,11 @@ fi
 if [[ -f $HOME/.zshrc.local ]]; then
   . $HOME/.zshrc.local
 fi
+
+# git
+if [[ -f $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh ]]; then
+  source $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh
+fi
+if [[ -f $HOME/.zfunctions/git-submodule-completion/zsh.zsh ]]; then
+  source $HOME/.zfunctions/git-submodule-completion/zsh.zsh
+fi
