@@ -331,6 +331,7 @@ if [[ $os == 'mac' ]]; then
   alias java='java -Dfile.encoding=UTF8'
   alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
   export ANT_OPTS='-Dfile.encoding=UTF-8'
+  export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
 fi
 if whence -p vim 2>&1 > /dev/null; then
   alias vi=vim
@@ -363,4 +364,9 @@ if whence -p keychain 2>&1 > /dev/null; then
   if [ -f $HOME/.keychain/$HOSTNAME-sh-gpg ]; then
     . $HOME/.keychain/$HOSTNAME-sh-gpg
   fi
+fi
+
+# local
+if [[ -f $HOME/.zshrc.local ]]; then
+  . $HOME/.zshrc.local
 fi
