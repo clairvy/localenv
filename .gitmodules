@@ -19,3 +19,9 @@
 [submodule ".emacs.d/auto-complete"]
 	path = .emacs.d/auto-complete
 	url = http://github.com/m2ym/auto-complete.git
+[submodule ".zfunctions/git-flow-completion"]
+	path = .zfunctions/git-flow-completion
+	url = https://github.com/bobthecow/git-flow-completion.git
+[submodule ".zfunctions/git-submodule-completion"]
+	path = .zfunctions/git-submodule-completion
+	url = git@gist.github.com:591626.git
