@@ -584,6 +584,12 @@
              (define-key scala-mode-map "\C-ch" 'my-scala-doc)
              (define-key scala-mode-map "\C-cH" 'my-scala-doc-1)
              ))
+(add-to-list 'load-path (expand-file-name ".emacs.d/scamacs/src/elisp/sbt" home))
+(require 'sbt)
+;;; ensime
+(add-to-list 'load-path (expand-file-name ".emacs.d/ensime/dist/elisp" home))
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ;;; tiarra-conf
 (setq load-path (cons (concat home "/.emacs.d/tiarra-conf")
