@@ -319,7 +319,9 @@
 
 ;;; auto-complete
 (add-to-list 'load-path (expand-file-name ".emacs.d/auto-complete" home))
-(require 'auto-complete nil t)
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
 (global-auto-complete-mode t)
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
 (define-key ac-complete-mode-map "\C-p" 'ac-previous)
