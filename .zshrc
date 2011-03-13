@@ -196,6 +196,16 @@ if whence -p lv 2>&1 > /dev/null; then
   alias lc='lv | cat'
 fi
 
+if whence -p xsbt 2>&1 > /dev/null; then
+  function sbt() {
+    if [ *.sbt(N) ]; then
+      command xsbt "$@";
+    else
+      command sbt "$@";
+    fi
+  }
+fi
+
 # default path
 path=(/usr/bin /bin)
 
