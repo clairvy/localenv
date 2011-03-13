@@ -311,6 +311,9 @@
 (setq load-path (cons (concat home "/.emacs.d/egg")
                       load-path))
 (require 'egg)
+;;; git(magit)
+(add-to-list 'load-path (expand-file-name ".emacs.d/magit" home))
+(require 'magit)
 
 ;;; gist
 (setq load-path (cons (concat home "/.emacs.d/gist")

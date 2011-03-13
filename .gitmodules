@@ -25,3 +25,12 @@
 [submodule ".zfunctions/git-submodule-completion"]
 	path = .zfunctions/git-submodule-completion
 	url = git@gist.github.com:591626.git
+[submodule ".vim/bundle/vim-ref"]
+	path = .vim/bundle/vim-ref
+	url = https://github.com/thinca/vim-ref.git
+[submodule ".vim/bundle/neocomplcache"]
+	path = .vim/bundle/neocomplcache
+	url = https://github.com/Shougo/neocomplcache.git
+[submodule ".emacs.d/rubikitch-magit"]
+	path = .emacs.d/rubikitch-magit
+	url = git://gitorious.org/~rubikitch/magit/rubikitch-magit.git
