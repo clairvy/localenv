@@ -55,7 +55,7 @@ function reload_function() {
   autoload -U $f:t
 }
 # 補完設定
-autoload -Uz compinit; compinit
+autoload -Uz compinit; compinit -u
 
 # ファイルリスト補完でもlsと同様に色をつける｡
 export LSCOLORS=GxFxCxdxBxegedabagacad
