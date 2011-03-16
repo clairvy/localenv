@@ -944,7 +944,8 @@ without any interpretation."
 
 (setq use-monaco nil)
 (cond (;; http://sakito.jp/emacs/emacs23.html
-       (and (= (string-to-number emacs-version) 23.2)
+       (and (or (= (string-to-number emacs-version) 23.2)
+                (= (string-to-number emacs-version) 24.0))
             (not use-monaco))
        (create-fontset-from-ascii-font "Menlo-14:weight=normal:slant=normal" nil "menlokakugo")
        (set-fontset-font "fontset-menlokakugo"
@@ -955,7 +956,8 @@ without any interpretation."
        (add-to-list 'default-frame-alist '(font . "fontset-menlokakugo"))
        )
       (;; http://sakito.jp/emacs/emacs23.html
-       (= (string-to-number emacs-version) 23.2)
+       (or (= (string-to-number emacs-version) 23.2)
+           (= (string-to-number emacs-version) 24.0))
        (set-face-attribute 'default nil
                            :family "monaco"
                            :height 140)
