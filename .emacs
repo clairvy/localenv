@@ -373,7 +373,7 @@
 
 ;; pit
 (add-to-list 'load-path (expand-file-name ".emacs.d/pit" home))
-(require 'pit)
+;(require 'pit)
 
 ;; autoinsert
 (require 'autoinsert)
