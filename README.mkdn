@@ -22,3 +22,10 @@ blog だと埋もれちゃうんで。
   * Cygwin
 
 <http://daringfireball.net/projects/markdown/dingus>
+
+最初にやること
+* Emacs
+  * ddskk - cd ddskk && make
+  * ensime - cd ensime && sbt update dist
+* Screen
+  * touch .screen-local
