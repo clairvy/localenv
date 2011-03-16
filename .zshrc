@@ -343,13 +343,20 @@ alias hex='perl -le "print unpack q(H*), shift"'
 alias grep='grep --color'
 alias egrep='egrep --color'
 if [[ $os == 'mac' ]]; then
-  alias emacs-app='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
-  alias emacsclient='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient'
+  if [[ -f /opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs ]]; then
+    alias emacs-app='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
+    alias emacsclient='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient'
+  elif [[ -f /usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/Emacs ]]; then
+    alias emacs-app='/usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/Emacs'
+    alias emacsclient='/usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/bin/emacsclient'
+  fi
   alias javac='javac -J-Dfile.encoding=UTF-8 -Xlint:unchecked -Xlint:deprecation'
   alias java='java -Dfile.encoding=UTF8'
-  alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
   export ANT_OPTS='-Dfile.encoding=UTF-8'
-  export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
+  if [[ -f /Applications/MacVim.app/Contents/MacOS/Vim ]]; then
+    alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
+    export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
+  fi
   if [[ -d /usr/share/terminfo ]]; then
     export TERMINFO='/usr/share/terminfo'
   fi
