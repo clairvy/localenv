@@ -176,7 +176,7 @@ else
   local rprompt_color='%{[33m%}' # yellow [0m
   local vcs_prompot_color='%{[32m%}' # green [0m
   local prompt_char='$'
-  if [[ x"$USER" == x"s-nag" || x"$USER" == x"nagaya" || x"$USER" == x"s_nag" ]]; then
+  if [[ x"$USER" == x"s-nag" || x"$USER" == x"nagaya" || x"$USER" == x"s_nag" || x"$USER" == x"nag" ]]; then
     prompt_color='%{[32m%}'      # green [0m
   elif [[ x"$USER" == x"root" ]]; then
     prompt_color='%{[37m%}'      # white [0m
@@ -212,8 +212,10 @@ path=(/usr/bin /bin)
 # for Mac ports
 if [[ $os == 'mac' ]]; then
   export LC_ALL=ja_JP.UTF-8
-  path=(/opt/local/bin /opt/local/sbin $path)
-  manpath=(/opt/local/share/man $manpath)
+  if [[ -d /opt/local/bin ]]; then
+    path=(/opt/local/bin /opt/local/sbin $path)
+    manpath=(/opt/local/share/man $manpath)
+  fi
 fi
 # for BSDPAN and local path
 if [[ $os == 'bsd' ]]; then
@@ -348,6 +350,9 @@ if [[ $os == 'mac' ]]; then
   alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
   export ANT_OPTS='-Dfile.encoding=UTF-8'
   export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
+  if [[ -d /usr/share/terminfo ]]; then
+    export TERMINFO='/usr/share/terminfo'
+  fi
 fi
 if whence -p vim 2>&1 > /dev/null; then
   alias vi=vim
