@@ -3,3 +3,5 @@
 .emacs.d/js2-mode/build/
 .emacs.d/url
 *.elc
+/.emacs.d/ac-comphist.dat
+/.emacs.d/anything-c-adaptive-history
