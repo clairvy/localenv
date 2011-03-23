@@ -356,7 +356,7 @@ if [[ $os == 'mac' ]]; then
   export ANT_OPTS="$jfe"
   export SETUP_SH_VMARGS="$jfe"
   if [[ -f /Applications/MacVim.app/Contents/MacOS/Vim ]]; then
-    alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
+    alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
     export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
   fi
   if [[ -d /usr/share/terminfo ]]; then
