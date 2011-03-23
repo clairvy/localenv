@@ -350,9 +350,11 @@ if [[ $os == 'mac' ]]; then
     alias emacs-app='/usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/Emacs'
     alias emacsclient='/usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/bin/emacsclient'
   fi
-  alias javac='javac -J-Dfile.encoding=UTF-8 -Xlint:unchecked -Xlint:deprecation'
-  alias java='java -Dfile.encoding=UTF8'
-  export ANT_OPTS='-Dfile.encoding=UTF-8'
+  local jfe='-Dfile.encoding=UTF-8'
+  alias javac="javac -J$jfe -Xlint:unchecked -Xlint:deprecation"
+  alias java="java $jfe"
+  export ANT_OPTS="$jfe"
+  export SETUP_SH_VMARGS="$jfe"
   if [[ -f /Applications/MacVim.app/Contents/MacOS/Vim ]]; then
     alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim'
     export EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim'
