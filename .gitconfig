@@ -57,6 +57,7 @@
 	gn = grep -n
 	sm = submodule
 	smi = submodule update --init
+	smu = submodule foreach "git checkout master; git pull origin master"
 	smupdate = submodule foreach "git checkout master; git pull origin master"
 	show-graph = log --graph --abbrev-commit --pretty=oneline
 [user]
