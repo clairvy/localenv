@@ -412,3 +412,8 @@ fi
 if [[ -f $HOME/.zfunctions/git-submodule-completion/zsh.zsh ]]; then
   source $HOME/.zfunctions/git-submodule-completion/zsh.zsh
 fi
+
+# perlbrew
+if [[ -f $HOME/perl5/perlbrew/etc/bashrc ]]; then
+  source $HOME/perl5/perlbrew/etc/bashrc
+fi
