@@ -22,6 +22,7 @@ set number
 set ruler
 set smartindent
 set laststatus=2
+set wildmode=longest:full,full
 
 "{{{ 文字コードの自動認識
 set fileformats=unix,dos,mac
