@@ -58,3 +58,9 @@
 [submodule ".vim/bundle/eskk.vim"]
 	path = .vim/bundle/eskk.vim
 	url = https://github.com/tyru/eskk.vim
+[submodule ".vim/bundle/vim-quickrun"]
+	path = .vim/bundle/vim-quickrun
+	url = https://github.com/thinca/vim-quickrun.git
+[submodule ".vim/bundle/Align"]
+	path = .vim/bundle/Align
+	url = https://github.com/vim-scripts/Align.git
