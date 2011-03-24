@@ -138,3 +138,12 @@ function! s:vimshell_my_settings()
   NeoComplCacheAutoCompletionLength 3
 endfunction
 "}}}
+
+"{{{ eskk
+if has('vim_starting')
+    if has('mac')
+        let g:eskk#large_dictionary = "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L"
+    endif
+endif
+let g:eskk_debug = 0
+"}}}
