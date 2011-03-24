@@ -1,0 +1,30 @@
+#compdef vimana
+
+# http://d.hatena.ne.jp/lshenqi/20100928/1285627115
+# thanx Ishenqi
+
+local context state line list
+typeset -A opt_args
+
+list=$(awk '{print $1}' ~/.vimana/index)
+
+_arguments \
+'1:commands:(update installed search install remove help)' \
+'(-r --runtime-path)'{-r,--runtime-path}'[install to runtime path.]' \
+'(-v --verbose)'{-v,--verbose}'[verbose message]' \
+'(-y --yes)'{-y,--yes}'[assume yes]' \
+'(-f --force)'{-f,--force}'[force install]' \
+':lists:->args' 
+
+case $state in
+  args)
+  case $line[1] in
+    (search|install)
+      _multi_parts '\n' "($list)" && return 0
+    ;;
+    remove)
+      _files -W ~/.vim/record/ && return 0
+    ;;
+  esac
+  ;;
+esac

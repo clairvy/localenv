@@ -86,7 +86,7 @@ endif
 
 "{{{ PHPManual
 " PHP マニュアルを設置している場合
-let g:ref_phpmanual_path = $HOME . 'modules/php-5.2.6/lib/php/data/phpman/php-chunked-xhtml/'
+let g:ref_phpmanual_path = $HOME . '/local/share/phpman/php-chunked-xhtml/'
 let g:ref_phpmanual_cmd = 'w3m -dump %s'
 "let phpmanual_dir = $HOME . '/.vim/manual/php_manual_ja/'
 " マニュアルの拡張子
@@ -99,4 +99,41 @@ let phpmanual_convfilter = ''
 let phpmanual_htmlviewer = 'w3m -o display_charset=utf-8 -o auto_detect=2 -T text/html'
 " phpmanual.vim を置いているパスを指定
 "source $HOME/.vim/ftplugin/phpmanual.vim
+"}}}
+
+"{{{ Unite.vim
+let g:unite_source_file_mru_time_format = ''
+let g:unite_enable_start_insert = 1
+let g:unite_source_file_mru_ignore_pattern='.*\/$\|.*Application\ Data.*'
+nnoremap <silent> <C-r>  :<C-u>Unite file_mru<CR>
+nnoremap <silent> <C-n>  :<C-u>Unite buffer <CR>
+nnoremap <silent> <Leader>. :<C-u>Unite buffer <CR>
+nnoremap <silent> <Leader>d :<C-u>Unite file<CR>
+nnoremap <silent> <Leader>b :<C-u>Unite bookmark<CR>
+nnoremap <silent> <Leader>u  :<C-u>Unite buffer file_mru bookmark file<CR>
+nnoremap <silent> <Leader>p  :<C-u>Unite ref/phpmanual<CR>
+nnoremap <Leader>f  :<C-u>Unite file_rec -input=
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+  imap <buffer> jj <Plug>(unite_insert_leave)
+  imap <buffer> <C-j> <Plug>(unite_exit)
+  imap <buffer> <ESC> <Plug>(unite_exit)
+  imap <buffer> <C-o> <Plug>(unite_insert_leave):<C-u>call unite#mappings#do_action('above')<CR>
+endfunction
+
+autocmd FileType vimshell call s:vimshell_my_settings()
+function! s:vimshell_my_settings()
+  inoremap <buffer> <C-x> <ESC><C-w>h:on<CR>
+  inoremap <buffer> <silent> <C-n>  <ESC>:<C-u>Unite buffer <CR>
+  inoremap <buffer> <silent> <C-r>  <ESC>:<C-u>Unite file_mru <CR>
+  nnoremap <buffer> <CR> Go$ 
+  imap <buffer> <C-x>     <ESC><C-w>h:on<CR>
+  nnoremap <buffer><silent> <C-n>  :<C-u>Unite buffer <CR>
+  inoremap <C-v> <C-R>+
+  inoremap <buffer><expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
+  imap <buffer> <C-o> <Plug>(vimshell_enter)
+  inoremap <buffer> <C-l> <C-y>
+  imap <buffer> <C-s> <Plug>(vimshell_history_complete_whole)
+  NeoComplCacheAutoCompletionLength 3
+endfunction
 "}}}
