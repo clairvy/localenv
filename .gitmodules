@@ -46,18 +46,6 @@
 [submodule ".vim/bundle/vimshell"]
 	path = .vim/bundle/vimshell
 	url = https://github.com/Shougo/vimshell.git
-[submodule ".vim/bundle/vice.vim"]
-	path = .vim/bundle/vice.vim
-	url = https://github.com/tyru/vice.vim
-[submodule ".vim/bundle/cul.vim"]
-	path = .vim/bundle/cul.vim
-	url = https://github.com/tyru/cul.vim
-[submodule ".vim/bundle/savemap.vim"]
-	path = .vim/bundle/savemap.vim
-	url = https://github.com/tyru/savemap.vim
-[submodule ".vim/bundle/eskk.vim"]
-	path = .vim/bundle/eskk.vim
-	url = https://github.com/tyru/eskk.vim
 [submodule ".vim/bundle/vim-quickrun"]
 	path = .vim/bundle/vim-quickrun
 	url = https://github.com/thinca/vim-quickrun.git
