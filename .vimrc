@@ -133,6 +133,7 @@ let phpmanual_htmlviewer = 'w3m -o display_charset=utf-8 -o auto_detect=2 -T tex
 "}}}
 
 "{{{ Unite.vim
+let g:neocomplcache_enable_at_startup = 1
 let g:unite_source_file_mru_time_format = ''
 let g:unite_enable_start_insert = 1
 let g:unite_source_file_mru_ignore_pattern='.*\/$\|.*Application\ Data.*'
@@ -142,7 +143,7 @@ nnoremap <silent> <Leader>. :<C-u>Unite buffer <CR>
 nnoremap <silent> <Leader>d :<C-u>Unite file<CR>
 nnoremap <silent> <Leader>b :<C-u>Unite bookmark<CR>
 nnoremap <silent> <Leader>u  :<C-u>Unite buffer file_mru bookmark file<CR>
-nnoremap <silent> <Leader>p  :<C-u>Unite ref/phpmanual<CR>
+nnoremap <silent> <Leader>k  :<C-u>Unite ref/phpmanual<CR>
 nnoremap <Leader>f  :<C-u>Unite file_rec -input=
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()
@@ -169,6 +170,12 @@ function! s:vimshell_my_settings()
 endfunction
 "}}}
 
+imap <TAB>     <Plug>(neocomplcache_snippets_expand)
+smap <TAB>     <Plug>(neocomplcache_snippets_expand)
+"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
 "{{{ eskk
 if has('vim_starting')
     if has('mac')
@@ -186,4 +193,15 @@ augroup cch
   autocmd WinLeave * setlocal nocursorline
   autocmd WinEnter,BufRead * setlocal cursorline
 augroup END
+"}}}
+
+"{{{ symofny
+nnoremap <silent> <Leader>v :<C-u>Sview<CR>
+nnoremap <silent> <Leader>m :<C-u>Smodel<CR>
+nnoremap <silent> <Leader>a :<C-u>Saction<CR>
+nnoremap <silent> <Leader>p :<C-u>Spartial<CR>
+nnoremap <Leader>V :<C-u>Sview 
+nnoremap <Leader>M :<C-u>Smodel 
+nnoremap <Leader>A :<C-u>Saction 
+nnoremap <Leader>P :<C-u>Spartial 
 "}}}
