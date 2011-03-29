@@ -52,3 +52,6 @@
 [submodule ".vim/bundle/Align"]
 	path = .vim/bundle/Align
 	url = https://github.com/vim-scripts/Align.git
+[submodule ".vim/bundle/vim-symfony"]
+	path = .vim/bundle/vim-symfony
+	url = https://github.com/soh335/vim-symfony.git
