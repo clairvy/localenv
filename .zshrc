@@ -146,14 +146,39 @@ fi
 setopt prompt_subst
 autoload -U colors; colors
 
+autoload -Uz add-zsh-hook
 if [[ $ZSH_VERSION == 4.3.* ]]; then
   autoload -Uz vcs_info
+  zstyle ':vcs_info:*' enable git svn hg bzr
   zstyle ':vcs_info:*' formats '(%s)-[%b]'
   zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
-  precmd () {
+  zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
+  zstyle ':vcs_info:bzr:*' use-simple true
+  if is-at-least 4.3.10; then
+    zstyle ':vcs_info:git:*' check-for-changes true
+    zstyle ':vcs_info:git:*' stagedstr '+'
+    zstyle ':vcs_info:git:*' unstagedstr '-'
+    zstyle ':vcs_info:git:*' formats '(%s)-[%c%u%b]'
+    zstyle ':vcs_info:git:*' actionformats '(%s)-[%c%u%b|%a]'
+  fi
+  function _update_vcs_info_msg() {
     psvar=()
     LANG=en_US.UTF-8 vcs_info
+    psvar[2]=$(_git_not_pushed)
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+  }
+  add-zsh-hook precmd _update_vcs_info_msg
+  function _git_not_pushed() {
+    if [[ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = "true" ]]; then
+      head="$(git rev-parse HEAD)"
+      for x in $(git rev-parse --remotes); do
+        if [[ "$head" = "$x" ]]; then
+          return 0
+        fi
+      done
+      echo "{?}"
+    fi
+    return 0
   }
 fi
 
@@ -185,7 +210,7 @@ else
     prompt_color='%{[35m%}'      # pink [0m
   fi
   PROMPT=$prompt_color'%U%B%n'$rprompt_color'%U@'$prompt_color'%B%m%b %h '$prompt_char$clear_color'%u '
-  RPROMPT=$vcs_prompot_color'%1(v|%1v|) '$rprompt_color'[%~]'$clear_color
+  RPROMPT=$vcs_prompot_color'%1(v|%1v%2v|)${vcs_info_git_pushed} '$rprompt_color'[%~]'$clear_color
 fi
 
 if whence -p lv 2>&1 > /dev/null; then
