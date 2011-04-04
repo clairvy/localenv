@@ -147,3 +147,13 @@ if has('vim_starting')
 endif
 let g:eskk_debug = 0
 "}}}
+
+"{{{ カーソル行をハイライト
+set cursorline
+
+augroup cch
+  autocmd! cch
+  autocmd WinLeave * setlocal nocursorline
+  autocmd WinEnter,BufRead * setlocal cursorline
+augroup END
+"}}}
