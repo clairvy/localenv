@@ -1,3 +1,4 @@
+
 " .vim/bundle を使う
 call pathogen#runtime_append_all_bundles()
 
@@ -5,10 +6,39 @@ call pathogen#runtime_append_all_bundles()
 filetype plugin on
 filetype indent on
 syntax enable
-" from Ubuntu default
-set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8,utf-16,japan
+
+" VIMRC 編集/ロード設定
+nnoremap <Space> :<C-u>edit $MYVIMRC<Enter>
+nnoremap <Space>s. :<C-u>source $MYVIMRC<Enter>
+" バックスペースが特殊な文字を削除できる
+set backspace=indent,eol,start
+" 検索に使う文字
+set ignorecase
+set smartcase
+" 検索
+set incsearch
+set hlsearch
+" ステータスライン
+"set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+set statusline=%F%m%r%h%w\ [%{&fenc!=''?&fenc:&enc},%{&ff},%Y]\ [\%03.3b,0x\%2.2B]\ (%04l,%04v)[%LL/%p%%]\ %{strftime('%Y/%m/%d(%a)%H:%M')}
+set laststatus=2
+" コマンドの入力状況の表示
+set showcmd
+" インデント関連
+set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+" }}}
+
+"set encoding=utf-8
+"set fileencoding=utf-8
+"set fileencodings=utf-8,utf-16,japan
+"set fileformats=unix,dos,mac
+
+" モードライン(ファイルのコメントからの読み込み)
+set modeline
+set modelines=5
 
 set backspace=2
 set tabstop=2
