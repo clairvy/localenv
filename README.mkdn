@@ -30,3 +30,5 @@ blog だと埋もれちゃうんで。
   * ensime - cd ensime && sbt update dist
 * Screen
   * touch .screen-local
+* Vim
+  * cd .vim/bundle/vimproc && make -f make_XXX.mak
