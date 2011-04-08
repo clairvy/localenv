@@ -1,8 +1,8 @@
 
-" .vim/bundle を使う
+" .vim/bundle を使う {{{1
 call pathogen#runtime_append_all_bundles()
 
-"{{{ Vim の流儀 より
+" Vim の流儀 より. {{{1
 filetype plugin on
 filetype indent on
 syntax enable
@@ -31,6 +31,7 @@ set shiftwidth=4
 set expandtab
 " }}}
 
+" leader {{{1
 let mapleader = ","
 
 "set encoding=utf-8
@@ -38,7 +39,7 @@ let mapleader = ","
 "set fileencodings=utf-8,utf-16,japan
 "set fileformats=unix,dos,mac
 
-" モードライン(ファイルのコメントからの読み込み)
+" モードライン(ファイルのコメントからの読み込み) {{{1
 set modeline
 set modelines=5
 
@@ -57,7 +58,7 @@ set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
 
-"{{{ 文字コードの自動認識
+" 文字コードの自動認識 {{{1
 set fileformats=unix,dos,mac
 
 " 文字コードの自動認識
@@ -116,9 +117,8 @@ set fileformats=unix,dos,mac
 if exists('&ambiwidth')
   set ambiwidth=double
 endif
-"}}}
 
-"{{{ PHPManual
+" PHPManual {{{1
 " PHP マニュアルを設置している場合
 let g:ref_phpmanual_path = $HOME . '/local/share/phpman/php-chunked-xhtml/'
 let g:ref_phpmanual_cmd = 'w3m -dump %s'
@@ -135,7 +135,7 @@ let phpmanual_htmlviewer = 'w3m -o display_charset=utf-8 -o auto_detect=2 -T tex
 "source $HOME/.vim/ftplugin/phpmanual.vim
 "}}}
 
-"{{{ Unite.vim
+" Unite.vim {{{1
 let g:neocomplcache_enable_at_startup = 1
 let g:unite_source_file_mru_time_format = ''
 let g:unite_enable_start_insert = 1
@@ -173,13 +173,14 @@ function! s:vimshell_my_settings()
 endfunction
 "}}}
 
+" neocmplcache {{{1
 imap <TAB>     <Plug>(neocomplcache_snippets_expand)
 smap <TAB>     <Plug>(neocomplcache_snippets_expand)
 "imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
-"{{{ eskk
+" eskk {{{1
 if has('vim_starting')
     if has('mac')
         let g:eskk#large_dictionary = "~/Library/Application\ Support/AquaSKK/SKK-JISYO.L"
@@ -188,7 +189,7 @@ endif
 let g:eskk_debug = 0
 "}}}
 
-"{{{ カーソル行をハイライト
+" カーソル行をハイライト {{{1
 set cursorline
 
 augroup cch
@@ -196,15 +197,18 @@ augroup cch
   autocmd WinLeave * setlocal nocursorline
   autocmd WinEnter,BufRead * setlocal cursorline
 augroup END
+
+" symofny {{{1
+nnoremap <silent> <Leader>v :<C-u>STview<CR>
+nnoremap <silent> <Leader>m :<C-u>STmodel<CR>
+nnoremap <silent> <Leader>a :<C-u>STaction<CR>
+nnoremap <silent> <Leader>p :<C-u>STpartial<CR>
+nnoremap <Leader>V :<C-u>STview 
+nnoremap <Leader>M :<C-u>STmodel 
+nnoremap <Leader>A :<C-u>STaction 
+nnoremap <Leader>P :<C-u>STpartial 
 "}}}
 
-"{{{ symofny
-nnoremap <silent> <Leader>v :<C-u>Sview<CR>
-nnoremap <silent> <Leader>m :<C-u>Smodel<CR>
-nnoremap <silent> <Leader>a :<C-u>Saction<CR>
-nnoremap <silent> <Leader>p :<C-u>Spartial<CR>
-nnoremap <Leader>V :<C-u>Sview 
-nnoremap <Leader>M :<C-u>Smodel 
-nnoremap <Leader>A :<C-u>Saction 
-nnoremap <Leader>P :<C-u>Spartial 
-"}}}
+" git. {{{1
+nnoremap <Leader>gg :<C-u>GitGrep 
+" vim: foldmethod=marker
