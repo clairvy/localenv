@@ -27,7 +27,7 @@
 
 ;;; apel
 (if (or (string-equal hostname "mbp1")
-	(= (floor (string-to-int emacs-version)) 23))
+	(<= 23 (floor (string-to-int emacs-version))))
     (setq load-path (cons (concat home "/.emacs.d/apel")
 			  load-path)))
 
@@ -122,10 +122,9 @@
 (global-hl-line-mode)
 
 ;;; elscreen
-(cond ((= (floor (string-to-int emacs-version)) 23) ; carbon だと同梱
-       (setq load-path (cons (concat home "/.emacs.d/elscreen")
-                             load-path))
-       (load "elscreen" "ElScreen" t)))
+(when (<= 23 (floor (string-to-int emacs-version))) ; carbon だと同梱
+  (add-to-list 'load-path (expand-file-name ".emacs.d/elscreen" home))
+  (load "elscreen" "ElScreen" t))
 
 ;;; anything (yasnippet / auto-install)
 (when (>= emacs-major-version 22)
