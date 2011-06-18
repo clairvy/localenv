@@ -55,3 +55,6 @@
 [submodule ".vim/bundle/vim-symfony"]
 	path = .vim/bundle/vim-symfony
 	url = https://github.com/soh335/vim-symfony.git
+[submodule ".vim/bundle/vim-surround"]
+	path = .vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
