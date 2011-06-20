@@ -1,3 +1,16 @@
+[user]
+	name = NAGAYA Shinichiro
+	email = clairvy@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	grep = auto
+[push]
+	default = tracking
+[core]
+	excludesfile = ~/.gitignore
 [alias]
 	st = status -sb
 	sta = status
@@ -64,15 +77,4 @@
 	feature = flow feature
 	release = flow release
 	hotfix = flow hotfix
-[user]
-	name = NAGAYA Shinichiro
-	email = clairvy@gmail.com
-[color]
-	diff = auto
-	status = auto
-	branch = auto
-	interactive = auto
-	grep = auto
 # github config in /etc/gitconfig
-[push]
-	default = tracking
