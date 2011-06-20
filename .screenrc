@@ -6,4 +6,3 @@ source $HOME/.screenrc-local
 screen -t BS 0
 screen -t lo 1
 screen -t lo 2
-screen -t lo 3
