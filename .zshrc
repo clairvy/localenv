@@ -431,6 +431,9 @@ if [[ -f $HOME/.zshrc.local ]]; then
 fi
 
 # git
+if [[ -d /usr/share/git-core/Git-Hooks ]]; then
+  export GIT_HOOKS_HOME=/usr/share/git-core/Git-Hooks
+fi
 if [[ -f $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh ]]; then
   source $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh
 fi
