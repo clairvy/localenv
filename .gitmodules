@@ -58,3 +58,6 @@
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule ".vim/vundle.git"]
+	path = .vim/vundle.git
+	url = http://github.com/gmarik/vundle.git
