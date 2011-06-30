@@ -1,3 +1,12 @@
+" vundle を使う {{{1
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/vundle.git/
+call vundle#rc()
+
+filetype plugin indent on
+
 
 " .vim/bundle を使う {{{1
 call pathogen#runtime_append_all_bundles()
