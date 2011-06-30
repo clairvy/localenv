@@ -15,7 +15,11 @@ _symfony () {
 
     _arguments -C \
         '(-T --tasks)'{-T,--tasks}'[list of the symfony tasks]' \
-        '(-V --version)'{-V,--version}'[version]' \
+        '(-H --help)'{-H,--help}'[Display help message]' \
+        '(-q --quiet)'{-q,--quiet}'[Do not log message to standard outpu]' \
+        '(-t --trace)'{-t,--trace}'[Turn on invoke/execute tracing, enable full backtrace]' \
+        '(-V --version)'{-V,--version}'[Display the program version]' \
+        '--color[Force ANSI color output]' \
         '1: :->tasks' \
         '*:: :->args' && ret=0
 
