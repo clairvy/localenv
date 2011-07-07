@@ -367,6 +367,12 @@ alias scx='screen -x'
 alias hex='perl -le "print unpack q(H*), shift"'
 alias grep='grep --color'
 alias egrep='egrep --color'
+if whence -p vim 2>&1 > /dev/null; then
+  alias vi=vim
+  export EDITOR=vim
+else
+  export EDITOR=vi
+fi
 if [[ $os == 'mac' ]]; then
   if [[ -f /opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs ]]; then
     alias emacs-app='/opt/local/var/macports/software/emacs-app/23.1_1/Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs'
@@ -387,9 +393,6 @@ if [[ $os == 'mac' ]]; then
   if [[ -d /usr/share/terminfo ]]; then
     export TERMINFO='/usr/share/terminfo'
   fi
-fi
-if whence -p vim 2>&1 > /dev/null; then
-  alias vi=vim
 fi
 export MYSQL_PS1='([32m\u[00m@[33m\h[00m) [34m[\d][00m > '
 if whence -p mysql 2>&1 > /dev/null; then
