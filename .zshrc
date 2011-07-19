@@ -385,6 +385,7 @@ if [[ $os == 'mac' ]]; then
   alias javac="javac -J$jfe -Xlint:unchecked -Xlint:deprecation"
   alias java="java $jfe"
   export ANT_OPTS="$jfe"
+  export MAVEN_OPTS="$jfe"
   export SETUP_SH_VMARGS="$jfe"
   if [[ -f /Applications/MacVim.app/Contents/MacOS/Vim ]]; then
     alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
