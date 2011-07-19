@@ -436,7 +436,11 @@ fi
 # git
 if [[ -d /usr/share/git-core/Git-Hooks ]]; then
   export GIT_HOOKS_HOME=/usr/share/git-core/Git-Hooks
-  source /usr/share/git-core/Git-Hooks/_git-hooks
+  source /usr/share/git-core/Git-Hooks/git-hooks-completion.bash
+fi
+if [[ -d /usr/local/share/git-core/Git-Hooks ]]; then
+  export GIT_HOOKS_HOME=/usr/local/share/git-core/Git-Hooks
+  source /usr/local/share/git-core/Git-Hooks/git-hooks-completion.bash
 fi
 if [[ -f $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh ]]; then
   source $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh
