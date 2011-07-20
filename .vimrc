@@ -70,6 +70,11 @@ set wildmode=longest:full,full
 " 文字コードの自動認識 {{{1
 set fileformats=unix,dos,mac
 
+set termencoding=utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+
 " 文字コードの自動認識
 if &encoding !=# 'utf-8'
   set encoding=japan
@@ -91,7 +96,7 @@ if has('iconv')
   if &encoding ==# 'utf-8'
     let s:fileencodings_default = &fileencodings
     let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
+    let &fileencodings = s:fileencodings_default . ',' . &fileencodings
     unlet s:fileencodings_default
   else
     let &fileencodings = &fileencodings .','. s:enc_jis
