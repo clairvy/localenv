@@ -384,6 +384,7 @@ if [[ $os == 'mac' ]]; then
   local jfe='-Dfile.encoding=UTF-8'
   alias javac="javac -J$jfe -Xlint:unchecked -Xlint:deprecation"
   alias java="java $jfe"
+  alias jarsigner="jarsigner -J$jfe"
   export ANT_OPTS="$jfe"
   export MAVEN_OPTS="$jfe"
   export SETUP_SH_VMARGS="$jfe"
