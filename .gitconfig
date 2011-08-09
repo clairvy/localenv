@@ -77,4 +77,6 @@
 	feature = flow feature
 	release = flow release
 	hotfix = flow hotfix
+	hooks = hooks
+	ticket = ticket
 # github config in /etc/gitconfig
