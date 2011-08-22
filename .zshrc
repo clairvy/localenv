@@ -456,3 +456,8 @@ fi
 if [[ -f $HOME/perl5/perlbrew/etc/bashrc ]]; then
   source $HOME/perl5/perlbrew/etc/bashrc
 fi
+
+# pythonbrew
+if [[ -f $HOME/.pythonbrew/etc/bashrc ]]; then
+  source $HOME/.pythonbrew/etc/bashrc
+fi
