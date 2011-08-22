@@ -396,6 +396,12 @@ if [[ $os == 'mac' ]]; then
     export TERMINFO='/usr/share/terminfo'
   fi
 fi
+if whence -p vim 2>&1 > /dev/null; then
+  alias vi=vim
+  if [[ x"$EDITOR" = x"" ]]; then
+    export EDITOR=vim
+  fi
+fi
 export MYSQL_PS1='([32m\u[00m@[33m\h[00m) [34m[\d][00m > '
 if whence -p mysql 2>&1 > /dev/null; then
   alias mysql='mysql --auto-rehash'
