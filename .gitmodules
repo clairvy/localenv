@@ -9,7 +9,7 @@
 	url = git://github.com/defunkt/gist.el.git
 [submodule ".emacs.d/clairvy-Scamacs"]
 	path = .emacs.d/clairvy-Scamacs
-	url = git@github.com:clairvy/Scamacs.git
+	url = http://github.com/clairvy/Scamacs.git
 [submodule ".emacs.d/emacs-ditz"]
 	path = .emacs.d/emacs-ditz
 	url = http://github.com/hron/emacs-ditz.git
@@ -24,7 +24,7 @@
 	url = https://github.com/bobthecow/git-flow-completion.git
 [submodule ".zfunctions/git-submodule-completion"]
 	path = .zfunctions/git-submodule-completion
-	url = git@gist.github.com:591626.git
+	url = git://gist.github.com/591626.git
 [submodule ".vim/bundle/vim-ref"]
 	path = .vim/bundle/vim-ref
 	url = https://github.com/thinca/vim-ref.git
