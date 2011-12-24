@@ -678,6 +678,12 @@
 (add-to-list 'load-path (expand-file-name ".emacs.d/ess/lisp" home))
 (require 'ess-site)
 
+;; coffee-script
+(add-to-list 'load-path (expand-file-name ".emacs.d/coffee-mode" home))
+(require 'coffee-mode)
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
+
 ;;;
 ;;; Application
 ;;;
