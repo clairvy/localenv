@@ -467,3 +467,8 @@ fi
 if [[ -f $HOME/.pythonbrew/etc/bashrc ]]; then
   source $HOME/.pythonbrew/etc/bashrc
 fi
+
+# node.js
+if [[ -d /usr/local/lib/node_modules ]]; then
+  export NODE_PATH=/usr/local/lib/node_modules
+fi
