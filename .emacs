@@ -472,8 +472,8 @@
 (require 'rd-mode-plus)
 
 ;;; perl
-(setq load-path (cons (concat home "/.emacs.d/cperl-mode")
-                      load-path))
+;(setq load-path (cons (concat home "/.emacs.d/cperl-mode")
+;                      load-path))
 (setq load-path (cons (concat home "/.emacs.d/cperl-calculate-indent")
                       load-path))
 (autoload 'cperl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
@@ -545,6 +545,16 @@
 (add-hook 'cperl-mode-hook
           (lambda ()
             (require 'cperl-calculate-indent)))
+
+;;; Perl6
+(add-to-list 'load-path (expand-file-name ".emacs.d/parrot" home))
+(autoload 'pir-mode "pir-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.pir\\'" . pir-mode))
+(load "pasm")
+(load "parrot")
+
+;;; Jasmin
+(load (expand-file-name ".emacs.d/jasmin.el" home))
 
 ;;; scala
 (add-to-list 'load-path (expand-file-name ".emacs.d/scala-mode" home))
