@@ -450,7 +450,9 @@ if [[ -d /usr/share/git-core/Git-Hooks ]]; then
 fi
 if [[ -d /usr/local/share/git-core/Git-Hooks ]]; then
   export GIT_HOOKS_HOME=/usr/local/share/git-core/Git-Hooks
-  source /usr/local/share/git-core/Git-Hooks/git-hooks-completion.bash
+  if [[ -f /usr/local/share/git-core/Git-Hooks/git-hooks-completion.zsh ]]; then
+    source /usr/local/share/git-core/Git-Hooks/git-hooks-completion.zsh
+  fi
 fi
 if [[ -f $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh ]]; then
   source $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh
