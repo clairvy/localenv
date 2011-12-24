@@ -259,8 +259,9 @@ fi
 # for local::lib
 local_lib_path="$HOME/perl5"
 function _set_perl_env () {
-  export MODULEBUILDRC="${local_lib_path}/.modulebuildrc"
+  export PERL_LOCAL_LIB_ROOT="${local_lib_path}";
   export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
+  export PERL_MB_OPT="--install_base ${local_lib_path}"
   export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
   path=(${local_lib_path}/bin $path)
 }
