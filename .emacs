@@ -1009,7 +1009,8 @@ without any interpretation."
        )
       (;; http://sakito.jp/emacs/emacs23.html
        (or (= (string-to-number emacs-version) 23.2)
-           (= (string-to-number emacs-version) 24.0))
+           (= (string-to-number emacs-version) 24.0)
+           (= (string-to-number emacs-version) 23.3))
        (set-face-attribute 'default nil
                            :family "monaco"
                            :height 140)
