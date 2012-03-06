@@ -438,6 +438,13 @@ if whence -p keychain 2>&1 > /dev/null; then
   fi
 fi
 
+# z.sh
+_Z_CMD=j
+source ~/.zfunctions/z/z.sh
+precmd() {
+  _z --add "$(pwd -P)"
+}
+
 # local
 if [[ -f $HOME/.zshrc.local ]]; then
   . $HOME/.zshrc.local
