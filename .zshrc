@@ -457,9 +457,6 @@ fi
 if [[ -f $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh ]]; then
   source $HOME/.zfunctions/git-flow-completion/git-flow-completion.zsh
 fi
-if [[ -f $HOME/.zfunctions/git-submodule-completion/zsh.zsh ]]; then
-  source $HOME/.zfunctions/git-submodule-completion/zsh.zsh
-fi
 
 # perlbrew
 if [[ -f $HOME/perl5/perlbrew/etc/bashrc ]]; then

@@ -22,9 +22,6 @@
 [submodule ".zfunctions/git-flow-completion"]
 	path = .zfunctions/git-flow-completion
 	url = https://github.com/bobthecow/git-flow-completion.git
-[submodule ".zfunctions/git-submodule-completion"]
-	path = .zfunctions/git-submodule-completion
-	url = git://gist.github.com/591626.git
 [submodule ".vim/bundle/vim-ref"]
 	path = .vim/bundle/vim-ref
 	url = https://github.com/thinca/vim-ref.git
