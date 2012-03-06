@@ -64,3 +64,6 @@
 [submodule ".emacs.d/coffee-mode"]
 	path = .emacs.d/coffee-mode
 	url = git://github.com/defunkt/coffee-mode.git
+[submodule ".zfunctions/z"]
+	path = .zfunctions/z
+	url = https://github.com/rupa/z.git
