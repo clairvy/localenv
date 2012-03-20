@@ -49,7 +49,7 @@ case $state in
     case $line[1] in
       switch | use)
        local -a versions
-       versions=($(ls $PERLBREW_ROOT/perls/ | perl -pe 's/$ENV{PERLBREW_PERL}//;s/\n/ /m'))
+       versions=($(perlbrew list | perl -pe 's/\*.*//;s/\n/ /m'))
        _wanted versions expl 'perl version' compadd $versions && ret=0
       ;;
       install)
