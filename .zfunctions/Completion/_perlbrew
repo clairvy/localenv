@@ -21,7 +21,27 @@ _arguments -C \
 case $state in
   cmds)
     local -a cmds
-    cmds=( init install uninstall switch switch-off list use available off help mirror version install-cpanm self-upgrade env )
+    cmds=(
+      'init:Initialize perlbrew environment.'
+      'install:Install perl'
+      'uninstall:Uninstall the given installation'
+      'available:List perls available to install'
+      'lib:Manage local::lib directories.'
+      'alias:Give perl installations a new name'
+      'list:List perl installations'
+      'use:Use the specified perl in current shell'
+      'off:Turn off perlbrew in current shell'
+      'switch:Permanently use the specified perl as default'
+      'switch-off:Permanently turn off perlbrew (revert to system perl)'
+      'self-upgrade:Upgrade perlbrew itself.'
+      'install-cpanm:Install cpanm, a friendly companion.'
+      'install-patchperl:Install patchperl'
+      'mirror:Pick a preferred mirror site'
+      'version:Display version'
+      'help:Read more detailed instructions'
+      'exec:Execute command for all perls, one by one.'
+      'env:See the list of environment variables'
+    )
 
     _describe -t commands 'perlbrew command' cmds && ret=0
   ;;
@@ -30,17 +50,17 @@ case $state in
       switch | use)
        local -a versions
        versions=($(ls $PERLBREW_ROOT/perls/ | perl -pe 's/$ENV{PERLBREW_PERL}//;s/\n/ /m'))
-       _wanted versions expl 'perl version' compadd $versions && ret=0 
+       _wanted versions expl 'perl version' compadd $versions && ret=0
       ;;
       install)
        local -a perl_versions
        perl_versions=($(perlbrew available|perl -pe 's/^i//m;s/\n/ /m') perl-blead )
-       _wanted perl_versions expl 'perl-<version-number>' compadd $perl_versions && ret=0 
+       _wanted perl_versions expl 'perl-<version-number>' compadd $perl_versions && ret=0
       ;;
       uninstall)
        local -a versions
        versions=($(ls $PERLBREW_ROOT/perls/ | perl -pe 's/\n/ /m'))
-       _wanted versions expl 'perl version' compadd $versions && ret=0 
+       _wanted versions expl 'perl version' compadd $versions && ret=0
       ;;
       *)
         (( ret )) && _message 'no more arguments'
