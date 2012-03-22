@@ -274,6 +274,7 @@ function _set_perl_env () {
   export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
   export PERL_MB_OPT="--install_base ${local_lib_path}"
   export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
+  export PERL_CPANM_OPT="--local-lib=${local_lib_path}"
   path=(${local_lib_path}/bin $path)
 }
 if [[ "x$HOSTNAME" == "xdv1" ]]; then
