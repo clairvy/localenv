@@ -451,11 +451,13 @@ if whence -p keychain 2>&1 > /dev/null; then
 fi
 
 # z.sh
-_Z_CMD=j
-source ~/.zfunctions/z/z.sh
-precmd() {
-  _z --add "$(pwd -P)"
-}
+if [[ -f ~/.zfunctions/z/z.sh ]]; then
+  _Z_CMD=j
+  source ~/.zfunctions/z/z.sh
+  precmd() {
+    _z --add "$(pwd -P)"
+  }
+fi
 
 # local
 if [[ -f $HOME/.zshrc.local ]]; then
