@@ -315,8 +315,11 @@
 (require 'magit)
 
 ;;; gist
-(setq load-path (cons (concat home "/.emacs.d/gist")
-                      load-path))
+(add-to-list 'load-path (expand-file-name ".emacs.d/gist" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/tabulated-list" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/gh" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/pcache" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/logito" home))
 (require 'gist)
 
 ;;; auto-complete

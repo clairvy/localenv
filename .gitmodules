@@ -64,3 +64,15 @@
 [submodule ".zfunctions/z"]
 	path = .zfunctions/z
 	url = https://github.com/rupa/z.git
+[submodule ".emacs.d/gh"]
+	path = .emacs.d/gh
+	url = https://github.com/sigma/gh.el.git
+[submodule ".emacs.d/pcache"]
+	path = .emacs.d/pcache
+	url = https://github.com/sigma/pcache.git
+[submodule ".emacs.d/logito"]
+	path = .emacs.d/logito
+	url = https://github.com/sigma/logito.git
+[submodule ".emacs.d/tabulated-list"]
+	path = .emacs.d/tabulated-list
+	url = https://github.com/sigma/tabulated-list.el.git
