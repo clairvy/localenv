@@ -550,8 +550,8 @@
 (add-to-list 'load-path (expand-file-name ".emacs.d/parrot" home))
 (autoload 'pir-mode "pir-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pir\\'" . pir-mode))
-(load "pasm")
-(load "parrot")
+;(load "pasm")
+;(load "parrot")
 
 ;;; Jasmin
 (load (expand-file-name ".emacs.d/jasmin.el" home))
