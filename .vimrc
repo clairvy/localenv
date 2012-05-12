@@ -1,3 +1,4 @@
+filetype on
 " vundle を使う {{{1
 set nocompatible
 filetype off
