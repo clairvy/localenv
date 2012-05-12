@@ -557,7 +557,7 @@
 ;(load "parrot")
 
 ;;; Jasmin
-(load (expand-file-name ".emacs.d/jasmin.el" home))
+;(load (expand-file-name ".emacs.d/jasmin.el" home))
 
 ;;; scala
 (add-to-list 'load-path (expand-file-name ".emacs.d/scala-mode" home))
