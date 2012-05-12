@@ -231,8 +231,8 @@
 (global-set-key "\C-c\C-o" 'search-buffers)
 
 ;;; skk
-(setq load-path (cons (concat home "/.emacs.d/ddskk")
-                      load-path))
+(add-to-list 'load-path (expand-file-name ".emacs.d/ddskk" home))
+(add-to-list 'load-path (expand-file-name ".emacs.d/popup" home))
 (setq skk-use-azik t)
 (setq skk-dcomp-activate t)
 (setq skk-dcomp-multiple-activate t)
