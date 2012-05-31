@@ -985,7 +985,8 @@ without any interpretation."
 (cond (;; http://sakito.jp/emacs/emacs23.html
        (and (or (= (string-to-number emacs-version) 23.2)
                 (= (string-to-number emacs-version) 23.4)
-                (= (string-to-number emacs-version) 24.0))
+                (= (string-to-number emacs-version) 24.0)
+                (= (string-to-number emacs-version) 24.1))
             (not use-monaco))
        (create-fontset-from-ascii-font "Menlo-14:weight=normal:slant=normal" nil "menlokakugo")
        (set-fontset-font "fontset-menlokakugo"
