@@ -503,3 +503,8 @@ fi
 if [[ -d $HOME/Library/Haskell/bin ]]; then
   path=($path $HOME/Library/Haskell/bin)
 fi
+
+# smlnj
+if [[ -d /usr/local/Cellar/smlnj/110.73/libexec/bin ]]; then
+  path=($path /usr/local/Cellar/smlnj/110.73/libexec/bin)
+fi
