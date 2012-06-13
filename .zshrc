@@ -498,3 +498,8 @@ fi
 if [[ -d /usr/local/lib/node_modules ]]; then
   export NODE_PATH=/usr/local/lib/node_modules
 fi
+
+# haskell
+if [[ -d $HOME/Library/Haskell/bin ]]; then
+  path=($path $HOME/Library/Haskell/bin)
+fi
