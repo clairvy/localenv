@@ -244,6 +244,10 @@ fi
 if [[ -d /usr/local/share/man ]]; then
   manpath=(/usr/local/share/man $manpath)
 fi
+# rbenv
+if [[ -d $HOME/.rbenv/bin ]]; then
+  path=($path $HOME/.rbenv/bin)
+fi
 
 # for Mac ports
 if [[ $os == 'mac' ]]; then
