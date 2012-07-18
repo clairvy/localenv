@@ -463,6 +463,26 @@ if [[ -f ~/.zfunctions/z/z.sh ]]; then
   }
 fi
 
+# rbenv
+if [[ -d $HOME/.rbenv ]]; then
+  export PATH="$HOME/.rbenv/shims:${PATH}"
+  source "$HOME/.rbenv/completions/rbenv.zsh"
+  rbenv rehash 2>/dev/null
+  rbenv() {
+    local command="$1"
+    if [ "$#" -gt 0 ]; then
+      shift
+    fi
+
+    case "$command" in
+    shell)
+      eval `rbenv "sh-$command" "$@"`;;
+    *)
+      command rbenv "$command" "$@";;
+    esac
+  }
+fi
+
 # local
 if [[ -f $HOME/.zshrc.local ]]; then
   . $HOME/.zshrc.local
