@@ -581,3 +581,6 @@ fi
 if [[ -d /usr/local/Cellar/smlnj/110.73/libexec/bin ]]; then
   path=($path /usr/local/Cellar/smlnj/110.73/libexec/bin)
 fi
+
+# byobu
+export BYOBU_PREFIX=$(brew --prefix)
