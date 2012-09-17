@@ -10,6 +10,9 @@ for f in .*; do
   if [ x"$f" == x'.hosts' ]; then
     continue
   fi
+  if [ x"$f" == x'.ssh' ]; then
+    continue
+  fi
   pushd ~
 #pwd
   if [ -f $f ]; then
