@@ -18,7 +18,7 @@
 	url = https://github.com/aemoncannon/ensime.git
 [submodule ".emacs.d/auto-complete"]
 	path = .emacs.d/auto-complete
-	url = https://github.com/m2ym/auto-complete.git
+	url = https://github.com/auto-complete/auto-complete.git
 [submodule ".zfunctions/git-flow-completion"]
 	path = .zfunctions/git-flow-completion
 	url = https://github.com/bobthecow/git-flow-completion.git
