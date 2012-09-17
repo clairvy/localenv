@@ -79,6 +79,6 @@
 	hotfix = flow hotfix
 	hooks = hooks
 	ticket = ticket
-	rma = "!f() { git ls-files --deleted | sort -u }; git rm `f`"
+	rma = "!f() { git ls-files --deleted | sort -u; }; git rm `f`"
 	rebase-status = "!f() { GIT_DIR=`git rev-parse --git-dir`;if [ -d $GIT_DIR/rebase-merge -o -f $GIT_DIR/rebase-apply/rebasing ]; then if [ -f $GIT_DIR/rebase-merge/interactive ]; then br='rebase-i'; else br='rebase-m'; fi; echo 'rebasing...('$br')'; else echo 'not rebasing.'; fi }; f"
 # github config in /etc/gitconfig
