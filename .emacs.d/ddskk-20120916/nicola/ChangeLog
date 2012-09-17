@@ -1,0 +1,750 @@
+2012-09-13  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-menu.el, skk-kanagaki-util.el, skk-nicola.el: Find
+	feature `emacs' for GNU emacs.
+
+2011-06-12  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-MK (nicola-ddskk-generate-autoloads): Indent fixes.
+
+2011-05-31  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-MK (nicola-ddskk-generate-autoloads): Undo the
+	previous change and set buffer-file-name instead.
+
+2011-05-08  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-MK (nicola-ddskk-generate-autoloads): Set
+	generated-autoload-file under Emacs 24 or later.
+
+2010-11-17  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el, skk-nicola.el: Update custom types for user
+	options.
+	* *.el: Update docstrings.
+
+2010-11-14  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagai.el (skk-setup-keymap@around@skk-kangaki-keys): No
+	longer modify value of skk-previous-candidate-char.  Change to
+	after advice.
+
+2010-10-24  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-format-time): Update comments.
+
+2010-09-11  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-CFG, NICOLA-DDSKK-ELS: Do not use path-util.el.
+	* NICOLA-DDSKK-MK: Do not requiqre pcustom and poem.
+	* skk-kanagaki-menu.el: Do not use path-util.el and static.el.
+	* skk-kanagaki-util.el, skk-nicola-dcomp.el: Do not require static.
+	* skk-kanagaki.el: Do not use `defalias-maybe'.
+	* skk-nicola.el: Do not use static.el.  Require skk-emacs instead
+	of skk-e21 for GNU Emacsen.
+
+2010-09-09  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-CFG: Check if Emacs is self-contained.
+	* NICOLA-DDSKK-MK: Show VERSION_SPECIFIC_LISPDIR.
+	* skk-kanagaki-menu.el, skk-kanagaki-util.el, skk-nicola.el: Use
+	skk-running-gnu-emacs.
+
+2010-08-27  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-menu.el, skk-kanagaki-util.el, skk-nicola.el: Do
+	not use skk-emacs-type.
+
+2010-08-21  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-rshift-keys): Use `append' instead of
+	`nconc'.
+
+2010-08-02  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-bs): Use `delete-char'
+	instead of `delete-backward-char'.
+
+2010-01-30  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-print-help-function): New
+	constant variable.
+	(skk-kanagaki-help-1): Use it.  Use `with-current-buffer' instead
+	of `save-excursion'.
+
+2009-11-02  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-kanagaki-initialize): Use
+	`skk-char-to-unibyte-string' instead of `char-to-string'.
+
+	* skk-nicola.el (skk-insert@around@skk-nicola-workaround): Use
+	`char-to-string' instead of `skk-char-to-string'.
+	(skk-nicola-turn-on-j-mode, skk-nicola-treat-triple)
+	(skk-nicola-insert-double, skk-nicola-maybe-double-p): Use
+	`skk-char-to-unibyte-string' instead of `char-to-string'.
+
+2009-08-14  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-menu.el:
+	* skk-nicola.el:
+	Check for mule6.
+
+2009-08-13  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-kanagaki-insert): Use
+	`skk-bind-last-command-char'.
+
+	* skk-nicola.el (skk-nicola-self-insert-lshift-1):
+	(skk-nicola-insert-single, skk-nicola-insert-double):
+	(skk-nicola-turn-on-j-mode, skk-nicola-space-function):
+	(skk-nicola-maybe-double-p):
+	(skk-insert@around@skk-nicola-workaround):
+	Use `skk-last-command-char' and `skk-bind-last-command-char'.
+
+2008-12-17  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-format-time): CAR of return value of
+	`current-time' must be multiplied by 65536 (i.e. 2x10^6). Fix.
+
+2007-09-02  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-setup-modeline): Name the toplevel
+	anonymous function for skk-mode-hook.
+	(skk-kanagaki-initialize): New advice.
+
+2007-08-20  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-setup-keymap): Define function keys f1-f10
+	only when skk-j-mode-function-key-usage is `kanagaki'.
+
+2007-08-14  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el:
+	* skk-nicola.el:
+
+	Put `skk-kanagaki-bs', skk-nicola-self-insert-lshift and
+	skk-nicola-self-insert-rshift' property for pending-del or delsel.
+
+2007-04-29  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-bs): Call
+	`skk-dcomp-after-delete-backward-char'.
+	* skk-nicola.el (skk-nicola-self-insert-lshift-1): New function.
+	* skk-nicola-dcomp.el: Advise it instead of
+	`skk-nicola-self-insert-lshift'.
+
+2007-04-24  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-kanagaki-insert):
+	* skk-nicola.el (skk-nicola-self-insert-lshift):
+	(skk-nicola-insert-single):
+	(skk-nicola-space-function):
+
+	Rename optional argument.
+
+2007-04-22  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-kanagaki-insert):
+	* skk-nicola.el (skk-nicola-self-insert-lshift):
+	(skk-nicola-insert-single):
+	(skk-nicola-space-function):
+
+	Accept optional argument PREFIX-ARG.
+
+2007-04-22  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	Suggested by Tatsuya Kinoshita <tats@vega.ocn.ne.jp>.
+
+	* *.el: Specify coding at the first line of each file containing
+	non-ASCII characters.
+
+2007-04-14  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el:
+	* skk-nicola.el:
+
+	Update custom types.
+
+2007-04-08  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el: Define custom group skk-kanagaki in
+	skk-vars.el.
+
+	* skk-nicola.el: Define custom group skk-nicola in skk-vars.el.
+
+2007-03-29  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-CFG: Modify default values for install-prefix,
+	LISPDIR and VERSION_SPECIFIC_LISPDIR.
+
+2007-03-25  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-CFG: Call `install-get-default-package-directory'
+	for setting PACKAGEDIR.
+
+	* NICOLA-DDSKK-MK (compile-nicola-ddskk-package): Call
+	`install-update-package-files'.
+
+2006-01-18  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-insert-kana): Call
+	`skk-cancel-undo-boundary'.
+
+2005-12-18  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola-dcomp.el (skk-nicola-self-insert-lshift): Call
+	`skk-dcomp-do-completion'.
+
+2005-12-15  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-dakuten): When Emacs is in
+	skk-isearch and SKK enters minibuffer touroku mode, do not
+	set buffer to skk-isearch-working-buffer.
+
+2005-12-04  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola-dcomp.el (skk-nicola-self-insert-lshift): Do not do
+	completion if skk-hint-inhibit-dcomp is non-nil.
+
+2005-11-28  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-dakuten):
+	* skk-nicola.el (skk-nicola-insert-double):
+
+	Workaround for modification in Emacs 22.0.50 which uses a vector,
+	instead of a list, for each element of `isearch-cmds'.
+
+2005-02-25  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-kanagaki-insert): When skk-dcomp is used,
+	call `skk-dcomp-cleanup-buffer' before calling
+	`skk-set-okurigana-no-sokuon'.
+
+	(skk-kanagaki-set-okurigana): Redefine function as an alias to
+	`skk-set-char-before-as-okurigana'.
+
+2004-08-29  Yoichi NAKAYAMA  <yoichi@geiin.org>
+
+	* skk-kanagaki.el: Fixed typo.
+
+2004-04-04  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-menu.el: Add Japanese menu support for Emacs 21.
+
+	* skk-nicola-dcomp.el (skk-nicola-self-insert-lshift): Do not try
+	to delete region when local variable pos is not set.
+
+2004-03-13  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-kanagaki-jidou-keymap-kakikae-service):
+	Abolish variable.
+
+	* skk-kanagaki-util.el (skk-kanagaki-call-xmodmap): Abolish macro.
+
+	(skk-kanagaki-help-1): Abolish old style backquote.
+
+	* skk-106-jis.el:
+	* skk-oasys.el:
+
+	Don't call xmodmap.
+
+2004-03-12  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-106-jis.el: Modify keycode 123 -> 211.
+
+	(skk-kanagaki-106-jis-base-rule-list):
+	(skk-106-jis-plain-rule-list):
+
+	Call `skk-nicola-insert' for chars \, |, _, Y, and Z.
+
+	(skk-106-jis-lshift-rule-list):
+	(skk-106-jis-rshift-rule-list):
+
+	Default to the same as skk-106-jis-plain-rule-list.
+
+	* skk-kanagaki-util.el (skk-kanagaki-dakuten): Don't call
+	`caddr'. Call `nth' instead.  Use `skk-unread-event'.
+
+	* skk-nicola.el (skk-nicola-insert-double): Do not consider
+	skk-106-jis explicitly.
+
+	(skk-nicola-rshift-keys): Do not consider Emacs 20.2 or earlier.
+
+2004-03-09  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-dakuten): Now works in
+	isearch mode. This is Kanzen-like behavior.
+
+	(isearch-repeat): Advise to go to isearch-barrier before search.
+
+2004-03-04  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-MK (nicola-ddskk-generate-autoloads): No longer
+	support Mule 2.
+
+2003-07-09  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el:
+	(skk-kanagaki-temp-dir): Abolish variable.
+
+	(skk-kanagaki-call-xmodmap): Call `make-temp-file', not
+	`make-temp-name'.
+
+2002-07-25  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el:
+	(isearch-text-char-description): Do not put advice to this
+	function.
+
+2002-07-20  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el:
+	(skk-nicola-insert-double): Do not call
+	`skk-nicola-set-okuri-flag' at the henkan start point.
+
+2002-01-19  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-menu.el:
+	* skk-kanagaki-util.el:
+	* skk-nicola-dcomp.el:
+	* skk-nicola-jis.el:
+	* skk-nicola-us.el:
+	* skk-nicola.el:
+	* skk-omelet-jis.el:
+	* skk-omelet-us.el:
+	Use #' for functions.
+
+2002-01-18  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el:
+	Remove workarounds for MULE 3.
+
+	(isearch-char-to-string):
+	No longer advise here.
+
+2002-01-17  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el:
+	Doc strings and comments update.
+
+2001-12-09  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kangaki.el
+	(skk-kanagaki-adjust-rule-tree): Set rules.
+
+2001-12-02  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kangaki.el
+	(skk-setup-keymap): Preactivate.
+
+2001-11-17  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola-jis.el
+	* skk-nicola-us.el
+	* skk-omelet-jis.el
+	* skk-omelet-us.el:
+	Use `skk-mode-hook' when `skk-nicola-use-koyubi-functions' is
+	non-nil.
+
+2001-11-03  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el
+	(skk-setup-keymap): New advice.
+
+2001-11-03  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el
+	(skk-kanagaki-midashi-henkan): Bind `skk-kakutei-history' nil.
+
+	* skk-nicola.el
+	(skk-nicola-insert-double): Bind `skk-kakutei-history' nil.
+
+2001-10-31  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el
+	* skk-kanagaki.el
+	* skk-nicola-dcomp.el
+	* skk-nicola.el:
+	Refer to `skk-henkan-mode'.
+
+2001-10-12  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kangaki-menu-oe.el:
+	No longer in the repository.
+
+2001-10-11  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el
+	(skk-nicola-turn-on-j-mode): Don't check if color cursor is
+	required.
+
+2001-10-10  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-ELS
+	* skk-kanagaki-util.el
+	* skk-kanagaki.el
+	* skk-nicola.el:
+	Modification concerning specificity.
+
+2001-10-07  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el
+	(skk-compute-henkan-lists-sub-adjust-okuri): New advice.
+
+2001-10-02  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola-dcomp.el:
+	New file.
+
+2001-09-23  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el
+	(skk-nicola-turn-on-j-mode): Call `skk-cursor-set'.
+
+2001-09-17  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-omelet-us.el (skk-insert): Now advise in skk-nicola.el.
+
+	* skk-kanagaki.el, skk-nicola.el: Rename each one of advice.
+
+	* skk-nicola-us.el: Enable Koyubi functions.
+
+2001-09-16  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-omelet-us.el (skk-insert): Workaround.
+
+	Enable Koyubi fnctions.
+
+	* skk-nicola.el (skk-nicola-lshift-function): New variable.
+	(skk-nicola-lshift-function): Refer to it.
+
+2001-09-14  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* *: Re-indent.
+
+2001-09-11  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-self-insert-lshift): Use
+	`skk-dcomp-marked-p'.
+
+2001-09-10  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kangaki.el (skk-kanagaki-adjust-rule-tree): Use `case'.
+	(skk-kanagaki-insert): Use `skk-save-point'.
+	(skk-insert): Don't bind `skk-henkan-point-key' in
+	skk-jisx0201-mode.
+
+2001-09-08  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-self-insert-lshift): Do not do dynamic
+	completion when `skk-henkan-active'.
+	Call `skk-insert' when `skk-kanagaki-state' is not kana.
+
+2001-09-07  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-toggle-katakana): Make or kill local
+	variable `skk-kanagaki-state'.
+	(skk-mode, skk-latin-mode, skk-jisx0208-latin-mode,
+	skk-abbrev-mode): New advice.
+
+	* skk-nicola.el (skk-nicola-self-insert-lshift): Do not do dynamic
+	completion if `this-command' is `skk-nicola-self-insert-rshift'.
+
+2001-09-06  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* *: No real changes. Looks more esthetic.
+
+	* skk-kanagaki.el (skk-toggle-katakana): New advice.
+
+	* skk-kanagaki-menu*.el: Don't consider `skk-jisx0201-mode-map'.
+
+2001-08-29  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* *: Update comments and doc strings.
+
+2001-08-25  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* *: Farewell to Emacs 18.
+
+2001-08-09  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* *: Clean up.
+
+2001-08-08  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el, skk-nicola.el: Typo.
+
+2001-07-28  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-compute-henkan-lists): I guess that is
+	preferred, then had better let the function advised.
+	(skk-kanagaki-rule-list): Add a rule for `skk-kakutei-key'.
+
+2001-07-20  NAKAJIMA Mikio  <minakaji@osaka.email.ne.jp>
+
+	* skk-kanagaki.el (skk-compute-henkan-lists): The function that
+	has skk-kanagaki specific transaction was moved from skk.el.
+
+2001-03-19  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-treat-triple): New function.
+	(skk-nicola-insert): Call it.
+
+2001-03-16  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-temp-data): New variable.
+	(skk-nicola-insert): Deal with triple typings.
+	(skk-nicola-format-time, skk-nicola-event-to-key,
+	skk-nicola-insert-single, skk-nicola-insert-double,
+	skk-nicola-maybe-double-p): New functions.
+
+2001-03-12  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* README.NICOLA.ja: Update.
+
+	* skk-kanagaki.el (skk-kanagaki-previous-candidate-key): Change
+	the default value to "\C-p".
+	(skk-kanagaki-initialize): Set `skk-previous-candidate-char'
+	properly if necessary.
+
+2001-01-20  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-self-insert-lshift): Remove defvars
+	for skk-dcomp.
+
+2001-01-07  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-insert-kana): When RULE indicates a
+	function, call it.
+
+2000-12-16  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el: Remove defvars for skk-dcomp.
+
+2000-12-13  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-toggle-rom-kana): Call
+	`skk-modify-indicator-alist'.
+
+	* skk-nicola.el (skk-mode-hook): Ditto.
+
+2000-12-05  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* README.NICOLA.ja: New file.
+
+	* skk-106-jis.el: Require `skk-nicola'.
+
+	* skk-kanagaki.el (skk-insert@around@skk-kanagaki-ad): Set
+	`skk-process-okuri-early' to nil.
+
+2000-12-04  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* *: Modify Comments.
+
+2000-12-03  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-self-insert-lshift): Don't advise to
+	do completion when `skk-henkan-active' is t.
+
+2000-12-02  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-self-insert-lshift): Modify for
+	skk-dcomp.
+
+2000-12-01  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* *: Modify comments.
+
+2000-11-29  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el
+	(skk-nicola-self-insert-lshift@arond@skk-nicola-ad-for-dcomp): New
+	advice.
+
+2000-11-28  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el: Integrate some pieces of advice into original
+	functions.
+	(skk-nicola-lshift-function): Simply call `skk-kakutei'.
+
+2000-11-27  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-bs): Use
+	`skk-isearch-current-buffer'.
+
+	* skk-kanagaki.el (skk-kanagaki-initialize,
+	skk-kanagaki-adjust-rule-tree): New functions.
+
+2000-11-25  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el: Do nothing for tutorial under Emacs 18.
+	(skk-nicola-lshift-keys): Rename from `skk-nicola-lshift-key'.
+	(skk-nicola-rshift-keys): Rename from `skk-nicola-rshift-key'.
+	(skk-nicola-turn-on-j-mode): Insert original characters.
+
+2000-11-24  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-2nd-help): Add keys.
+
+2000-11-20  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el: Eliminate warnings.
+	Call `skk-mode-string-to-indicator'.
+
+2000-11-19  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-mode-hook): Update modeline indicators under
+	Emacs 21. Call `skk-update-modeline'.
+	(skk-kanagaki-toggle-rom-kana): Ditto.
+
+2000-11-15  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-kanagaki-state): This shouldn't be a local
+	varaible.
+
+	* skk-nicola.el (skk-kanagaki-toggle-rom-kana): Update all
+	buffers.
+
+2000-11-13  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-bs): Rename from
+	`skk-kanagaki-delete-backward-char'.
+	(skk-kanagaki-esc): New function.
+
+	* skk-kanagaki.el (skk-kanagaki-isearch-buffer): New variable.
+	(skk-isearch-wrapper): New advice.
+	(skk-insert): Keep `skk-kanagaki-state' to rom in tutorial.
+
+	* skk-nicola.el (skk-nicola-use-koyubi-functions): New variable.
+	(skk-nicola-lshift-function): Call `exit-minibuffer' in
+	minibuffer.
+
+	* skk-nicola-jis.el, skk-oasys.el, skk-omelet-jis.el: Define keys
+	when `skk-nicola-use-koyubi-functions' is non-nil.
+
+2000-11-12  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* README.ja: Update.
+
+	* *.el: Modify comments.
+
+2000-11-09  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-sit-for): Abolish.
+
+	* skk-nicola.el: Use `skk-sit-for'.
+
+2000-11-08  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el: Modify comments.
+
+	* skk-kanagaki-util.el (skk-kanagaki-sit-for,
+	skk-kanagaki-make-string): Redefine as macros.
+
+2000-11-07  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* *: From "experimental/nicola" to "nicola".
+
+2000-11-04  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-kanagaki-state): New variable.
+	(skk-kanagaki-toggle-rom-kana): Check it.
+
+2000-11-02  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-okurigana-prefix): New advice.
+
+2000-10-17  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-106-jis.el, skk-kanagaki-menu-oe.el,
+	skk-kanagaki-menu.el, skk-kanagaki-util.el, skk-kanagaki.el,
+	skk-nicola-dvorak.el, skk-nicola-jis.el, skk-nicola-us.el,
+	skk-nicola.el, skk-oasys.el, skk-omelet-dvorak.el,
+	skk-omelet-jis.el, skk-omelet-us.el: Call `product-provide'.
+
+2000-10-12  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-turn-on-j-mode): Use
+	`skk-cursor-hiragana-color' instead of the return value of
+	`skk-cursor-current-color'.
+
+2000-10-11  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el: Require "static" at compile time.
+
+2000-10-10  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* README.ja: Update.
+
+2000-10-09  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* README.ja: Update.
+
+	* skk-nicola.el (skk-nicola-turn-on-j-mode): Check the value of
+	`skk-use-color-cursor' as well as the return value of
+	`skk-color-display-p'.
+	(skk-previous-candidate): Fix the advice.
+
+	* skk-106-jis.el, skk-nicola-dvorak.el, skk-nicola-jis.el,
+	skk-nicola-us.el, skk-oasys.el, skk-omelet-dvorak.el,
+	skk-omelet-jis.el, skk-omelet-us.el: Don't use `defconst'.
+
+2000-10-07  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-adjust-user-option): Don't use `mapcar'.
+
+2000-09-17  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el: Add comments.
+
+2000-09-13  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki-util.el (skk-kanagaki-help-1): Move from
+	skk-kanagaki.el.
+
+2000-09-11  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-kanagaki.el (skk-kangaki-help): Use `dolist'.
+
+	* skk-nicola.el (skk-nicola-2nd-help): Ditto.
+	(skk-nicola-turn-on-j-mode): Use `set-buffer-local-cursor-color'
+	instead of `update-buffer-local-frame-params'.
+
+2000-09-10  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* NICOLA-DDSKK-MK: Use `dolist' or `do' instead of `mapcar' or
+	`while' if possible.
+
+	* README.URIs: Use overlays instead of text properties.
+
+	* README.ja: Ditto.
+
+	* skk-nicola.el (skk-nicola-setup): New function.
+
+2000-09-08  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* Makefile (VERSION): Use version number of Darevil SKK.
+
+	* README.URIs: Highlight URIs as if they are clickable.
+
+	* README.ja: Ditto.
+
+2000-09-06  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-*.el: Add keywords.
+
+2000-09-05  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* skk-nicola.el (skk-nicola-insert): Sync with new
+	cursor-controlling functions.
+	Fix the behaviour of right-shift-key simultaneous typing.
+
+2000-09-04  Tetsuo Tsukamoto  <czkmt@remus.dti.ne.jp>
+
+	* Changelog, Changelog.1, Changelog.2, Makefile,
+	NICOLA-DDSKK-CFG, NICOLA-DDSKK-ELS, NICOLA-DDSKK-MK, README.URIs,
+	README.ja, skk-106-jis.el, skk-kanagaki-menu-oe.el,
+	skk-kanagaki-menu.el, skk-kanagaki-util.el, skk-kanagaki.el,
+	skk-nicola-dvorak.el, skk-nicola-jis.el, skk-nicola-us.el,
+	skk-nicola.el, skk-oasys.el, skk-omelet-dvorak.el,
+	skk-omelet-jis.el, skk-omelet-us.el: New files.
