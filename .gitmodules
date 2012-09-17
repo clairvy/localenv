@@ -76,6 +76,3 @@
 [submodule ".emacs.d/tabulated-list"]
 	path = .emacs.d/tabulated-list
 	url = https://github.com/sigma/tabulated-list.el.git
-[submodule ".emacs.d/popup"]
-	path = .emacs.d/popup
-	url = https://github.com/m2ym/popup-el.git
