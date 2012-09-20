@@ -893,10 +893,6 @@ without any interpretation."
      (color-theme-hober)))
 
 
-;;; eslide
-(add-to-list 'load-path (expand-file-name ".emacs.d/eslide" home))
-(require 'eslide)
-
 ;;; use command key as Meta
 ;;; http://cgi.NetLaputa.ne.jp/~kose/diary/?200908a&to=200908060#200908060
 (when (and (eq window-system 'ns)
