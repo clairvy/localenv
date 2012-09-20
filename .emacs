@@ -687,6 +687,11 @@
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 
+;; Alloy
+(add-to-list 'load-path (expand-file-name ".emacs.d/alloy" home))
+(require 'alloy-mode)
+(add-to-list 'auto-mode-alist '("\\.als$" . alloy-mode))
+
 ;;;
 ;;; Application
 ;;;
