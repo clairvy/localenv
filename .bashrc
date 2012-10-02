@@ -11,6 +11,8 @@ export PATH=$HOME/local/bin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/sbin
 export PAGER='lv -Ou'
 export HISTSIZE=100000
 export HISTFILESIZE=1000000
+export LC_ALL=ja_JP.UTF-8
+export LC_TYPE=ja_JP.UTF-8
 
 set -o ignoreeof
 set -o noclobber
