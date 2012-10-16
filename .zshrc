@@ -220,6 +220,11 @@ if whence -p lv 2>&1 > /dev/null; then
   export PAGER='lv -Ou'
   alias lc='lv | cat'
 fi
+if whence -p ocaml 2>&1 > /dev/null; then
+  if whence -p rlwrap 2>&1 > /dev/null; then
+    alias ocaml='command rlwrap ocaml'
+  fi
+fi
 
 if whence -p xsbt 2>&1 > /dev/null; then
   function sbt() {
