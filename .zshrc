@@ -239,19 +239,26 @@ fi
 # default path
 path=(/usr/bin /bin)
 
+# for sbin
+if [[ -d /sbin ]];then
+  path=($path /sbin)
+fi
+if [[ -d /usr/sbin ]];then
+  path=($path /usr/sbin)
+fi
 # /usr/local
 if [[ -d /usr/local/sbin ]]; then
-  export PATH="/usr/local/sbin:${PATH}"
+  path=(/usr/local/sbin $path)
 fi
 if [[ -d /usr/local/bin ]]; then
-  export PATH="/usr/local/bin:${PATH}"
+  path=(/usr/local/bin $path)
 fi
 if [[ -d /usr/local/share/man ]]; then
   manpath=(/usr/local/share/man $manpath)
 fi
 # rbenv
 if [[ -d $HOME/.rbenv/bin ]]; then
-  path=($path $HOME/.rbenv/bin)
+  path=($HOME/.rbenv/bin $path)
 fi
 
 # for Mac ports
@@ -316,29 +323,19 @@ elif [[ x"$HOSTNAME" == x'kaname' ]]; then
   set_perl_env
 fi
 
-# for cabal
-if [[ -d $HOME/.cabal/bin ]]; then
-  path=($path $HOME/.cabal/bin)
-fi
-
-if [[ -d /usr/local ]]; then
-  path=(/usr/local/bin /usr/local/sbin $path)
-  manpath=(/usr/local/man $manpath)
-fi
 if [[ -d $HOME/local ]]; then
   path=($HOME/local/bin $HOME/local/sbin $path)
   manpath=($HOME/local/man $manpath)
 fi
+
+# for cabal
+if [[ -d $HOME/.cabal/bin ]]; then
+  path=($HOME/.cabal/bin $path)
+fi
+
 # for gems
 if [[ -d /var/lib/gems/1.8/bin ]]; then
   path=($path /var/lib/gems/1.8/bin)
-fi
-# for sbin
-if [[ -d "/sbin" ]];then
-  path=($path /sbin)
-fi
-if [[ -d "/usr/sbin" ]];then
-  path=($path /usr/sbin)
 fi
 # for gisty
 export GISTY_DIR="$HOME/work/gists"
