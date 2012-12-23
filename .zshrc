@@ -225,6 +225,10 @@ if whence -p ocaml 2>&1 > /dev/null; then
     alias ocaml='command rlwrap ocaml'
   fi
 fi
+if whence -p tmux 2>&1 > /dev/null; then
+  function tmux() { if command tmux list-clients > /dev/null; then command tmux attach; else command tmux; fi }
+  alias tml='command tmux list-sessions'
+fi
 
 if whence -p xsbt 2>&1 > /dev/null; then
   function sbt() {
