@@ -430,10 +430,10 @@ if whence -p git 2>&1 > /dev/null; then
   alias ga='git add'
   alias gad='git add .'
   alias gap='git add -p'
-  alias gs='git status'
   alias gc='git commit'
   alias gcm='git commit -m'
   alias gca='git commit --amend'
+  alias gf='git config'
   alias gd='git diff'
   alias gd1='git diff HEAD~'
   alias gds='git diff --staged'
@@ -441,9 +441,11 @@ if whence -p git 2>&1 > /dev/null; then
   alias gdw='git diff -w'
   alias gw='git diff -w'
   alias gl='git log'
-  alias g1='git log --oneline --decorate'
   alias gla='git log --graph --all --color --pretty='\''%x09%h %cn%x09%s %Cred%d%Creset'\'''
-  alias gf='git config'
+  alias g1='git log --oneline --decorate'
+  alias gr='git rebase'
+  alias gri='git rebase -i'
+  alias gs='git status'
 fi
 
 if whence -p scala 2>&1 > /dev/null; then
