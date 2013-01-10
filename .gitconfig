@@ -11,6 +11,7 @@
 	default = tracking
 [core]
 	excludesfile = ~/.gitignore
+	precomposeunicode = true
 [alias]
 	st = status -sb
 	sta = status
