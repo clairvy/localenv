@@ -147,7 +147,7 @@ setopt prompt_subst
 autoload -U colors; colors
 
 autoload -Uz add-zsh-hook
-if [[ $ZSH_VERSION == 4.3.* ]]; then
+if [[ $ZSH_VERSION != [1-3].* && $ZSH_VERSION != 4.[12].* ]]; then
   autoload -Uz vcs_info
   zstyle ':vcs_info:*' enable git svn hg bzr
   zstyle ':vcs_info:*' formats '(%s)-[%b]'
