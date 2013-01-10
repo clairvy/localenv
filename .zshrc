@@ -446,6 +446,14 @@ if whence -p git 2>&1 > /dev/null; then
   alias gf='git config'
 fi
 
+if whence -p scala 2>&1 > /dev/null; then
+  if whence -p rlwrap 2>&1 > /dev/null; then
+    alias scala='rlwrap scala -deprecation'
+  else
+    alias scala='scala -deprecation'
+  fi
+fi
+
 # 補完するかの質問は画面を超える時にのみに行う｡
 LISTMAX=0
 
