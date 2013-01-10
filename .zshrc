@@ -431,6 +431,8 @@ if whence -p git 2>&1 > /dev/null; then
   alias gad='git add .'
   alias gap='git add -p'
   alias gb='git branch'
+  alias gbd='git branch -d'
+  alias gbD='git branch -D'
   alias gco='git checkout'
   alias gc='git commit'
   alias gcm='git commit -m'
