@@ -430,6 +430,8 @@ if whence -p git 2>&1 > /dev/null; then
   alias ga='git add'
   alias gad='git add .'
   alias gap='git add -p'
+  alias gb='git branch'
+  alias gco='git checkout'
   alias gc='git commit'
   alias gcm='git commit -m'
   alias gca='git commit --amend'
@@ -445,6 +447,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias g1='git log --oneline --decorate'
   alias gr='git rebase'
   alias gri='git rebase -i'
+  alias ghh='git reset --hard'
   alias gs='git status'
 fi
 
