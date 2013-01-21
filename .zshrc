@@ -502,7 +502,9 @@ fi
 # rbenv
 if [[ -d $HOME/.rbenv ]]; then
   export PATH="$HOME/.rbenv/shims:${PATH}"
-  source "$HOME/.rbenv/completions/rbenv.zsh"
+  if [[ -r $HOME/.rbenv/completions/rbenv.zsh ]]; then
+    source "$HOME/.rbenv/completions/rbenv.zsh"
+  fi
   rbenv rehash 2>/dev/null
   rbenv() {
     local command="$1"
