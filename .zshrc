@@ -447,6 +447,8 @@ if whence -p git 2>&1 > /dev/null; then
   alias gl='git log'
   alias gla='git log --graph --all --color --pretty='\''%x09%h %cn%x09%s %Cred%d%Creset'\'''
   alias g1='git log --oneline --decorate'
+  alias gp='git push'
+  alias gpn='git push -n'
   alias gr='git rebase'
   alias gri='git rebase -i'
   alias ghh='git reset --hard'
