@@ -380,6 +380,7 @@ fi
 alias ln='ln -n'
 alias x='exit'
 alias first_release="perl -mModule::CoreList -le 'print Module::CoreList->first_release(@ARGV)'"
+alias first_number_sort="perl -e '@l=<>;print(map{\$_->[1]}sort{\$a->[0]<=>\$b->[0]}map{[do{m/\d+/;\$1},\$_]}@l)'"
 alias screen='command screen -U'
 alias scc='screen'
 alias scx='screen -x'
