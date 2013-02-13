@@ -460,6 +460,8 @@ if whence -p git 2>&1 > /dev/null; then
   alias ghh='git reset --hard'
   alias gs='git status'
   alias gst='git status -sb'
+  alias gsu='git submodule update'
+  alias gsui='git submodule update --init'
 fi
 
 if whence -p gosh 2>&1 > /dev/null; then
