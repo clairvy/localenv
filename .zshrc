@@ -259,6 +259,10 @@ fi
 # rbenv
 if [[ -d $HOME/.rbenv/bin ]]; then
   path=($HOME/.rbenv/bin $path)
+  if [[ -r $HOME/.rbenv/completions/rbenv.zsh ]]; then
+    source "$HOME/.rbenv/completions/rbenv.zsh"
+  fi
+  eval $(rbenv init -)
 fi
 
 # for Mac ports
@@ -506,28 +510,6 @@ if [[ -f ~/.zfunctions/z/z.sh ]]; then
   source ~/.zfunctions/z/z.sh
   precmd() {
     _z --add "$(pwd -P)"
-  }
-fi
-
-# rbenv
-if [[ -d $HOME/.rbenv ]]; then
-  export PATH="$HOME/.rbenv/shims:${PATH}"
-  if [[ -r $HOME/.rbenv/completions/rbenv.zsh ]]; then
-    source "$HOME/.rbenv/completions/rbenv.zsh"
-  fi
-  rbenv rehash 2>/dev/null
-  rbenv() {
-    local command="$1"
-    if [ "$#" -gt 0 ]; then
-      shift
-    fi
-
-    case "$command" in
-    shell)
-      eval `rbenv "sh-$command" "$@"`;;
-    *)
-      command rbenv "$command" "$@";;
-    esac
   }
 fi
 
