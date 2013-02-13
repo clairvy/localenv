@@ -264,6 +264,9 @@ if [[ -d $HOME/.rbenv/bin ]]; then
   fi
   eval $(rbenv init -)
 fi
+if [[ -f /etc/profile.d/rbenv.sh ]]; then
+  . /etc/profile.d/rbenv.sh
+fi
 
 # for Mac ports
 if [[ $os == 'mac' ]]; then
