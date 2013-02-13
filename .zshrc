@@ -452,6 +452,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gpn='git push -n'
   alias gr='git rebase'
   alias gri='git rebase -i'
+  alias grom='git rebase origin/master master'
   alias ghh='git reset --hard'
   alias gs='git status'
   alias gst='git status -sb'
