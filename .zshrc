@@ -462,6 +462,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias grom='git rebase origin/master master'
   alias ghh='git reset --hard'
   alias gs='git status'
+  alias gls='git status' # for gnu ls not to use
   alias gst='git status -sb'
   alias gsu='git submodule update'
   alias gsui='git submodule update --init'
