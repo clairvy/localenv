@@ -470,7 +470,7 @@ fi
 
 if whence -p gosh 2>&1 > /dev/null; then
   if whence -p rlwrap 2>&1 > /dev/null; then
-    alias scala='rlwrap gosh'
+    alias gosh='rlwrap gosh'
   fi
 fi
 if whence -p scala 2>&1 > /dev/null; then
