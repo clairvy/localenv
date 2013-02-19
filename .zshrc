@@ -257,12 +257,21 @@ if [[ -d /usr/local/share/man ]]; then
   manpath=(/usr/local/share/man $manpath)
 fi
 # rbenv
+if [[ -d /usr/local/opt/rbenv ]]; then
+  export RBENV_ROOT=/usr/local/opt/rbenv
+  if [[ -r /usr/local/opt/rbenv/completions/rbenv.zsh ]]; then
+    source "/usr/local/opt/rbenv/completions/rbenv.zsh"
+  fi
+  if which rbenv > /dev/null; then
+    eval "$(rbenv init -)"
+  fi
+fi
 if [[ -d $HOME/.rbenv/bin ]]; then
   path=($HOME/.rbenv/bin $path)
+  eval $(rbenv init -)
   if [[ -r $HOME/.rbenv/completions/rbenv.zsh ]]; then
     source "$HOME/.rbenv/completions/rbenv.zsh"
   fi
-  eval $(rbenv init -)
 fi
 if [[ -f /etc/profile.d/rbenv.sh ]]; then
   . /etc/profile.d/rbenv.sh
