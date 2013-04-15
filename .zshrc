@@ -571,6 +571,9 @@ fi
 if [[ -d /usr/local/lib/node_modules ]]; then
   export NODE_PATH=/usr/local/lib/node_modules
 fi
+if [[ -d $HOME/.nodebrew/current/bin ]]; then
+  export PATH=$HOME/.nodebrew/current/bin:$PATH
+fi
 
 # haskell
 if [[ -d $HOME/Library/Haskell/bin ]]; then
