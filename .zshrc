@@ -220,11 +220,6 @@ if whence -p lv 2>&1 > /dev/null; then
   export PAGER='lv -Ou'
   alias lc='lv | cat'
 fi
-if whence -p ocaml 2>&1 > /dev/null; then
-  if whence -p rlwrap 2>&1 > /dev/null; then
-    alias ocaml='command rlwrap ocaml'
-  fi
-fi
 if whence -p tmux 2>&1 > /dev/null; then
   function tmux() { if command tmux list-clients > /dev/null; then command tmux attach; else command tmux; fi }
   alias tml='command tmux list-sessions'
@@ -484,11 +479,13 @@ if whence -p git 2>&1 > /dev/null; then
   alias gsui='git submodule update --init'
 fi
 
-if whence -p gosh 2>&1 > /dev/null; then
-  if whence -p rlwrap 2>&1 > /dev/null; then
-    alias gosh='rlwrap gosh'
+for c in ocaml gosh clisp; do
+  if whence -p $c 2>&1 > /dev/null; then
+    if whence -p rlwrap 2>&1 > /dev/null; then
+      alias $c="command rlwrap $c"
+    fi
   fi
-fi
+done
 if whence -p scala 2>&1 > /dev/null; then
   if whence -p rlwrap 2>&1 > /dev/null; then
     alias scala='rlwrap scala -deprecation'
