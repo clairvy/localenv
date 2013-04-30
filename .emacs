@@ -621,6 +621,9 @@
    (get-buffer-create "*scheme*"))
   (run-scheme scheme-program-name))
 
+;;; common-lisp
+(add-to-list 'auto-mode-alist '("\.cl" . common-lisp-mode))
+
 ;;; haskell
 (add-to-list 'load-path (expand-file-name ".emacs.d/haskell-mode" home))
 (load-library "haskell-site-file")
