@@ -599,4 +599,6 @@ if [[ -d /usr/local/Cellar/smlnj/110.73/libexec/bin ]]; then
 fi
 
 # byobu
-export BYOBU_PREFIX=$(brew --prefix)
+if whence -p brew 2>&1 > /dev/null; then
+  export BYOBU_PREFIX=$(brew --prefix)
+fi
