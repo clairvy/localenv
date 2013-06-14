@@ -500,6 +500,9 @@ if whence -p scala 2>&1 > /dev/null; then
     alias scala='scala -deprecation'
   fi
 fi
+if whence -p dart 2>&1 > /dev/null; then
+  alias dart='dart --checked'
+fi
 
 # 補完するかの質問は画面を超える時にのみに行う｡
 LISTMAX=0
