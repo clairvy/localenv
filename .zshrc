@@ -484,6 +484,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gst='git status -sb'
   alias gsu='git submodule update'
   alias gsui='git submodule update --init'
+  alias galias='( alias | egrep git\ ; gsa )'
 fi
 
 for c in ocaml gosh clisp; do
