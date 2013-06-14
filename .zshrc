@@ -336,6 +336,12 @@ elif [[ x"$HOSTNAME" == x'kaname' ]]; then
     _set_perl_env
   }
   set_perl_env
+elif [[ -d $local_lib_path ]]; then
+  function set_perl_env() {
+    local site=`perl -V:archname | awk -F\' '{print $2}'`
+    _set_perl_env
+  }
+  set_perl_env
 fi
 
 if [[ -d $HOME/local ]]; then
