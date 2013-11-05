@@ -551,7 +551,9 @@ fi
 # git
 if [[ -d /usr/share/git-core/Git-Hooks ]]; then
   export GIT_HOOKS_HOME=/usr/share/git-core/Git-Hooks
-  source /usr/share/git-core/Git-Hooks/git-hooks-completion.bash
+  if [[ -f /usr/share/git-core/Git-Hooks/git-hooks-completion.zsh ]]; then
+    source /usr/share/git-core/Git-Hooks/git-hooks-completion.zsh
+  fi
 fi
 if [[ -d /usr/local/share/git-core/Git-Hooks ]]; then
   export GIT_HOOKS_HOME=/usr/local/share/git-core/Git-Hooks
