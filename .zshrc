@@ -468,6 +468,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gdw='git diff -w'
   alias gw='git diff -w'
   alias gf='git fetch'
+  alias gg='git grep'
   alias gl='git log'
   alias gla='git log --graph --all --color --pretty='\''%x09%h %cn%x09%s %Cred%d%Creset %C(green)- %cr%Creset'\'''
   alias g1='git log --graph -n 20 --pretty=format:'\''%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'\'''
