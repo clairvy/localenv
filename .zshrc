@@ -456,6 +456,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gbd='git branch -d'
   alias gbD='git branch -D'
   alias gco='git checkout'
+  alias gcob='git checkout -b'
   alias gc='git commit'
   alias gcm='git commit -m'
   alias gca='git commit --amend'
