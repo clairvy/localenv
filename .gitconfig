@@ -93,4 +93,4 @@
 [init]
 	templatedir = ~/.git_template
 [pre-push]
-	cmd = git log --graph --color --pretty='%x09%h %cn%x09%s %Cred%d%Creset %C(green)- %cr%Creset' {}
+	cmd = git log --color --pretty='%h %s %Cred%d%Creset %C(green)- %cr%Creset c:%cn:%ce a:%an:%ae' {}
