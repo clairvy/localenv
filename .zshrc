@@ -457,10 +457,10 @@ if whence -p git 2>&1 > /dev/null; then
   alias gbD='git branch -D'
   alias gco='git checkout'
   alias gcob='git checkout -b'
-  alias gslocal='git config user.email clairvy@gmail.com; git config user.name clairvy'
   alias gc='git commit'
   alias gcm='git commit -m'
   alias gca='git commit --amend'
+  alias gslocal='git config user.email clairvy@gmail.com; git config user.name clairvy'
   alias gsc='git config -l'
   alias gsa='git config -l | egrep alias'
   alias gd='git diff'
@@ -470,6 +470,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gdw='git diff -w'
   alias gw='git diff -w'
   alias gf='git fetch'
+  alias gfb="git filter-branch --commit-filter 'GIT_AUTHOR_NAME=clairvy; GIT_AUTHOR_EMAIL=clairvy@gmail.com; GIT_COMMITTER_NAME=clairvy; GIT_COMMITTER_EMAIL=clairvy@gmail.com; git commit-tree \"\$@\"' HEAD"
   alias gg='git grep'
   alias gl='git log'
   alias gla="git log --graph --all --color --pretty='%x09%h %s %Cred%d%Creset %C(green)- %cr%Creset c:%cn:%ce a:%an:%ae'"
@@ -487,6 +488,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gst='git status -sb'
   alias gsu='git submodule update'
   alias gsui='git submodule update --init'
+  alias gurm='git update-ref -d refs/original/refs/heads/master'
   alias galias='( alias | egrep git\ ; gsa )'
 fi
 
