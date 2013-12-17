@@ -457,6 +457,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gbD='git branch -D'
   alias gco='git checkout'
   alias gcob='git checkout -b'
+  alias gslocal='git config user.email clairvy@gmail.com; git config user.name clairvy'
   alias gc='git commit'
   alias gcm='git commit -m'
   alias gca='git commit --amend'
