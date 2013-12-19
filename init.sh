@@ -13,7 +13,7 @@ for f in .*; do
   if [ x"$f" == x'.ssh' ]; then
     continue
   fi
-  pushd ~
+  pushd ~ > /dev/null
 #pwd
   if [ -f $f ]; then
 #    echo mv $f $f.org
@@ -21,6 +21,6 @@ for f in .*; do
   fi
 #  echo ln -s s/localenv/$f .
   ln -s s/localenv/$f .
-  popd
+  popd > /dev/null
 #pwd
 done
