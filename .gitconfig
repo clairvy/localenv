@@ -89,6 +89,7 @@
 	ticket = ticket
 	rma = "!f() { git ls-files --deleted | sort -u; }; git rm `f`"
 	rebase-status = "!f() { GIT_DIR=`git rev-parse --git-dir`;if [ -d $GIT_DIR/rebase-merge -o -f $GIT_DIR/rebase-apply/rebasing ]; then if [ -f $GIT_DIR/rebase-merge/interactive ]; then br='rebase-i'; else br='rebase-m'; fi; echo 'rebasing...('$br')'; else echo 'not rebasing.'; fi }; f"
+	pview = "!f() { git push -n 2>&1 | tail -1 | awk '{if ($1 ~ /\\.\\./){print $1}}' | xargs -I {} git log --oneline {} | cat; }; f" # for git version < 1.8.2
 # github config in /etc/gitconfig
 [init]
 	templatedir = ~/.git_template
