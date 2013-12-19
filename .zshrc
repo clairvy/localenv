@@ -477,6 +477,8 @@ if whence -p git 2>&1 > /dev/null; then
   alias gp='git push'
   alias gpn='git push -n'
   alias gr='git rebase'
+  alias gra='git rebase --abort'
+  alias grc='git rebase --continue'
   alias gri='git rebase -i'
   alias grm='git rebase master'
   alias grom='git rebase origin/master master'
