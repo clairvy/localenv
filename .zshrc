@@ -515,6 +515,27 @@ if whence -p dart 2>&1 > /dev/null; then
   alias dart='dart --checked'
 fi
 
+# docker
+if whence -p boot2docker 2>&1 > /dev/null; then
+  alias boot2dockerenv="boot2docker up | awk '/export/{print \$2}'"
+  alias boot2dockerhost="boot2docker up | awk -F= '/export/{print \$2}'"
+  alias boot2dockerstatus="boot2docker status | awk '{print \$5}'"
+  if whence -p docker 2>&1 > /dev/null; then
+    function docker {
+      if [[ x"`boot2dockerstatus`" == x"running." ]]; then
+        command docker --host="`boot2dockerhost`" "$@"
+      else
+        command docker "$@"
+      fi
+    }
+  fi
+fi
+# boot2docker
+if whence -p VBoxManage 2>&1 > /dev/null; then
+  alias boot2dockershowpf='VBoxManage showvminfo boot2docker-vm | egrep "NIC.*Rule" | perl -lpe '\''s/NIC (\d+) Rule\(\d+\)/--natpf\1/;s/,[^,]+ = /,/g;s/:[^:]+ = / /g'\'''
+  alias boot2dockershowpf-name='boot2dockershowpf | awk -F, '\''{split($1, a, " ");print a[2]}'\'
+fi
+
 # 補完するかの質問は画面を超える時にのみに行う｡
 LISTMAX=0
 
