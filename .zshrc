@@ -532,8 +532,22 @@ if whence -p boot2docker 2>&1 > /dev/null; then
 fi
 # boot2docker
 if whence -p VBoxManage 2>&1 > /dev/null; then
-  alias boot2dockershowpf='VBoxManage showvminfo boot2docker-vm | egrep "NIC.*Rule" | perl -lpe '\''s/NIC (\d+) Rule\(\d+\)/--natpf\1/;s/,[^,]+ = /,/g;s/:[^:]+ = / /g'\'''
-  alias boot2dockershowpf-name='boot2dockershowpf | awk -F, '\''{split($1, a, " ");print a[2]}'\'
+  alias boot2dockershowpf='VBoxManage showvminfo boot2docker-vm | egrep "NIC.*Rule" | perl -lpe '\''s/NIC (\d+) Rule\(\d+\)/natpf\1/;s/,[^,]+ = /,/g;s/:[^:]+ = / /g'\'''
+  alias boot2dockershowpf-name='boot2dockershowpf | awk -F, '\''{print $1}'\'
+  function boot2docker-add-pf {
+    if [[ $# -lt 1 ]]; then
+      echo "usage : $0 <port>"
+    else
+      VBoxManage controlvm boot2docker-vm natpf1 "tp$1,tcp,,$1,,$1"
+    fi
+  }
+  function boot2docker-del-pf {
+    if [[ $# -lt 1 ]]; then
+      echo "usage : $0 <name>"
+    else
+      VBoxManage controlvm boot2docker-vm natpf1 delete $1
+    fi
+  }
 fi
 
 # 補完するかの質問は画面を超える時にのみに行う｡
