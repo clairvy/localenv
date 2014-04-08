@@ -497,6 +497,24 @@ if whence -p git 2>&1 > /dev/null; then
   alias gx='git rm'
 fi
 
+# docker
+if whence -p docker 2>&1 > /dev/null; then
+  alias dl='docker ps -l -q'
+  function docker {
+    if [[ x"`boot2dockerstatus`" == x"running." ]]; then
+      command docker --host="`boot2dockerhost`" "$@"
+    else
+      command docker "$@"
+    fi
+  }
+fi
+# boot2docker
+if whence -p boot2docker 2>&1 > /dev/null; then
+  alias boot2dockerenv="boot2docker up | awk '/export/{print \$2}'"
+  alias boot2dockerhost="boot2docker up | awk -F= '/export/{print \$2}'"
+  alias boot2dockerstatus="boot2docker status | awk '{print \$5}'"
+fi
+
 for c in ocaml gosh clisp; do
   if whence -p $c 2>&1 > /dev/null; then
     if whence -p rlwrap 2>&1 > /dev/null; then
