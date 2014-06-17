@@ -501,7 +501,7 @@ fi
 if whence -p docker 2>&1 > /dev/null; then
   alias dl='docker ps -l -q'
   function docker {
-    if [[ x"`boot2dockerstatus`" == x"running." ]]; then
+    if [[ x"`boot2dockerstatus`" == x"running" ]]; then
       command docker --host="`boot2dockerhost`" "$@"
     else
       command docker "$@"
@@ -510,9 +510,9 @@ if whence -p docker 2>&1 > /dev/null; then
 fi
 # boot2docker
 if whence -p boot2docker 2>&1 > /dev/null; then
-  alias boot2dockerenv="boot2docker up | awk '/export/{print \$2}'"
-  alias boot2dockerhost="boot2docker up | awk -F= '/export/{print \$2}'"
-  alias boot2dockerstatus="boot2docker status | awk '{print \$5}'"
+  alias boot2dockerenv="boot2docker up 2>&1 | awk '/export/{print \$4}'"
+  alias boot2dockerhost="boot2docker up 2>&1 | awk -F= '/export/{print \$2}'"
+  alias boot2dockerstatus="boot2docker status"
 fi
 
 for c in ocaml gosh clisp; do
@@ -533,21 +533,6 @@ if whence -p dart 2>&1 > /dev/null; then
   alias dart='dart --checked'
 fi
 
-# docker
-if whence -p boot2docker 2>&1 > /dev/null; then
-  alias boot2dockerenv="boot2docker up | awk '/export/{print \$2}'"
-  alias boot2dockerhost="boot2docker up | awk -F= '/export/{print \$2}'"
-  alias boot2dockerstatus="boot2docker status | awk '{print \$5}'"
-  if whence -p docker 2>&1 > /dev/null; then
-    function docker {
-      if [[ x"`boot2dockerstatus`" == x"running." ]]; then
-        command docker --host="`boot2dockerhost`" "$@"
-      else
-        command docker "$@"
-      fi
-    }
-  fi
-fi
 # boot2docker
 if whence -p VBoxManage 2>&1 > /dev/null; then
   alias boot2dockershowpf='VBoxManage showvminfo boot2docker-vm | egrep "NIC.*Rule" | perl -lpe '\''s/NIC (\d+) Rule\(\d+\)/natpf\1/;s/,[^,]+ = /,/g;s/:[^:]+ = / /g'\'''
