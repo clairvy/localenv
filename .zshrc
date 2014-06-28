@@ -10,6 +10,30 @@ HISTFILE=~/.zhistory
 HISTSIZE=100000
 SAVEHIST=10000000
 
+if which peco > /dev/null; then
+  function peco-select-history() {
+      local tac
+      if which tac > /dev/null; then
+          tac="tac"
+      else
+          tac="tail -r"
+      fi
+      BUFFER=$(builtin history -n 1 | \
+          eval $tac | \
+          peco --query "$LBUFFER")
+      CURSOR=$#BUFFER
+      zle clear-screen
+  }
+  zle -N peco-select-history
+  bindkey '^r' peco-select-history
+else
+  if is-at-least 4.3.10; then
+    bindkey "^R" history-incremental-pattern-search-backward
+  else
+    bindkey "^R" history-incremental-search-backward
+  fi
+fi
+
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -17,10 +41,8 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 autoload is-at-least
 if is-at-least 4.3.10; then
-  bindkey "^R" history-incremental-pattern-search-backward
   bindkey "^S" history-incremental-pattern-search-forward
 else
-  bindkey "^R" history-incremental-search-backward
   bindkey "^S" history-incremental-search-forward
 fi
 
