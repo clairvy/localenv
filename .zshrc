@@ -10,7 +10,7 @@ HISTFILE=~/.zhistory
 HISTSIZE=100000
 SAVEHIST=10000000
 
-if which peco > /dev/null; then
+if which peco 2>&1 > /dev/null; then
   function peco-select-history() {
       local tac
       if which tac > /dev/null; then
