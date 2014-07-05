@@ -10,30 +10,6 @@ HISTFILE=~/.zhistory
 HISTSIZE=100000
 SAVEHIST=10000000
 
-if which peco 2>&1 > /dev/null; then
-  function peco-select-history() {
-      local tac
-      if which tac > /dev/null; then
-          tac="tac"
-      else
-          tac="tail -r"
-      fi
-      BUFFER=$(builtin history -n 1 | \
-          eval $tac | \
-          peco --query "$LBUFFER")
-      CURSOR=$#BUFFER
-      zle clear-screen
-  }
-  zle -N peco-select-history
-  bindkey '^r' peco-select-history
-else
-  if is-at-least 4.3.10; then
-    bindkey "^R" history-incremental-pattern-search-backward
-  else
-    bindkey "^R" history-incremental-search-backward
-  fi
-fi
-
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -41,8 +17,10 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 autoload is-at-least
 if is-at-least 4.3.10; then
+  bindkey "^R" history-incremental-pattern-search-backward
   bindkey "^S" history-incremental-pattern-search-forward
 else
+  bindkey "^R" history-incremental-search-backward
   bindkey "^S" history-incremental-search-forward
 fi
 
@@ -235,28 +213,7 @@ else
   RPROMPT=$vcs_prompot_color'%1(v|%1v%2v|)${vcs_info_git_pushed} '$rprompt_color'[%~]'$clear_color
 fi
 
-if whence -p lv 2>&1 > /dev/null; then
-  if [[ $TERM_PROGRAM == "iTerm.app" ]]; then
-    alias lv='command lv -Ou'
-  fi
-  export PAGER='lv -Ou'
-  alias lc='lv | cat'
-fi
-if whence -p tmux 2>&1 > /dev/null; then
-  function tmux() { if command tmux list-clients > /dev/null; then command tmux attach; else command tmux; fi }
-  alias tml='command tmux list-sessions'
-fi
-
-if whence -p xsbt 2>&1 > /dev/null; then
-  function sbt() {
-    if [ *.sbt(N) ]; then
-      command xsbt "$@";
-    else
-      command sbt "$@";
-    fi
-  }
-fi
-
+### path settings
 # default path
 path=(/usr/bin /bin)
 
@@ -277,28 +234,7 @@ fi
 if [[ -d /usr/local/share/man ]]; then
   manpath=(/usr/local/share/man $manpath)
 fi
-# rbenv
-if [[ -d /usr/local/opt/rbenv ]]; then
-  export RBENV_ROOT=/usr/local/opt/rbenv
-  if [[ -r /usr/local/opt/rbenv/completions/rbenv.zsh ]]; then
-    source "/usr/local/opt/rbenv/completions/rbenv.zsh"
-  fi
-  if which rbenv > /dev/null; then
-    eval "$(rbenv init -)"
-  fi
-fi
-if [[ -d $HOME/.rbenv/bin ]]; then
-  path=($HOME/.rbenv/bin $path)
-  eval $(rbenv init -)
-  if [[ -r $HOME/.rbenv/completions/rbenv.zsh ]]; then
-    source "$HOME/.rbenv/completions/rbenv.zsh"
-  fi
-fi
-if [[ -f /etc/profile.d/rbenv.sh ]]; then
-  . /etc/profile.d/rbenv.sh
-fi
-
-# for Mac ports
+# path settings for Mac ports
 if [[ $os == 'mac' ]]; then
   export LC_ALL=ja_JP.UTF-8
   if [[ -d /opt/local/bin ]]; then
@@ -366,6 +302,7 @@ elif [[ -d $local_lib_path ]]; then
   set_perl_env
 fi
 
+# path settings for ~/local
 if [[ -d $HOME/local ]]; then
   path=($HOME/local/bin $HOME/local/sbin $path)
   manpath=($HOME/local/man $manpath)
@@ -380,6 +317,51 @@ fi
 if [[ -d /var/lib/gems/1.8/bin ]]; then
   path=($path /var/lib/gems/1.8/bin)
 fi
+
+### command settings
+if whence -p lv 2>&1 > /dev/null; then
+  if [[ $TERM_PROGRAM == "iTerm.app" ]]; then
+    alias lv='command lv -Ou'
+  fi
+  export PAGER='lv -Ou'
+  alias lc='lv | cat'
+fi
+if whence -p tmux 2>&1 > /dev/null; then
+  function tmux() { if command tmux list-clients > /dev/null; then command tmux attach; else command tmux; fi }
+  alias tml='command tmux list-sessions'
+fi
+
+if whence -p xsbt 2>&1 > /dev/null; then
+  function sbt() {
+    if [ *.sbt(N) ]; then
+      command xsbt "$@";
+    else
+      command sbt "$@";
+    fi
+  }
+fi
+
+# rbenv
+if [[ -d /usr/local/opt/rbenv ]]; then
+  export RBENV_ROOT=/usr/local/opt/rbenv
+  if [[ -r /usr/local/opt/rbenv/completions/rbenv.zsh ]]; then
+    source "/usr/local/opt/rbenv/completions/rbenv.zsh"
+  fi
+  if which rbenv > /dev/null; then
+    eval "$(rbenv init -)"
+  fi
+fi
+if [[ -d $HOME/.rbenv/bin ]]; then
+  path=($HOME/.rbenv/bin $path)
+  eval $(rbenv init -)
+  if [[ -r $HOME/.rbenv/completions/rbenv.zsh ]]; then
+    source "$HOME/.rbenv/completions/rbenv.zsh"
+  fi
+fi
+if [[ -f /etc/profile.d/rbenv.sh ]]; then
+  . /etc/profile.d/rbenv.sh
+fi
+
 # for gisty
 export GISTY_DIR="$HOME/work/gists"
 
@@ -613,7 +595,7 @@ if [[ -f ~/.zfunctions/z/z.sh ]]; then
   }
 fi
 
-# local
+# load host local settings
 if [[ -f $HOME/.zshrc.local ]]; then
   . $HOME/.zshrc.local
 fi
@@ -674,4 +656,22 @@ fi
 # byobu
 if whence -p brew 2>&1 > /dev/null; then
   export BYOBU_PREFIX=$(brew --prefix)
+fi
+# peco
+if which peco 2>&1 > /dev/null; then
+  function peco-select-history() {
+      local tac
+      if which tac > /dev/null; then
+          tac="tac"
+      else
+          tac="tail -r"
+      fi
+      BUFFER=$(builtin history -n 1 | \
+          eval $tac | \
+          peco --query "$LBUFFER")
+      CURSOR=$#BUFFER
+      zle clear-screen
+  }
+  zle -N peco-select-history
+  bindkey '^x^r' peco-select-history
 fi
