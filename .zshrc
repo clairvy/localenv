@@ -658,7 +658,7 @@ if whence -p brew 2>&1 > /dev/null; then
   export BYOBU_PREFIX=$(brew --prefix)
 fi
 # peco
-if which peco 2>&1 > /dev/null; then
+if which peco > /dev/null 2>&1; then
   function peco-select-history() {
       local tac
       if which tac > /dev/null; then
