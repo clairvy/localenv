@@ -19,4 +19,7 @@ install fig 2>&1 | egrep -v '^Warning: ' || true
 cask install bettertouchtool 2>&1 | egrep -v ' already installed.' || true
 cask install atom 2>&1 | egrep -v ' already installed.' || true
 
+tap homebrew/completions
+install tmuxinator-completion
+
 cleanup
