@@ -506,7 +506,7 @@ if whence -p docker 2>&1 > /dev/null; then
   alias dl='docker ps -l -q'
   function docker {
     if [[ x"`boot2dockerstatus`" == x"running" ]]; then
-      command docker --host="`boot2dockerhost`" "$@"
+      eval `boot2dockerenv` command docker "$@"
     else
       command docker "$@"
     fi
@@ -514,7 +514,7 @@ if whence -p docker 2>&1 > /dev/null; then
 fi
 # boot2docker
 if whence -p boot2docker 2>&1 > /dev/null; then
-  alias boot2dockerenv="boot2docker up 2>&1 | awk '/export/{print \$4}'"
+  alias boot2dockerenv="boot2docker up 2>&1 | awk '/export/{print \$2}' | xargs"
   alias boot2dockerhost="boot2docker up 2>&1 | awk -F= '/DOCKER_HOST/{print \$2}'"
   alias boot2dockerstatus="boot2docker status"
 fi
