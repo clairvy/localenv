@@ -515,7 +515,7 @@ fi
 # boot2docker
 if whence -p boot2docker 2>&1 > /dev/null; then
   alias boot2dockerenv="boot2docker up 2>&1 | awk '/export/{print \$4}'"
-  alias boot2dockerhost="boot2docker up 2>&1 | awk -F= '/export/{print \$2}'"
+  alias boot2dockerhost="boot2docker up 2>&1 | awk -F= '/DOCKER_HOST/{print \$2}'"
   alias boot2dockerstatus="boot2docker status"
 fi
 
