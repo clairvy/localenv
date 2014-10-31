@@ -353,7 +353,7 @@ if [[ -d /usr/local/opt/rbenv ]]; then
 fi
 if [[ -d $HOME/.rbenv/bin ]]; then
   path=($HOME/.rbenv/bin $path)
-  eval $(rbenv init -)
+  eval "$(rbenv init -)"
   if [[ -r $HOME/.rbenv/completions/rbenv.zsh ]]; then
     source "$HOME/.rbenv/completions/rbenv.zsh"
   fi
