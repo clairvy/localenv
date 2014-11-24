@@ -636,6 +636,10 @@ fi
 if [[ -f $HOME/.pythonbrew/etc/bashrc ]]; then
   source $HOME/.pythonbrew/etc/bashrc
 fi
+# Homebrew
+if whence -p brew 2>&1 > /dev/null; then
+  alias brew-bundle="cat ~/Brewfile | grep '^[a-z]' | sed -e 's/^/brew /' | bash -x"
+fi
 
 # rvm
 if [[ -f $HOME/.rvm/scripts/rvm ]]; then
