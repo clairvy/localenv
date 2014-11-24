@@ -445,8 +445,7 @@
 (load "/opt/local/share/ProofGeneral/generic/proof-site.el" t)
 
 ;;; JavaScript
-(setq load-path (cons (concat home "/.emacs.d/js2-mode/build")
-                      load-path))
+(add-to-list 'load-path (expand-file-name ".emacs.d/js2-mode" home))
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
