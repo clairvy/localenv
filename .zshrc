@@ -501,19 +501,29 @@ if whence -p git 2>&1 > /dev/null; then
   alias gx='git rm'
 fi
 
-# docker
-if whence -p docker 2>&1 > /dev/null; then
-  alias dl='docker ps -l -q'
-  function docker {
-    if [[ x"`boot2dockerstatus`" == x"running" ]]; then
-      eval `boot2dockerenv` command docker "$@"
-    else
-      command docker "$@"
-    fi
-  }
-fi
 # boot2docker
 if whence -p boot2docker 2>&1 > /dev/null; then
+  # docker
+  if whence -p docker 2>&1 > /dev/null; then
+    alias dl='docker ps -l -q'
+    function docker {
+      if [[ x"`boot2dockerstatus`" == x"running" ]]; then
+        eval `boot2dockerenv` command docker "$@"
+      else
+        command docker "$@"
+      fi
+    }
+  fi
+  # fig
+  if whence -p fig 2>&1 > /dev/null; then
+    function fig {
+      if [[ x"`boot2dockerstatus`" == x"running" ]]; then
+        eval `boot2dockerenv` command fig "$@"
+      else
+        command fig "$@"
+      fi
+    }
+  fi
   alias boot2dockerenv="boot2docker up 2>&1 | awk '/export/{print \$2}' | xargs"
   alias boot2dockerhost="boot2docker up 2>&1 | awk -F= '/DOCKER_HOST/{print \$2}'"
   alias boot2dockerstatus="boot2docker status"
