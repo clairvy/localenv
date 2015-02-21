@@ -9,9 +9,7 @@ install rlwrap 2>&1 | egrep -v '^Warning: ' || true
 install emacs 2>&1 | egrep -v '^Warning: ' || true
 install peco 2>&1 | egrep -v '^Warning: ' || true
 
-
-tap 'caskroom/cask' 2>&1 | egrep -v '^Warning: ' || true
-install brew-cask 2>&1 | egrep -v '^Warning: ' || true
+install caskroom/cask/brew-cask 2>&1 | egrep -v '^Warning: ' || true
 
 cask install boot2docker 2>&1 | egrep -v ' already installed.' || true
 install fig 2>&1 | egrep -v '^Warning: ' || true
@@ -19,7 +17,6 @@ install fig 2>&1 | egrep -v '^Warning: ' || true
 cask install bettertouchtool 2>&1 | egrep -v ' already installed.' || true
 cask install atom 2>&1 | egrep -v ' already installed.' || true
 
-tap homebrew/completions
-install tmuxinator-completion
+install homebrew/completions/tmuxinator-completion 2>&1 | egrep -v ' already installed' || true
 
 cleanup
