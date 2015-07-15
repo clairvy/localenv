@@ -514,6 +514,16 @@ if whence -p boot2docker 2>&1 > /dev/null; then
       fi
     }
   fi
+  # docker-compose
+  if whence -p docker-compose 2>&1 > /dev/null; then
+    function docker-compose {
+      if [[ x"`boot2dockerstatus`" == x"running" ]]; then
+        eval `boot2dockerenv` command docker-compose "$@"
+      else
+        command docker-compose "$@"
+      fi
+    }
+  fi
   # fig
   if whence -p fig 2>&1 > /dev/null; then
     function fig {
