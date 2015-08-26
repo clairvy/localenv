@@ -503,12 +503,12 @@ if whence -p git 2>&1 > /dev/null; then
 fi
 
 # boot2docker
-if whence -p boot2docker 2>&1 > /dev/null; then
+if whence -p docker-machine 2>&1 > /dev/null; then
   # docker
   if whence -p docker 2>&1 > /dev/null; then
     alias dl='docker ps -l -q'
     function docker {
-      if [[ x"`boot2dockerstatus`" == x"running" ]]; then
+      if [[ x"`boot2dockerstatus`" == x"Running" ]]; then
         eval `boot2dockerenv` command docker "$@"
       else
         command docker "$@"
@@ -518,7 +518,7 @@ if whence -p boot2docker 2>&1 > /dev/null; then
   # docker-compose
   if whence -p docker-compose 2>&1 > /dev/null; then
     function docker-compose {
-      if [[ x"`boot2dockerstatus`" == x"running" ]]; then
+      if [[ x"`boot2dockerstatus`" == x"Running" ]]; then
         eval `boot2dockerenv` command docker-compose "$@"
       else
         command docker-compose "$@"
@@ -528,16 +528,16 @@ if whence -p boot2docker 2>&1 > /dev/null; then
   # fig
   if whence -p fig 2>&1 > /dev/null; then
     function fig {
-      if [[ x"`boot2dockerstatus`" == x"running" ]]; then
+      if [[ x"`boot2dockerstatus`" == x"Running" ]]; then
         eval `boot2dockerenv` command fig "$@"
       else
         command fig "$@"
       fi
     }
   fi
-  alias boot2dockerenv="boot2docker up 2>&1 | awk '/export/{print \$2}' | xargs"
-  alias boot2dockerhost="boot2docker up 2>&1 | awk -F= '/DOCKER_HOST/{print \$2}'"
-  alias boot2dockerstatus="boot2docker status"
+  alias boot2dockerenv="docker-machine env default 2>&1 | awk '/export/{print \$2}' | xargs"
+  alias boot2dockerhost="docker-machine env default 2>&1 | awk -F= '/DOCKER_HOST/{print \$2}'"
+  alias boot2dockerstatus="docker-machine status default"
 fi
 
 for c in ocaml gosh clisp; do
