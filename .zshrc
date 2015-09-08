@@ -440,7 +440,7 @@ if [[ $os == 'mac' ]]; then
   if [[ -d /usr/share/terminfo ]]; then
     export TERMINFO='/usr/share/terminfo'
   fi
-  alias blutooth-fix='sudo kextunload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport; sudo kextload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport'
+  alias bluetooth-fix='sudo kextunload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport; sudo kextload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport'
 fi
 if whence -p vim 2>&1 > /dev/null; then
   alias vi=vim
