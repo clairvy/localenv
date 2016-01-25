@@ -15,6 +15,9 @@ install caskroom/cask/brew-cask 2>&1 | egrep -v '^Warning: ' || true
 #install fig 2>&1 | egrep -v '^Warning: ' || true
 cask install dockertoolbox 2>&1 | egrep -v ' already installed.' || true
 
+cask install alfred 2>&1 | egrep -v ' already installed.' || true
+cask install karabiner 2>&1 | egrep -v ' already installed.' || true
+
 cask install bettertouchtool 2>&1 | egrep -v ' already installed.' || true
 cask install atom 2>&1 | egrep -v ' already installed.' || true
 
