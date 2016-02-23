@@ -502,44 +502,6 @@ if whence -p git 2>&1 > /dev/null; then
   alias gx='git rm'
 fi
 
-# boot2docker
-if whence -p docker-machine 2>&1 > /dev/null; then
-  # docker
-  if whence -p docker 2>&1 > /dev/null; then
-    alias dl='docker ps -l -q'
-    function docker {
-      if [[ x"`boot2dockerstatus`" == x"Running" ]]; then
-        eval `boot2dockerenv` command docker "$@"
-      else
-        command docker "$@"
-      fi
-    }
-  fi
-  # docker-compose
-  if whence -p docker-compose 2>&1 > /dev/null; then
-    function docker-compose {
-      if [[ x"`boot2dockerstatus`" == x"Running" ]]; then
-        eval `boot2dockerenv` command docker-compose "$@"
-      else
-        command docker-compose "$@"
-      fi
-    }
-  fi
-  # fig
-  if whence -p fig 2>&1 > /dev/null; then
-    function fig {
-      if [[ x"`boot2dockerstatus`" == x"Running" ]]; then
-        eval `boot2dockerenv` command fig "$@"
-      else
-        command fig "$@"
-      fi
-    }
-  fi
-  alias boot2dockerenv="docker-machine env default 2>&1 | awk '/export/{print \$2}' | xargs"
-  alias boot2dockerhost="docker-machine env default 2>&1 | awk -F= '/DOCKER_HOST/{print \$2}'"
-  alias boot2dockerstatus="docker-machine status default"
-fi
-
 for c in ocaml gosh clisp; do
   if whence -p $c 2>&1 > /dev/null; then
     if whence -p rlwrap 2>&1 > /dev/null; then
