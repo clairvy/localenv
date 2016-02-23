@@ -20,6 +20,7 @@ cask install iterm2 2>&1 | egrep -v ' already installed.' || true
 cask install evernote 2>&1 | egrep -v ' already installed.' || true
 cask install bettertouchtool 2>&1 | egrep -v ' already installed.' || true
 cask install totalfinder 2>&1 | egrep -v ' already installed.' || true
+cask install aquaskk 2>&1 | egrep -v ' already installed.' || true
 
 install homebrew/completions/tmuxinator-completion 2>&1 | egrep -v ' already installed' || true
 
