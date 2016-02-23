@@ -739,8 +739,8 @@
        (format growl-command-template
                (format "Outputz: %d chars"
                        typing-outputz-buffer-local-counter))))))
-(add-hook 'typing-outputz-record-buffer-hook
-          'to-growl-record-buffer nil)
+;(add-hook 'typing-outputz-record-buffer-hook
+;          'to-growl-record-buffer nil)
 
 ;;; for simple-hatena-mode
 (cond ((>= (string-to-int emacs-version) 23)
