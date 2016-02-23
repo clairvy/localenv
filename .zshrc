@@ -482,6 +482,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gls='git status' # for gnu ls not to use
   alias gp='git push'
   alias gpn='git push -n'
+  alias gpd='git push --delete'
   alias gr='git rebase'
   alias gra='git rebase --abort'
   alias grc='git rebase --continue'
