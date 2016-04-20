@@ -605,6 +605,11 @@ fi
 if [[ -f $HOME/perl5/perlbrew/etc/bashrc ]]; then
   source $HOME/perl5/perlbrew/etc/bashrc
 fi
+# plenv
+if [[ -d $HOME/.plenv/bin ]]; then
+  path=($path $HOME/.plenv/bin)
+  eval "$(plenv init -)"
+fi
 
 # pythonbrew
 if [[ -f $HOME/.pythonbrew/etc/bashrc ]]; then
