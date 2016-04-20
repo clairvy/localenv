@@ -257,50 +257,50 @@ if [[ $os == 'sun' && -d /opt/csw/bin ]]; then
 fi
 
 # for local::lib
-local_lib_path="$HOME/perl5"
-function _set_perl_env () {
-  export PERL_LOCAL_LIB_ROOT="${local_lib_path}";
-  export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
-  export PERL_MB_OPT="--install_base ${local_lib_path}"
-  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
-  export PERL_CPANM_OPT="--local-lib=${local_lib_path}"
-  path=(${local_lib_path}/bin $path)
-}
-if [[ "x$HOSTNAME" == "xdv1" ]]; then
-  function set_perl_env () {
-    local site='i486-linux-gnu-thread-multi'
-    _set_perl_env
-  }
-  set_perl_env
-elif [[ $os == 'mac' ]]; then
-  function set_perl_env () {
-    local site='darwin-multi-2level'
-    _set_perl_env
-  }
-  function set_perl_env_wx () {
-    local site='darwin-thread-multi-2level'
-    _set_perl_env
-  }
-  set_perl_env
-elif [[ $os == 'bsd' ]]; then
-  function set_perl_env () {
-    local site='i386-freebsd-64int'
-    _set_perl_env
-  }
-  set_perl_env
-elif [[ x"$HOSTNAME" == x'kaname' ]]; then
-  function set_perl_env() {
-    local site='i686-linux-gnu-thread-multi'
-    _set_perl_env
-  }
-  set_perl_env
-elif [[ -d $local_lib_path ]]; then
-  function set_perl_env() {
-    local site=`perl -V:archname | awk -F\' '{print $2}'`
-    _set_perl_env
-  }
-  set_perl_env
-fi
+#local_lib_path="$HOME/perl5"
+#function _set_perl_env () {
+#  export PERL_LOCAL_LIB_ROOT="${local_lib_path}";
+#  export PERL_MM_OPT="INSTALL_BASE=${local_lib_path}"
+#  export PERL_MB_OPT="--install_base ${local_lib_path}"
+#  export PERL5LIB="${local_lib_path}/lib/perl5:${local_lib_path}/lib/perl5/$site"
+#  export PERL_CPANM_OPT="--local-lib=${local_lib_path}"
+#  path=(${local_lib_path}/bin $path)
+#}
+#if [[ "x$HOSTNAME" == "xdv1" ]]; then
+#  function set_perl_env () {
+#    local site='i486-linux-gnu-thread-multi'
+#    _set_perl_env
+#  }
+#  set_perl_env
+#elif [[ $os == 'mac' ]]; then
+#  function set_perl_env () {
+#    local site='darwin-multi-2level'
+#    _set_perl_env
+#  }
+#  function set_perl_env_wx () {
+#    local site='darwin-thread-multi-2level'
+#    _set_perl_env
+#  }
+#  set_perl_env
+#elif [[ $os == 'bsd' ]]; then
+#  function set_perl_env () {
+#    local site='i386-freebsd-64int'
+#    _set_perl_env
+#  }
+#  set_perl_env
+#elif [[ x"$HOSTNAME" == x'kaname' ]]; then
+#  function set_perl_env() {
+#    local site='i686-linux-gnu-thread-multi'
+#    _set_perl_env
+#  }
+#  set_perl_env
+#elif [[ -d $local_lib_path ]]; then
+#  function set_perl_env() {
+#    local site=`perl -V:archname | awk -F\' '{print $2}'`
+#    _set_perl_env
+#  }
+#  set_perl_env
+#fi
 
 # path settings for ~/local
 if [[ -d $HOME/local ]]; then
