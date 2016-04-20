@@ -674,3 +674,8 @@ if [[ -d $HOME/w/gopath ]]; then
   export GOPATH=$HOME/w/gopath
   path=($path $GOPATH/bin)
 fi
+
+# tex
+if [[ -d /usr/texbin ]]; then
+  path=($path /usr/texbin)
+fi
