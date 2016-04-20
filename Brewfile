@@ -9,7 +9,8 @@ install rlwrap 2>&1 | egrep -v '^Warning: ' || true
 install emacs --cocoa 2>&1 | egrep -v '^Warning: ' || true
 linkapps emacs
 
-install caskroom/cask/brew-cask 2>&1 | egrep -v '^Warning: ' || true
+tap caskroom/cask | egrep -v 'Warning: ' || true
+#install caskroom/cask/brew-cask 2>&1 | egrep -v '^Warning: ' || true
 
 cask install dockertoolbox 2>&1 | egrep -v ' already installed.' || true
 
