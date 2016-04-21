@@ -663,3 +663,9 @@ if which peco > /dev/null 2>&1; then
   zle -N peco-select-history
   bindkey '^x^r' peco-select-history
 fi
+
+# go
+if [[ -d $HOME/w/gopath ]]; then
+  export GOPATH=$HOME/w/gopath
+  path=($path $GOPATH/bin)
+fi
