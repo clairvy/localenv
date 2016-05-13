@@ -25,6 +25,7 @@ cask install aquaskk 2>&1 | egrep -v ' already installed.' || true
 cask install limechat 2>&1 | egrep -v ' already installed.' || true
 
 cask install eclipse-java 2>&1 | egrep -v ' already installed.' || true
+cask install intellij-idea-ce 2>&1 | egrep -v ' already installed.'
 
 install homebrew/completions/tmuxinator-completion 2>&1 | egrep -v ' already installed' || true
 
