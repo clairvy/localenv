@@ -3,14 +3,21 @@ filetype on
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/vundle.git/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
+Plugin 'VundleVim/Vundle.vim'
+
+" Vundle
+Plugin 'elixir-lang/vim-elixir'
+
+call vundle#end()
 filetype plugin indent on
-
+"}}}
 
 " .vim/bundle を使う {{{1
 call pathogen#runtime_append_all_bundles()
+"}}}
 
 " Vim の流儀 より. {{{1
 filetype plugin on
@@ -48,25 +55,28 @@ let mapleader = ","
 "set fileencoding=utf-8
 "set fileencodings=utf-8,utf-16,japan
 "set fileformats=unix,dos,mac
+"}}}
 
 " モードライン(ファイルのコメントからの読み込み) {{{1
 set modeline
 set modelines=5
 
 set backspace=2
-set tabstop=2
+set tabstop=4
 set shiftwidth=4
 set expandtab
 
 highlight tabs ctermbg=green guibg=green
 
 set list
+set listchars=tab:>-
 set number
 set ruler
 set smartindent
 set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
+"}}}
 
 " 文字コードの自動認識 {{{1
 set fileformats=unix,dos,mac
@@ -194,6 +204,7 @@ smap <TAB>     <Plug>(neocomplcache_snippets_expand)
 "imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-g>     neocomplcache#undo_completion()
 inoremap <expr><C-l>     neocomplcache#complete_common_string()
+"}}}
 
 " eskk {{{1
 if has('vim_starting')
@@ -212,6 +223,7 @@ augroup cch
   autocmd WinLeave * setlocal nocursorline
   autocmd WinEnter,BufRead * setlocal cursorline
 augroup END
+"}}}
 
 " symofny {{{1
 nnoremap <silent> <Leader>v :<C-u>STview<CR>
