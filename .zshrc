@@ -699,3 +699,8 @@ if [[ -d $HOME/.pyenv ]]; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi
+
+# tex
+if [[ -d /Library/TeX/texbin ]]; then
+  path=($path /Library/TeX/texbin)
+fi
