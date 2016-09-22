@@ -4,6 +4,13 @@
 ;;; 途中でコケて，C-h が効かなかったらアレでしょ？
 
 ;;; キーバインド
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (define-key global-map "\C-h" 'delete-backward-char) ; 削除
 (define-key global-map "\M-?" 'help-for-help)        ; ヘルプ
 (define-key global-map "\M-g" 'goto-line)
