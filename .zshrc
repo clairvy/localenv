@@ -691,6 +691,8 @@ if [[ -d $HOME/google-cloud-sdk ]]; then
   source "$HOME/google-cloud-sdk/completion.zsh.inc"
 fi
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 # pyenv
 if [[ -d $HOME/.pyenv ]]; then
   path=($HOME/.pyenv/bin $path)
