@@ -682,3 +682,10 @@ fi
 if [[ -d /usr/texbin ]]; then
   path=($path /usr/texbin)
 fi
+
+# pyenv
+if [[ -d $HOME/.pyenv ]]; then
+  path=($HOME/.pyenv/bin $path)
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
