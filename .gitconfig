@@ -95,3 +95,5 @@
 	templatedir = ~/.git_template
 [pre-push]
 	cmd = git log --color --pretty='%h %s %Cred%d%Creset %C(green)- %cr%Creset c:%cn:%ce a:%an:%ae' {}
+[ghq]
+    root = ~/w/gopath/src
