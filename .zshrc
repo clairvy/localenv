@@ -488,6 +488,9 @@ if whence -p git 2>&1 > /dev/null; then
   alias grc='git rebase --continue'
   alias gri='git rebase -i'
   alias grm='git rebase master'
+  function gro {
+    git rebase origin/$1 $1
+  }
   alias grom='git rebase origin/master master'
   alias gs='git status'
   alias gsa='git config -l | egrep alias'
