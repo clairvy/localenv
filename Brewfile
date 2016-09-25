@@ -20,6 +20,7 @@ cask install evernote 2>&1 | egrep -v ' already installed.' || true
 cask install bettertouchtool 2>&1 | egrep -v ' already installed.' || true
 cask install aquaskk 2>&1 | egrep -v ' already installed.' || true
 cask install limechat 2>&1 | egrep -v ' already installed.' || true
+cask install yujitach-menumeters 2>&1 | egrep -v ' already installed.' || true
 
 install homebrew/completions/tmuxinator-completion 2>&1 | egrep -v ' already installed' || true
 
