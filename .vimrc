@@ -11,6 +11,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Vundle
 Plugin 'elixir-lang/vim-elixir'
 
+Plugin 'rust-lang/rust.vim'
+
 call vundle#end()
 filetype plugin indent on
 "}}}
