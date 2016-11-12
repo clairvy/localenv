@@ -984,6 +984,9 @@ without any interpretation."
   (define-key function-key-map [201326757] [?\C-\M-\\])
   )
 
+(when (= (string-to-number emacs-version) 25.1)
+  (setq compare-windows-get-window-function (quote compare-windows-get-next-window)))
+
 (setq use-monaco nil)
 (cond (;; http://sakito.jp/emacs/emacs23.html
        (and (or (= (string-to-number emacs-version) 23.2)
