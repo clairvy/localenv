@@ -14,7 +14,8 @@ tap caskroom/cask
 tap homebrew/versions
 
 cask install alfred 2>&1 | egrep -v ' already installed.' || true
-cask install karabiner 2>&1 | egrep -v ' already installed.' || true
+#cask install karabiner 2>&1 | egrep -v ' already installed.' || true
+cask install karabiner-elements 2>&1 | egrep -v ' already installed.' || true
 cask install iterm2 2>&1 | egrep -v ' already installed.' || true
 cask install evernote 2>&1 | egrep -v ' already installed.' || true
 cask install bettertouchtool 2>&1 | egrep -v ' already installed.' || true
