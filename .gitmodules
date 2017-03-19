@@ -10,9 +10,6 @@
 [submodule ".emacs.d/emacs-ditz"]
 	path = .emacs.d/emacs-ditz
 	url = https://github.com/hron/emacs-ditz.git
-[submodule ".emacs.d/ensime"]
-	path = .emacs.d/ensime
-	url = https://github.com/aemoncannon/ensime.git
 [submodule ".emacs.d/auto-complete"]
 	path = .emacs.d/auto-complete
 	url = https://github.com/auto-complete/auto-complete.git
