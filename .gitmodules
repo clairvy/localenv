@@ -25,9 +25,6 @@
 [submodule ".vim/bundle/neocomplcache"]
 	path = .vim/bundle/neocomplcache
 	url = https://github.com/Shougo/neocomplcache.git
-[submodule ".emacs.d/rubikitch-magit"]
-	path = .emacs.d/rubikitch-magit
-	url = git://gitorious.org/~rubikitch/magit/rubikitch-magit.git
 [submodule ".vim/bundle/git-vim"]
 	path = .vim/bundle/git-vim
 	url = https://github.com/motemen/git-vim.git
