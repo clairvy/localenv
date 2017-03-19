@@ -19,6 +19,8 @@ filetype plugin indent on
 
 " .vim/bundle を使う {{{1
 call pathogen#runtime_append_all_bundles()
+
+call pathogen#infect()
 "}}}
 
 " Vim の流儀 より. {{{1
