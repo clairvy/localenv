@@ -312,16 +312,6 @@
 ;;; elscreen
 (load "elscreen" "Elscreen" t)
 
-;;; git(egg)
-(if nil
-    (setq egg-git-command "/opt/local/bin/git"))
-(setq load-path (cons (concat home "/.emacs.d/egg")
-                      load-path))
-(require 'egg)
-;;; git(magit)
-(add-to-list 'load-path (expand-file-name ".emacs.d/magit" home))
-(require 'magit)
-
 ;;; gist
 (add-to-list 'load-path (expand-file-name ".emacs.d/gist" home))
 (add-to-list 'load-path (expand-file-name ".emacs.d/tabulated-list" home))
@@ -607,10 +597,6 @@
              ))
 (add-to-list 'load-path (expand-file-name ".emacs.d/scamacs/src/elisp/sbt" home))
 (require 'sbt)
-;;; ensime
-(add-to-list 'load-path (expand-file-name ".emacs.d/ensime/dist/elisp" home))
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ;;; tiarra-conf
 (setq load-path (cons (concat home "/.emacs.d/tiarra-conf")
