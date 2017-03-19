@@ -1,9 +1,6 @@
 [submodule ".vim/bundle/vim-pathogen"]
 	path = .vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
-[submodule ".emacs.d/egg-snapshot"]
-	path = .emacs.d/egg-snapshot
-	url = https://github.com/bogolisk/egg.git
 [submodule ".emacs.d/gist-snapshot"]
 	path = .emacs.d/gist-snapshot
 	url = https://github.com/defunkt/gist.el.git
