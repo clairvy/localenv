@@ -13,6 +13,9 @@ Plugin 'elixir-lang/vim-elixir'
 
 Plugin 'rust-lang/rust.vim'
 
+Plugin 'fatih/vim-go'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+
 call vundle#end()
 filetype plugin indent on
 "}}}
