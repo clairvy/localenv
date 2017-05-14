@@ -474,6 +474,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gdsw='git diff --staged -w'
   alias gdw='git diff -w'
   alias gf='git fetch'
+  alias gfp='git fetch --prune'
   alias gfb="git filter-branch --commit-filter 'GIT_AUTHOR_NAME=clairvy; GIT_AUTHOR_EMAIL=clairvy@gmail.com; GIT_COMMITTER_NAME=clairvy; GIT_COMMITTER_EMAIL=clairvy@gmail.com; git commit-tree \"\$@\"' HEAD"
   alias gg='git grep'
   alias ghh='git reset --hard'
