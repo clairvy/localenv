@@ -13,6 +13,10 @@ linkapps emacs
 tap caskroom/cask
 tap homebrew/versions
 
+# tmux-xpane
+tap greymd/tools
+install tmux-xpanes
+
 cask install alfred 2>&1 | egrep -v ' already installed.' || true
 #cask install karabiner 2>&1 | egrep -v ' already installed.' || true
 cask install karabiner-elements 2>&1 | egrep -v ' already installed.' || true
