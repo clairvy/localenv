@@ -705,3 +705,10 @@ fi
 if [[ -d /Library/TeX/texbin ]]; then
   path=($path /Library/TeX/texbin)
 fi
+
+# zplug
+if [[ -f $HOME/.zplug/init.zsh ]]; then
+  source $HOME/.zplug/init.zsh
+
+  zplug "greymd/tmux-xpanes"
+fi
