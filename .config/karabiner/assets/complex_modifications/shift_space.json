@@ -1,0 +1,34 @@
+{
+  "title": "Personal Setting (@clairvy)",
+  "rules": [
+    {
+      "description": "SHIFT + Space を押したときに、かなキーを送信する。",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "spacebar",
+            "modifiers": {
+              "mandatory": [
+                "shift"
+              ],
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "japanese_kana"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "spacebar"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
