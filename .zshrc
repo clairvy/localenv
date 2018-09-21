@@ -721,3 +721,8 @@ fi
 if whence -p kubectl 2>&1 > /dev/null; then
   source <(kubectl completion zsh)
 fi
+
+# rust
+if [[ -d $HOME/.cargo ]]; then
+  path=($path $HOME/.cargo/bin)
+fi
