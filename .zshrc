@@ -716,3 +716,8 @@ if [[ -f $HOME/.zplug/init.zsh ]]; then
 
   zplug "greymd/tmux-xpanes"
 fi
+
+# kubernetes
+if whence -p kubectl 2>&1 > /dev/null; then
+  source <(kubectl completion zsh)
+fi
