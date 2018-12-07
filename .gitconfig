@@ -97,3 +97,10 @@
 	cmd = git log --color --pretty='%h %s %Cred%d%Creset %C(green)- %cr%Creset c:%cn:%ce a:%an:%ae' {}
 [ghq]
     root = ~/w/gopath/src
+[filter "lfs"]
+	smudge = git-lfs smudge --skip -- %f
+	process = git-lfs filter-process --skip
+	required = true
+	clean = git-lfs clean -- %f
+[log]
+    date = format:%Y/%m/%d_%H:%M:%S%z
