@@ -480,7 +480,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias ghh='git reset --hard'
   alias gl='git log'
   if [[ 2006 -le `git --version | awk '{print $3}' | awk -F. '{printf "%d%03d", $1, $2}' 2> /dev/null` ]]; then # 2.6 or more
-    alias gla='git log --graph --all --color --pretty="%x09%h %s %Cred%d%Creset %C(green)- %cd%Creset c:%cn:%ce a:%an:%ae" --date=format:"%Y/%m/%d %H:%M:%S%z"'
+    alias gla='git log --graph --all --color --pretty="%x09%h %s %Cred%d%Creset %C(green)- %ad%Creset c:%cn:%ce a:%an:%ae" --date=format:"%Y/%m/%d %H:%M:%S%z"'
   else
     alias gla='git log --graph --all --color --pretty="%x09%h %s %Cred%d%Creset %C(green)- %cr%Creset c:%cn:%ce a:%an:%ae"'
   fi
