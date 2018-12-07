@@ -726,3 +726,5 @@ fi
 if [[ -d $HOME/.cargo ]]; then
   path=($path $HOME/.cargo/bin)
 fi
+
+# vim: sw=2
