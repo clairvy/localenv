@@ -1,6 +1,8 @@
 [user]
 	name = clairvy
 	email = clairvy@gmail.com
+[push]
+	default = nothing
 [color]
 	diff = auto
 	status = auto
