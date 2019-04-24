@@ -104,3 +104,5 @@
 	clean = git-lfs clean -- %f
 [log]
     date = format:%Y/%m/%d_%H:%M:%S%z
+[branch "master"]
+	pushRemote = dont-push-master!!!
