@@ -466,7 +466,7 @@ if whence -p git 2>&1 > /dev/null; then
   alias gca='git commit --amend'
   alias gcm='git commit -m'
   alias gco='git checkout'
-  alias gcob='git checkout -b'
+  alias gcob='git checkout --no-track -b'
   alias gd1='git diff HEAD~'
   alias gd='git diff'
   alias gdel='git rm'

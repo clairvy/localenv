@@ -7,8 +7,6 @@
 	branch = auto
 	interactive = auto
 	grep = auto
-[push]
-	default = tracking
 [core]
 	excludesfile = ~/.gitignore
 	precomposeunicode = true
