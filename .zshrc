@@ -416,6 +416,9 @@ alias scx='screen -x'
 alias hex='perl -le "print unpack q(H*), shift"'
 alias grep='grep --color'
 alias egrep='egrep --color'
+alias snh='sort -nr | head'
+alias suc='sort | uniq -c'
+
 if whence -p vim 2>&1 > /dev/null; then
   alias vi=vim
   export EDITOR=vim
