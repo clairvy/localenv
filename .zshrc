@@ -327,7 +327,7 @@ if whence -p lv 2>&1 > /dev/null; then
   alias lc='lv | cat'
 fi
 if whence -p tmux 2>&1 > /dev/null; then
-  function tmux() { if command tmux list-clients > /dev/null; then command tmux attach; else command tmux; fi }
+  function tmux() { if [ $# -le 0 ] && command tmux list-clients > /dev/null; then command tmux attach; else command tmux $*; fi }
   alias tml='command tmux list-sessions'
 fi
 
