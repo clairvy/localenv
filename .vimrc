@@ -1,4 +1,49 @@
 filetype on
+
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+let s:dein_dir = $HOME . '/.cache/dein'
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:dein_toml_dir = $HOME . '/.vim/userautoload/dein'
+let s:dein_enabled = 0
+
+" dein.vim ディレクトリがruntimepathに入っていない場合、追加
+if match(&runtimepath, '/dein.vim') == -1
+  " dein_repo_dir で指定した場所に dein.vim が無い場合、git cloneしてくる
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath+=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
+
+" Required:
+if dein#load_state(s:dein_dir)
+  let s:dein_enabled = 1
+
+  call dein#begin(s:dein_dir)
+
+  call dein#load_toml(s:dein_toml_dir . '/plugins.toml', {'lazy': 0})
+  call dein#load_toml(s:dein_toml_dir . '/lazy.toml', {'lazy': 1})
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
+
 " vundle を使う {{{1
 set nocompatible
 filetype off
@@ -44,8 +89,8 @@ set incsearch
 set hlsearch
 " ステータスライン
 "set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
-set statusline=%F%m%r%h%w\ [%{&fenc!=''?&fenc:&enc},%{&ff},%Y]\ [\%03.3b,0x\%2.2B]\ (%04l,%04v)[%LL/%p%%]\ %{strftime('%Y/%m/%d(%a)%H:%M')}
-set laststatus=2
+"set statusline=%F%m%r%h%w\ [%{&fenc!=''?&fenc:&enc},%{&ff},%Y]\ [\%03.3b,0x\%2.2B]\ (%04l,%04v)[%LL/%p%%]\ %{strftime('%Y/%m/%d(%a)%H:%M')}
+"set laststatus=2
 " コマンドの入力状況の表示
 set showcmd
 " インデント関連
@@ -80,7 +125,7 @@ set listchars=tab:>-
 set number
 set ruler
 set smartindent
-set laststatus=2
+"set laststatus=2
 set wildmenu
 set wildmode=longest:full,full
 "}}}
@@ -165,44 +210,6 @@ let phpmanual_convfilter = ''
 let phpmanual_htmlviewer = 'w3m -o display_charset=utf-8 -o auto_detect=2 -T text/html'
 " phpmanual.vim を置いているパスを指定
 "source $HOME/.vim/ftplugin/phpmanual.vim
-"}}}
-
-" Unite.vim {{{1
-let g:neocomplcache_enable_at_startup = 1
-let g:unite_source_file_mru_time_format = ''
-let g:unite_enable_start_insert = 1
-let g:unite_source_file_mru_ignore_pattern='.*\/$\|.*Application\ Data.*'
-nnoremap <silent> <C-r>  :<C-u>Unite file_mru<CR>
-nnoremap <silent> <C-n>  :<C-u>Unite buffer <CR>
-nnoremap <silent> <Leader>. :<C-u>Unite buffer <CR>
-nnoremap <silent> <Leader>d :<C-u>Unite file<CR>
-nnoremap <silent> <Leader>b :<C-u>Unite bookmark<CR>
-nnoremap <silent> <Leader>u  :<C-u>Unite buffer file_mru bookmark file<CR>
-nnoremap <silent> <Leader>k  :<C-u>Unite ref/phpmanual<CR>
-nnoremap <Leader>f  :<C-u>Unite file_rec -input=
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()
-  imap <buffer> jj <Plug>(unite_insert_leave)
-  imap <buffer> <C-j> <Plug>(unite_exit)
-  imap <buffer> <ESC> <Plug>(unite_exit)
-  imap <buffer> <C-o> <Plug>(unite_insert_leave):<C-u>call unite#mappings#do_action('above')<CR>
-endfunction
-
-autocmd FileType vimshell call s:vimshell_my_settings()
-function! s:vimshell_my_settings()
-  inoremap <buffer> <C-x> <ESC><C-w>h:on<CR>
-  inoremap <buffer> <silent> <C-n>  <ESC>:<C-u>Unite buffer <CR>
-  inoremap <buffer> <silent> <C-r>  <ESC>:<C-u>Unite file_mru <CR>
-  nnoremap <buffer> <CR> Go$ 
-  imap <buffer> <C-x>     <ESC><C-w>h:on<CR>
-  nnoremap <buffer><silent> <C-n>  :<C-u>Unite buffer <CR>
-  inoremap <C-v> <C-R>+
-  inoremap <buffer><expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
-  imap <buffer> <C-o> <Plug>(vimshell_enter)
-  inoremap <buffer> <C-l> <C-y>
-  imap <buffer> <C-s> <Plug>(vimshell_history_complete_whole)
-  NeoComplCacheAutoCompletionLength 3
-endfunction
 "}}}
 
 " neocmplcache {{{1

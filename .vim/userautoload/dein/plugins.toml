@@ -1,0 +1,71 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'dense-analysis/ale'
+hook_add = '''
+  let g:ale_linters = {
+              \ 'ruby': ['rubocop'],
+              \ 'typescript': ['eslint'],
+              \ }
+  let g:ale_fixers = {
+              \ 'ruby': ['rubocop'],
+              \ 'typescript': ['eslint'],
+              \ }
+  "let g:ale_sign_column_always = 1
+  "let g:ale_open_list = 1
+  "let g:ale_keep_list_window_open = 1
+
+  " Set this. Airline will handle the rest.
+  let g:airline#extensions#ale#enabled = 1
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+depends = ['vim-airline-themes']
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+hook_add = '''
+  " タブバーをかっこよく
+  let g:airline#extensions#tabline#enabled = 1
+
+  " Lintツールによるエラー、警告を表示(ALEの拡張)
+  let g:airline#extensions#ale#enabled = 1
+  let g:airline#extensions#ale#error_symbol = 'E:'
+  let g:airline#extensions#ale#warning_symbol = 'W:'
+'''
+
+[[plugins]]
+repo='prabirshrestha/async.vim'
+
+[[plugins]]
+repo='prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo='prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo='prabirshrestha/asyncomplete-lsp.vim'
+
+#[[plugins]]
+#repo='prabirshrestha/asyncomplete-neosnippet.vim'
+#hook_add='''
+#call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+#    \ 'name': 'neosnippet',
+#    \ 'whitelist': ['*'],
+#    \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+#    \ }))
+#imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+#smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+#xmap <C-k>     <Plug>(neosnippet_expand_target)
+#'''
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
