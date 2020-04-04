@@ -391,16 +391,20 @@ alias mgdir='nocorrect mkdir -m 775'
 alias rm='rm -i'
 alias history='builtin history -Di'
 alias his='history | tail'
-if [[ $use_color == 'true' ]]; then
-  if [[ $os == 'mac' || $os == 'bsd' ]]; then
-    alias ls='command ls -AFG'
-  elif [[ $os == 'sun' ]]; then
-    alias ls='command ls -AF'
-  else
-    alias ls='command ls -AF --color=auto --show-control-chars'
-  fi
+if whence -p exa 2>&1 > /dev/null; then
+  alias ls='exa -F'
 else
-  alias ls='command ls -AF'
+  if [[ $use_color == 'true' ]]; then
+    if [[ $os == 'mac' || $os == 'bsd' ]]; then
+      alias ls='command ls -AFG'
+    elif [[ $os == 'sun' ]]; then
+      alias ls='command ls -AF'
+    else
+      alias ls='command ls -AF --color=auto --show-control-chars'
+    fi
+  else
+    alias ls='command ls -AF'
+  fi
 fi
 alias ln='ln -n'
 alias x='exit'
