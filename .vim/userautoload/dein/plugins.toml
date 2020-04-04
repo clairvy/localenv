@@ -69,3 +69,6 @@ repo='prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
+
+[[plugins]]
+repo = 'tmux-plugins/vim-tmux'
