@@ -461,6 +461,8 @@ if whence -p mysql 2>&1 > /dev/null; then
 fi
 alias phpcs='phpcs --standard=Symfony'
 if whence -p git 2>&1 > /dev/null; then
+  alias -g S160=--stat=160
+  alias -g SS=--stat=160
   alias g1="git log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'"
   alias ga='git add'
   alias gad='git add .'
