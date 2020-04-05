@@ -252,4 +252,14 @@ nnoremap <Leader>P :<C-u>STpartial
 
 " git. {{{1
 nnoremap <Leader>gg :<C-u>GitGrep 
+"}}}
 " vim: foldmethod=marker
+
+" window {{{1
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+nnoremap ss :<C-u>sp<CR><C-w>j
+nnoremap sv :<C-u>vs<CR><C-w>l
+"}}}
