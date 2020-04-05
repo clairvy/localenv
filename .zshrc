@@ -736,4 +736,16 @@ if [[ -d $HOME/.cargo ]]; then
   path=($path $HOME/.cargo/bin)
 fi
 
+# Settings for fzf
+if whence -p fzf 2>&1 > /dev/null; then
+  path=($path $HOME/.fzf/bin)
+  if whence -p rg 2>&1 > /dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+  fi
+  export FZF_DEFAULT_OPTS='--height 30% --border'
+  if [[ -f $HOME/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+  fi
+fi
+
 # vim: sw=2
