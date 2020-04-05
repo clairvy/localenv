@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo "Usage: run command first to use vim"
+echo 'git submodule update --init'
+
 for f in .*; do
   if [ x"$f" == x'.' -o x"$f" == x'..' ]; then
     continue
