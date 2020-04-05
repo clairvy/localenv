@@ -11,13 +11,13 @@ repo = 'Shougo/neosnippet-snippets'
 repo = 'dense-analysis/ale'
 hook_add = '''
   let g:ale_linters = {
-              \ 'ruby': ['rubocop'],
-              \ 'typescript': ['eslint'],
-              \ }
+    \ 'ruby': ['rubocop'],
+    \ 'typescript': ['eslint'],
+    \ }
   let g:ale_fixers = {
-              \ 'ruby': ['rubocop'],
-              \ 'typescript': ['eslint'],
-              \ }
+    \ 'ruby': ['rubocop'],
+    \ 'typescript': ['eslint'],
+    \ }
   "let g:ale_sign_column_always = 1
   "let g:ale_open_list = 1
   "let g:ale_keep_list_window_open = 1
@@ -28,11 +28,12 @@ hook_add = '''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline'
-depends = ['vim-airline-themes']
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
+depends = 'vim-airline'
 hook_add = '''
+  let g:airline_theme = 'onedark'
   " タブバーをかっこよく
   let g:airline#extensions#tabline#enabled = 1
 
@@ -40,6 +41,11 @@ hook_add = '''
   let g:airline#extensions#ale#enabled = 1
   let g:airline#extensions#ale#error_symbol = 'E:'
   let g:airline#extensions#ale#warning_symbol = 'W:'
+
+  " , キーで次タブのバッファを表示
+  nnoremap <silent> < :bprev<CR>
+  " . キーで前タブのバッファを表示
+  nnoremap <silent> > :bnext<CR>
 '''
 
 [[plugins]]
@@ -77,5 +83,34 @@ repo = 'tmux-plugins/vim-tmux'
 repo = 'scrooloose/nerdtree'
 hook_add = '''
   let NERDTreeShowHidden=1
-    nnoremap <silent><C-a> :NERDTreeFind<CR>:vertical res 30<CR>
+  nnoremap <silent><C-a> :NERDTreeFind<CR>:vertical res 30<CR>
+'''
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+  let g:indent_guides_enable_on_vim_startup = 1
+  let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+  let g:indent_guides_auto_colors = 0
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=237
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=240
+'''
+
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  set signcolumn=yes
+  let g:gitgutter_async = 1
+  let g:gitgutter_sign_modified = 'rw'
+  highlight GitGutterAdd ctermfg=green
+  highlight GitGutterChange ctermfg=yellow
+  highlight GitGutterDelete ctermfg=red
+  highlight GitGutterChangeDelete ctermfg=yellow
+'''
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
+hook_add = '''
+  let g:rainbow_active = 1
 '''
