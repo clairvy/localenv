@@ -263,3 +263,22 @@ nnoremap sh <C-w>h
 nnoremap ss :<C-u>sp<CR><C-w>j
 nnoremap sv :<C-u>vs<CR><C-w>l
 "}}}
+
+" Indent width
+if has("autocmd")
+  "ファイルタイプの検索を有効にする
+  filetype plugin on
+  "ファイルタイプに合わせたインデントを利用
+  filetype indent on
+  "sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtabの略
+  autocmd FileType ruby        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType js          setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType zsh         setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType json        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType yml        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType yaml        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType javascript  setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType typescript  setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType typescriptreact setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType vim         setlocal sw=2 sts=2 ts=2 et
+endif
