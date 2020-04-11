@@ -738,13 +738,19 @@ fi
 
 # Settings for fzf
 if whence -p fzf 2>&1 > /dev/null; then
-  path=($path $HOME/.fzf/bin)
   if whence -p rg 2>&1 > /dev/null; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
   fi
   export FZF_DEFAULT_OPTS='--height 30% --border'
   if [[ -f $HOME/.fzf.zsh ]]; then
     source ~/.fzf.zsh
+    # replace ^R -> ^O
+    bindkey '^O' fzf-history-widget
+    if is-at-least 4.3.10; then
+      bindkey "^R" history-incremental-pattern-search-backward
+    else
+      bindkey "^R" history-incremental-search-backward
+    fi
   fi
 fi
 
