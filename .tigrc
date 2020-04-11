@@ -3,11 +3,11 @@
 #--------------------------------------------------------------#
 set main-view  = id:yes date:default,local=yes author commit-title:graph=yes,refs=yes,overflow=false
 set blame-view = date:default id:yes,color line-number:yes,interval=1 text
-set pager-view = text
-set stage-view = text
-set log-view   = text
-set blob-view  = text
-set diff-view  = text:yes,commit-title-overflow=no
+set pager-view = line-number:yes,interval=1 text
+set stage-view = line-number:yes,interval=1 text
+set log-view   = line-number:yes,interval=1 text
+set blob-view  = line-number:yes,interval=1 text
+set diff-view  = line-number:yes,interval=1 text:yes,commit-title-overflow=no
 set tab-size = 2
 set ignore-case = true
 set split-view-width = 80%
@@ -15,9 +15,45 @@ set split-view-height = 80%
 set diff-options = -m --first-parent
 set refresh-mode = auto
 
+# utf-8 文字で画面描画する (~でトグル)
+set line-graphics = utf-8
+
 #--------------------------------------------------------------#
 ##        key bind                                            ##
 #--------------------------------------------------------------#
+
+# g をファイル先頭に移動に変更、 view-grep を再割当て
+bind generic g      move-first-line
+bind generic E      view-grep
+
+# G でファイル末尾に移動 (default: :toggle commit-title-graph)
+bind generic G      move-last-line
+bind main    G      move-last-line
+
+# n / p を上下移動に割り当て (default: find-next / view-pager)
+bind generic n      move-down
+bind generic p      move-up
+
+# # n / p で単位ごとの移動
+bind diff    n      :/^@@
+bind diff    p      :?^@@
+bind diff    <Esc>n :/^diff --(git|cc)
+bind diff    <Esc>p :?^diff --(git|cc)
+bind stage   n      :/^@@
+bind stage   p      :?^@@
+bind stage   <Esc>n :/^diff --(git|cc)
+bind stage   <Esc>p :?^diff --(git|cc)
+bind pager   n      :/^@@
+bind pager   p      :?^@@
+bind pager   <Esc>n :/^diff --(git|cc)
+bind pager   <Esc>p :?^diff --(git|cc)
+bind log     n      :/^commit
+bind log     p      :?^commit
+
+# Ctrl-v, Alt-v でページ単位移動 (ターミナルに食われるので Ctrl-v は2度押しが必要)
+bind generic <Ctrl-v> move-page-down
+bind generic <Esc>v move-page-up
+
 # Pで現在のブランチへpush
 bind generic P ?@!git push origin %(repo:head)
 
