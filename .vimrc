@@ -212,14 +212,6 @@ let phpmanual_htmlviewer = 'w3m -o display_charset=utf-8 -o auto_detect=2 -T tex
 "source $HOME/.vim/ftplugin/phpmanual.vim
 "}}}
 
-" neocmplcache {{{1
-imap <TAB>     <Plug>(neocomplcache_snippets_expand)
-smap <TAB>     <Plug>(neocomplcache_snippets_expand)
-"imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-"}}}
-
 " eskk {{{1
 if has('vim_starting')
     if has('mac')

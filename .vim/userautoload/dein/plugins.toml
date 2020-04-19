@@ -53,12 +53,28 @@ repo='prabirshrestha/async.vim'
 
 [[plugins]]
 repo='prabirshrestha/vim-lsp'
+depends = ['async.vim']
+hook_add = '''
+  let g:lsp_log_verbose = 1
+  let g:lsp_log_file = expand('~/vim-lsp.log')
+'''
+
+[[plugins]]
+repo='mattn/vim-lsp-settings'
 
 [[plugins]]
 repo='prabirshrestha/asyncomplete.vim'
+hook_add = '''
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+  imap <c-space> <Plug>(asyncomplete_force_refresh)
+'''
 
 [[plugins]]
 repo='prabirshrestha/asyncomplete-lsp.vim'
+depends = ['vim-lsp']
+on_source = ['asyncomplete.vim']
 
 #[[plugins]]
 #repo='prabirshrestha/asyncomplete-neosnippet.vim'
