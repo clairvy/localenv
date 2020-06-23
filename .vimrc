@@ -98,6 +98,8 @@ set tabstop=8
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+" time for redraw
+set redrawtime=100000
 " }}}
 
 " leader {{{1
