@@ -757,4 +757,17 @@ if whence -p fzf 2>&1 > /dev/null; then
   fi
 fi
 
+# rg
+if whence -p rg 2>&1 > /dev/null; then
+  export RG_DEFAULT_OPT=(-p --hidden)
+  function rg() {
+    # separated by :
+    typeset -a glob;
+    for p in ${(@s.:.)$(git config grep.defaultFile)}; do
+      glob+=(--glob $p)
+    done
+    command rg $RG_DEFAULT_OPT "$@" "${(@)glob}"
+  }
+fi
+
 # vim: sw=2
