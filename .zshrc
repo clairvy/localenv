@@ -361,9 +361,6 @@ fi
 if [[ -f /etc/profile.d/rbenv.sh ]]; then
   . /etc/profile.d/rbenv.sh
 fi
-if [[ $os == 'mac' ]]; then
-  export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-fi
 
 # for gisty
 export GISTY_DIR="$HOME/work/gists"
