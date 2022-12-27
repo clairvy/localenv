@@ -102,6 +102,8 @@ set expandtab
 " time for redraw
 set redrawtime=100000
 " }}}
+" ペースト設定
+vnoremap <silent> <C-p> "0p<CR>
 
 " leader {{{1
 let mapleader = ","
@@ -232,17 +234,6 @@ augroup cch
   autocmd WinLeave * setlocal nocursorline
   autocmd WinEnter,BufRead * setlocal cursorline
 augroup END
-"}}}
-
-" symofny {{{1
-nnoremap <silent> <Leader>v :<C-u>STview<CR>
-nnoremap <silent> <Leader>m :<C-u>STmodel<CR>
-nnoremap <silent> <Leader>a :<C-u>STaction<CR>
-nnoremap <silent> <Leader>p :<C-u>STpartial<CR>
-nnoremap <Leader>V :<C-u>STview 
-nnoremap <Leader>M :<C-u>STmodel 
-nnoremap <Leader>A :<C-u>STaction 
-nnoremap <Leader>P :<C-u>STpartial 
 "}}}
 
 " git. {{{1

@@ -57,6 +57,34 @@ depends = ['async.vim']
 hook_add = '''
   let g:lsp_log_verbose = 1
   let g:lsp_log_file = expand('~/vim-lsp.log')
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:lsp_diagnostics_echo_delay = 200
+  let g:lsp_diagnostics_virtual_text_enabled = 0
+  let g:lsp_diagnostics_signs_enabled = 1
+
+  function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gc <plug>(lsp-code-action)
+    nmap <buffer> gl <plug>(lsp-code-lens)
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+
+    " refer to doc to add more commands
+  endfunction
+
+  augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  augroup END
 '''
 
 [[plugins]]
@@ -154,4 +182,34 @@ hook_add = '''
   nnoremap <C-g> :Rg<Space>
   nnoremap <C-p> :GFiles<CR>
   nnoremap <C-h> :History<CR>
+'''
+
+[[plugins]]
+repo = 'qpkorr/vim-bufkill'
+hook_add = '''
+'''
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+hook_add = '''
+  " ダブルコーテーション→シングルコーテーション
+  nmap ff <Plug>Csurround"'
+  " シングルコーテーション→ダブルコーテーション
+  nmap tt <Plug>Csurround'"
+'''
+
+[[plugins]]
+repo = 'preservim/nerdcommenter'
+hook_add = '''
+  " Add spaces after comment delimiters by default
+  let g:NERDSpaceDelims = 1
+  " Use compact syntax for prettified multi-line comments
+  let g:NERDCompactSexyComs = 1
+  " Allow commenting and inverting empty lines (useful when commenting a region)
+  let g:NERDCommentEmptyLines = 1
+  " Align line-wise comment delimiters flush left instead of following code indentation
+  let g:NERDDefaultAlign='left'
+
+  nnoremap <silent> <leader>c} V}:call nerdcommenter#Comment('x', 'toggle')<CR>
+  nnoremap <silent> <leader>c{ V{:call nerdcommenter#Comment('x', 'toggle')<CR>
 '''
