@@ -7,8 +7,8 @@ bindkey -e
 bindkey '^W' kill-region
 
 HISTFILE=~/.zhistory
-HISTSIZE=100000
-SAVEHIST=10000000
+HISTSIZE=100000000
+SAVEHIST=100000000
 
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
