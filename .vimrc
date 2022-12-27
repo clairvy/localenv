@@ -36,6 +36,7 @@ endif
 " Required:
 filetype plugin indent on
 syntax enable
+colorscheme pablo
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
