@@ -391,8 +391,8 @@ alias mgdir='nocorrect mkdir -m 775'
 alias rm='rm -i'
 alias history='builtin history -Di'
 alias his='history | tail'
-if whence -p exa 2>&1 > /dev/null; then
-  alias ls='exa -F'
+if whence -p lsd 2>&1 > /dev/null; then
+  alias ls='lsd --icon never -F'
 else
   if [[ $use_color == 'true' ]]; then
     if [[ $os == 'mac' || $os == 'bsd' ]]; then
